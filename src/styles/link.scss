@@ -1,0 +1,43 @@
+.link {
+  color: var(--accent-color-1-default);
+  text-decoration: none;
+
+  &--button-like {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    background-color: transparent;
+    border: 1px solid var(--accent-color-1-default);
+    border-radius: 4px;
+    @include font-text-accent;
+    color: var(--accent-color-1-default);
+    transition-property: border-color, background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    cursor: pointer;
+  
+    &:hover {
+      background: var(--accent-color-1-shadow-3);
+    }
+  
+    &:active {
+      background: var(--accent-color-1-shadow-2);
+    }
+
+  }
+
+  &--accent {
+    background-color: var(--accent-color-1-default);
+    border: 1px solid var(--accent-color-1-default);
+    color: var(--main-color-3);
+
+    &:hover {
+      background-color: var(--accent-color-1-light);
+    }
+
+    &:active {
+      background-color: var(--accent-color-1-shadow-1);
+    }
+  }
+}

@@ -2,4 +2,9 @@
 @import './variables.scss';
 @import './mixins.scss';
 @import './global.scss';
+@import './layout.scss';
 @import './fonts';
+@import './link.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

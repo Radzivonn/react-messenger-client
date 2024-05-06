@@ -1,15 +1,114 @@
+@mixin font-display-tablet {
+  font-family: "Teko", sans-serif;
+  font-weight: 700;
+  font-size: 120px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+}
+
+@mixin font-display-mobile {
+  font-family: "Teko", sans-serif;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+}
+
+@mixin font-lead-mobile {
+  font-family: "Teko", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+@mixin font-lead-tablet {
+  font-family: "Teko", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+@mixin font-title-tablet {
+  font-family: "Teko", sans-serif;
+  font-weight: 500;
+  font-size: 60px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+@mixin font-title-mobile {
+  font-family: "Teko", sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
 @mixin font-text-regular {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.5px;
+}
+
+@mixin font-text-accent {
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
   font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0.03em;
+}
+
+@mixin font-text-link {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
   line-height: 150%;
   letter-spacing: 0.5px;
 }
 
 @mixin font-text-title {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 120%;
   letter-spacing: 0;
+}
+
+@mixin font-title {
+  @include font-title-mobile;
+  text-align: center;
+  color: var(--accent-color-1-default);
+
+  @media (min-width: 768px) {
+    @include font-title-tablet;
+  }
+}
+
+@mixin font-display {
+  @include font-display-mobile;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent-color-1-default);
+  text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    @include font-display-tablet;
+  }
+}
+
+@mixin font-lead {
+  @include font-lead-mobile;
+  color: var(--main-color-2-default);
+
+  @media (min-width: 768px) {
+    @include font-lead-tablet;
+  }
 }
