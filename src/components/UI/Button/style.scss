@@ -1,0 +1,88 @@
+@use '../../../styles/mixins.scss' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  background-color: transparent;
+  border: 1px solid var(--accent-color-1-default);
+  border-radius: 4px;
+  @include font-text-accent;
+  color: var(--accent-color-1-default);
+  transition-property: border-color, background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--accent-color-1-shadow-3);
+  }
+
+  &:active {
+    background: var(--accent-color-1-shadow-2);
+  }
+
+  &--accent {
+    background-color: var(--accent-color-1-default);
+    border: 1px solid var(--accent-color-1-default);
+    color: var(--main-color-3);
+
+    &:hover {
+      background-color: var(--accent-color-1-light);
+    }
+
+    &:active {
+      background-color: var(--accent-color-1-shadow-1);
+    }
+  }
+
+  &--icon-only {
+    display: flex;
+    padding: 0;
+    border-style: none;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  &--w-icon {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  &--wo-borders {
+    border-style: none;
+    padding: 0;
+
+    &:hover {
+      background-color: transparent;
+      color: var(--accent-color-1-light);
+    }
+
+    &:active {
+      background-color: transparent;
+      color: var(--accent-color-1-shadow-1);
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--main-color-2-shadow-1);
+    border-color: var(--main-color-2-shadow-1);
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+}

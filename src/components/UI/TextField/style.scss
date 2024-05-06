@@ -1,0 +1,182 @@
+.text-field {
+  position: relative;
+  color: var(--main-color-2-default);
+
+  &__label {
+    position: absolute;
+    left: 5px;
+    top: 0;
+    font-size: 0.75em;
+    transform: translate(14px, -9px);
+  }
+
+  &__input:placeholder-shown ~ &__label {
+    left: 0;
+    font-size: 1em;
+    transform: translate(14px, 12.5px);
+    transform-origin: top left;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    user-select: none;
+    color:  var(--main-color-2-shadow-1);
+  }
+
+  &__input:not(:placeholder-shown) ~ &__fieldset &__legend {
+    max-width: 100%;
+  }
+
+  &__container {
+    position: relative;
+  }
+
+  &__input {
+    min-width: 0;
+    width: 100%;
+    padding: 12px 48px 12px 12px;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentColor;
+    border-style: none;
+    outline: none;
+
+    &::placeholder {
+      visibility: hidden;
+    }
+
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      right: 12px;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      margin: auto 0;
+      width: 24px;
+      height: 24px;
+      opacity: 0;
+    }
+
+    &::-webkit-search-cancel-button {
+      position: absolute;
+      right: 12px;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      margin: auto 0;
+      width: 24px;
+      height: 24px;
+      opacity: 0;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: var(--main-color-2-default);
+      caret-color: var(--main-color-2-default);
+    }
+  }
+
+  &__fieldset {
+    position: absolute;
+    inset: 0;
+    top: -5px;
+    margin: 0;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: var(--main-color-2-default);
+    pointer-events: none;
+    transition: border-color 0.2s ease;
+  }
+
+  &__legend {
+    padding: 0;
+    height: 11px;
+    font-size: 0.75em;
+    max-width: 0px;
+    white-space: nowrap;
+
+    span {
+      padding: 0 5px;
+      display: inline-block;
+      opacity: 0;
+    }
+  }
+
+  &__icon-container {
+    position: absolute;
+    right: 12px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    svg {
+      cursor: pointer;
+      &:hover {
+        fill: var(--main-color-1);
+      }
+
+      &:active {
+        fill: var(--main-color-2-shadow-2);
+      }
+    }
+  }
+
+  &__text-helper {
+    position: absolute;
+    bottom: -24px;
+    font-size: 0.75em;
+    text-align: left;
+    margin-top: 1px;
+    margin-right: 12px;
+    margin-bottom: 0;
+    margin-left: 12px;
+  }
+
+  &:hover &__fieldset {
+    border-color: var(--main-color-1);
+  }
+
+  &:focus-within &__fieldset {
+    border-color: var(--accent-color-1-default);
+  }
+
+  &:focus-within &__label {
+    left: 5px;
+    font-size: 0.75em;
+    transform: translate(14px, -9px);
+    color:  var(--main-color-2-default);
+  }
+
+  &:focus-within &__legend {
+    max-width: 100%;
+  }
+
+  &--invalid:focus-within &__fieldset {
+    border-color: var(--status-color-error);
+  }
+
+  &--invalid:focus-within &__label {
+    color:  var(--status-color-error);
+  }
+
+  &--invalid &__fieldset {
+    border-color: var(--status-color-error);
+  }
+
+  &--invalid  &__label {
+    color:  var(--status-color-error);
+  }
+
+  &--invalid &__text-helper {
+    color:  var(--status-color-error);
+  }
+}

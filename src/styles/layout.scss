@@ -1,0 +1,17 @@
+.page-wrapper {
+  margin: 0 20px;
+  min-width: 350px;
+  max-width: 1200px;
+
+  @media (min-width: 390px) {
+    margin: 0 20px;
+  }
+
+  @media (min-width: 768px) {
+    margin: 0 24px;
+  }
+
+  @media (min-width: 1280px) {
+    margin: 0 auto;
+  }
+}
