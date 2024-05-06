@@ -11,9 +11,13 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.2"
+    "react-hook-form": "^7.51.4",
+    "react-router-dom": "^6.14.2",
+    "vite-plugin-svgr": "^4.2.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.17.0",
