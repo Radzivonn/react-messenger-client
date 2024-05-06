@@ -1,0 +1,44 @@
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  color: var(--main-color-2-default);
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  &__input {
+    display: none;
+  }
+
+  &__checker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    aspect-ratio:  1 / 1;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+
+    svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--main-color-3);
+      display: none;
+    }
+  }
+
+  &__input:checked ~ &__checker {
+    background-color: var(--accent-color-1-default);
+    border-color: var(--accent-color-1-default);
+    svg {
+      display: block;
+    }
+  }
+
+  &:hover {
+    color: var(--main-color-1);
+  }
+}
+
