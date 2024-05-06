@@ -1,0 +1,22 @@
+@use '../../styles/mixins.scss' as *;
+
+.login {
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__title {
+    @include font-title;
+  }
+
+  &__description {
+    text-align: center;
+  }
+}
