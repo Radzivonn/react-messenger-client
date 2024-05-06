@@ -18,7 +18,7 @@
     transition: all 0.2s ease;
     pointer-events: none;
     user-select: none;
-    color:  var(--main-color-2-shadow-1);
+    color: var(--main-color-2-shadow-1);
   }
 
   &__input:not(:placeholder-shown) ~ &__fieldset &__legend {
@@ -131,8 +131,8 @@
   }
 
   &__text-helper {
-    position: absolute;
-    bottom: -24px;
+    position: relative;
+    bottom: -4px;
     font-size: 0.75em;
     text-align: left;
     margin-top: 1px;
@@ -153,7 +153,7 @@
     left: 5px;
     font-size: 0.75em;
     transform: translate(14px, -9px);
-    color:  var(--main-color-2-default);
+    color: var(--main-color-2-default);
   }
 
   &:focus-within &__legend {
@@ -165,18 +165,18 @@
   }
 
   &--invalid:focus-within &__label {
-    color:  var(--status-color-error);
+    color: var(--status-color-error);
   }
 
   &--invalid &__fieldset {
     border-color: var(--status-color-error);
   }
 
-  &--invalid  &__label {
-    color:  var(--status-color-error);
+  &--invalid &__label {
+    color: var(--status-color-error);
   }
 
   &--invalid &__text-helper {
-    color:  var(--status-color-error);
+    color: var(--status-color-error);
   }
 }
