@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { profileFormFields } from './formFields';
 import { TextField } from '../../components/UI/TextField/TextField';
 import { profileFormSchema } from './schemes';
+import AuthService from '../../API/services/AuthService/AuthService';
 
 export const Registration = () => {
   const profileForm = useForm({
@@ -18,7 +19,14 @@ export const Registration = () => {
   const { errors } = formState;
 
   const onSubmit = handleSubmit(async (profileInfo) => {
-    console.log('Submitted');
+    const user = await AuthService.register(
+      profileInfo.userName,
+      profileInfo.email,
+      profileInfo.password,
+    );
+    if (user) {
+      AuthService.saveAccessToken(user.accessToken);
+    }
   });
 
   return (
