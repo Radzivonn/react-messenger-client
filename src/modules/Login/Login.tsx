@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { formFields } from './formFields';
 import { loginSchema } from './schemes';
+import AuthService from '../../API/services/AuthService/AuthService';
 
 export const Login = () => {
   const form = useForm({
@@ -24,7 +25,10 @@ export const Login = () => {
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log('Submitted');
+    const user = await AuthService.login(data.email, data.password);
+    if (user) {
+      AuthService.saveAccessToken(user.accessToken);
+    }
   });
 
   return (
