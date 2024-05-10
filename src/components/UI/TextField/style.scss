@@ -1,12 +1,9 @@
 .text-field {
-  position: relative;
-  color: var(--main-color-2-default);
+  @apply relative text-[var(--main-color-2-default)];
 
   &__label {
-    position: absolute;
-    left: 5px;
-    top: 0;
-    font-size: 0.75em;
+    @apply absolute left-1 text-xs;
+    top: 2px;
     transform: translate(14px, -9px);
   }
 
@@ -30,42 +27,22 @@
   }
 
   &__input {
-    min-width: 0;
-    width: 100%;
+    @apply w-full min-w-0 border-none bg-transparent text-[currentColor] outline-none;
     padding: 12px 48px 12px 12px;
-    background: none;
     font: inherit;
-    letter-spacing: inherit;
-    color: currentColor;
-    border-style: none;
-    outline: none;
 
     &::placeholder {
       visibility: hidden;
     }
 
     &::-webkit-calendar-picker-indicator {
-      position: absolute;
-      right: 12px;
-      top: 0;
-      bottom: 0;
+      @apply absolute bottom-0 right-3 top-0 mx-0 my-auto h-6 w-6 opacity-0;
       z-index: 1;
-      margin: auto 0;
-      width: 24px;
-      height: 24px;
-      opacity: 0;
     }
 
     &::-webkit-search-cancel-button {
-      position: absolute;
-      right: 12px;
-      top: 0;
-      bottom: 0;
+      @apply absolute bottom-0 right-3 top-0 mx-0 my-auto h-6 w-6 opacity-0;
       z-index: 1;
-      margin: auto 0;
-      width: 24px;
-      height: 24px;
-      opacity: 0;
     }
 
     &::-webkit-outer-spin-button,
@@ -110,13 +87,7 @@
   }
 
   &__icon-container {
-    position: absolute;
-    right: 12px;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    width: 24px;
-    height: 24px;
+    @apply absolute bottom-0 right-3 top-0 mx-0 my-auto h-6 w-6;
     pointer-events: none;
     svg {
       cursor: pointer;
@@ -131,14 +102,12 @@
   }
 
   &__text-helper {
-    position: relative;
+    @apply relative mx-2;
     bottom: -4px;
     font-size: 0.75em;
     text-align: left;
     margin-top: 1px;
-    margin-right: 12px;
     margin-bottom: 0;
-    margin-left: 12px;
   }
 
   &:hover &__fieldset {
