@@ -1,0 +1,5 @@
+@use '../../../styles/mixins.scss' as *;
+
+.sidebar {
+  @apply flex h-screen w-20 flex-col gap-2 bg-[var(--main-color-4)] py-3;
+}
