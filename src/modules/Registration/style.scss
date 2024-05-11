@@ -4,10 +4,7 @@
   padding: 32px 0;
 
   &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+    @apply flex flex-col items-center gap-6;
   }
 
   &__header {
