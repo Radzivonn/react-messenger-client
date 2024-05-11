@@ -1,10 +1,7 @@
-@use "../styles/mixins.scss" as *;
+@use '../styles/mixins.scss' as *;
 
 body {
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  @apply flex flex-col overflow-x-hidden scroll-smooth;
 }
 
 html {
@@ -15,16 +12,11 @@ html {
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  @apply flex grow flex-col;
 }
 
 .page-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
+  @apply flex grow flex-col justify-center;
 
   &--scroll-block {
     overflow: hidden;
