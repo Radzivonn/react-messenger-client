@@ -33,6 +33,10 @@
   &--icon-only {
     @apply flex h-12 w-12 justify-center border-none bg-transparent p-0;
 
+    a {
+      @apply flex h-12 w-12 items-center justify-center border-none bg-transparent p-0;
+    }
+
     &:hover {
       background-color: var(--main-color-2-shadow-2);
     }
@@ -61,7 +65,6 @@
   }
 
   &:disabled {
-    @apply cursor-default cursor-default
-    border-[--main-color-2-shadow-1] bg-transparent text-[var(--main-color-2-shadow-1)];
+    @apply cursor-default border-[--main-color-2-shadow-1] bg-transparent text-[var(--main-color-2-shadow-1)];
   }
 }
