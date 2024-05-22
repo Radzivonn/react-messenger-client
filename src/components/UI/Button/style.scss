@@ -65,7 +65,6 @@
   }
 
   &:disabled {
-    @apply cursor-default cursor-default
-    border-[--main-color-2-shadow-1] bg-transparent text-[var(--main-color-2-shadow-1)];
+    @apply cursor-default border-[--main-color-2-shadow-1] bg-transparent text-[var(--main-color-2-shadow-1)];
   }
 }
