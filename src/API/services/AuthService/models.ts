@@ -1,7 +1,7 @@
-import { IUser } from '../../../types/types';
+import { User } from '../../../types/types';
 
 export interface AuthResponse {
-  user: IUser;
+  user: User;
   accessToken: string;
   refreshToken: string;
 }
