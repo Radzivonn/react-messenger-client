@@ -8,6 +8,8 @@ import { profileFormFields } from './formFields';
 import { TextField } from '../../components/UI/TextField/TextField';
 import { profileFormSchema } from './schemes';
 import AuthService from '../../API/services/AuthService/AuthService';
+import { Link, useNavigate } from 'react-router-dom';
+import routes from '../../router/routes';
 
 export const Registration = () => {
   const profileForm = useForm({
@@ -15,17 +17,20 @@ export const Registration = () => {
     mode: 'all',
   });
 
+  const navigate = useNavigate();
+
   const { register, handleSubmit, formState } = profileForm;
   const { errors } = formState;
 
   const onSubmit = handleSubmit(async (profileInfo) => {
-    const user = await AuthService.register(
+    const userData = await AuthService.register(
       profileInfo.userName,
       profileInfo.email,
       profileInfo.password,
     );
-    if (user) {
-      AuthService.saveAccessToken(user.accessToken);
+    if (userData) {
+      AuthService.saveAccessToken(userData.accessToken);
+      navigate(`/users/${userData.user.id}`, { replace: true });
     }
   });
 
@@ -58,7 +63,12 @@ export const Registration = () => {
         <Button type="submit" form="RegistrationForm" accent>
           Sign Up
         </Button>
-        <p className="registration__note">{'Already have an account? '}</p>
+        <p className="registration__note">
+          {'Already have an account? '}
+          <Link to={`/${routes.login}`} className="link">
+            Log in!
+          </Link>
+        </p>
       </div>
     </section>
   );

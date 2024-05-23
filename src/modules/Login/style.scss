@@ -14,4 +14,11 @@
   &__description {
     text-align: center;
   }
+
+  .link {
+    color: var(--accent-color-1-default);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

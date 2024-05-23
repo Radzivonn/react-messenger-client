@@ -21,5 +21,8 @@
 
   .link {
     color: var(--accent-color-1-default);
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
