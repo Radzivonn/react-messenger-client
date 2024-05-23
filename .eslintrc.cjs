@@ -13,7 +13,14 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react', 'react-refresh', '@typescript-eslint', 'prettier', 'react-hooks'],
+  plugins: [
+    'react',
+    'react-refresh',
+    '@typescript-eslint',
+    'prettier',
+    'react-hooks',
+    '@tanstack/query',
+  ],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'linebreak-style': 'off',

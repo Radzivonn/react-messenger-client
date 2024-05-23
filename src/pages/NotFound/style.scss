@@ -1,0 +1,41 @@
+@use '../../styles/mixins.scss' as *;
+
+.error-section {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      align-items: start;
+    }
+  }
+
+  &__header,
+  &__text {
+    align-items: stretch;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: start;
+    }
+  }
+
+  &__header {
+    @include font-display;
+    margin-bottom: 24px;
+
+    @media (min-width: 768px) {
+      margin-bottom: 0px;
+    }
+  }
+
+  &__text {
+    @include font-text-accent;
+    margin-bottom: 64px;
+  }
+
+  @media (min-width: 768px) {
+    align-items: start;
+  }
+}

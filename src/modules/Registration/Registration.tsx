@@ -11,7 +11,7 @@ import AuthService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import routes from '../../router/routes';
 
-export const Registration = () => {
+export const RegistrationModule = () => {
   const profileForm = useForm({
     resolver: yupResolver(profileFormSchema),
     mode: 'all',

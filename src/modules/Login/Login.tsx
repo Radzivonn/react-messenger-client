@@ -12,7 +12,7 @@ import AuthService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import routes from '../../router/routes';
 
-export const Login = () => {
+export const LoginModule = () => {
   const form = useForm({
     resolver: yupResolver(loginSchema),
     mode: 'all',

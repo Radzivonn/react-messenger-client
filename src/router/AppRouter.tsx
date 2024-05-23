@@ -1,6 +1,6 @@
 import React from 'react';
-import { Registration } from '../modules/Registration/Registration';
-import { Login } from '../modules/Login/Login';
+import { Registration } from '../pages/Registration';
+import { Login } from '../pages/Login';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import routes from './routes';
 import { Layout } from './Layout';
