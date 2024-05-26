@@ -2,12 +2,13 @@ import React from 'react';
 import { Registration } from '../pages/Registration';
 import { Login } from '../pages/Login';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import routes from './routes';
+import { routes } from './routes';
 import { Layout } from './Layout';
 import { Main } from '../pages/Main/Main';
 import { FriendList } from '../modules/Main/FriendList/FriendList';
 import { RequireAuth } from '../hocs/RequireAuth';
 import { NotFound } from '../pages/NotFound/NotFound';
+import { UserSearch } from '../modules/Main/UserSearch/UserSearch';
 
 export const AppRouter = () => {
   return (
@@ -25,6 +26,7 @@ export const AppRouter = () => {
           >
             <Route path={routes.chats} />
             <Route path={routes.friends} element={<FriendList />} />
+            <Route path={routes.searching} element={<UserSearch />} />
           </Route>
           <Route path={routes.registration} element={<Registration />} />
           <Route path={routes.login} element={<Login />} />

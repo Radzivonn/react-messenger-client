@@ -5,6 +5,13 @@ const routes = {
   login: 'login',
   chats: 'chats',
   friends: 'people',
+  searching: 'search',
 };
 
-export default routes;
+const mainPageRoutes = {
+  chats: routes.chats,
+  friends: routes.friends,
+  searching: routes.searching,
+};
+
+export { routes, mainPageRoutes };
