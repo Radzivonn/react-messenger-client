@@ -10,7 +10,7 @@ import { formFields } from './formFields';
 import { loginSchema } from './schemes';
 import AuthService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
-import routes from '../../router/routes';
+import { routes } from '../../router/routes';
 
 export const LoginModule = () => {
   const form = useForm({

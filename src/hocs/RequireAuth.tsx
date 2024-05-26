@@ -1,7 +1,7 @@
 import React, { type FC } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { type ChildrenProps } from './types';
-import routes from '../router/routes';
+import { routes } from '../router/routes';
 import { useUserData } from '../hooks/useUserData/useUserData';
 import { TailSpinner } from '../components/UI/Spinners/TailSpinner';
 

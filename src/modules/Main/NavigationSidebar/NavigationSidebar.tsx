@@ -6,7 +6,7 @@ import FriendsIcon from './assets/friends-icon.svg?react';
 import LogoutIcon from './assets/logout-icon.svg?react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import './style.scss';
-import routes from '../../../router/routes';
+import { routes } from '../../../router/routes';
 
 export const NavigationSidebar = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
-import routes from '../../../router/routes';
+import { routes } from '../../../router/routes';
 import { ChatTab } from '../../../components/UI/Tabs/Chat-tab';
 
 // !!! temporary using mock data

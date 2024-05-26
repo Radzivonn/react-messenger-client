@@ -9,7 +9,7 @@ import { TextField } from '../../components/UI/TextField/TextField';
 import { profileFormSchema } from './schemes';
 import AuthService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
-import routes from '../../router/routes';
+import { routes } from '../../router/routes';
 
 export const RegistrationModule = () => {
   const profileForm = useForm({
