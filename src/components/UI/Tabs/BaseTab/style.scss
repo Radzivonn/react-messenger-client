@@ -14,7 +14,7 @@
     @apply h-auto w-auto;
   }
   &__info {
-    @apply flex w-full flex-row;
+    @apply flex w-full flex-row items-center justify-between;
     &_name {
       @apply my-auto text-xl font-bold;
     }
