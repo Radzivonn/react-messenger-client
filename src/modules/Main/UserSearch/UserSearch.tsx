@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './style.scss';
 import { TextField } from '../../../components/UI/TextField/TextField';
 import { useUsersSearch } from '../../../hooks/useUsersSearch/useUsersSearch';
 import { useDebounce } from '../../../hooks/useDebounce/useDebounce';

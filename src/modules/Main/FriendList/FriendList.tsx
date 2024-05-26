@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
-import routes from '../../../router/routes';
+import { routes } from '../../../router/routes';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
 
 export const FriendList = () => {
