@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import UserService from '../../API/services/UserService/UserService';
 
-export const useUserData = (userId: string) => {
+export const useUserData = () => {
   return useQuery({
-    queryKey: ['userData', userId],
+    queryKey: ['userData'],
     queryFn: () => UserService.getUserData(),
-    retry: 1,
+    retry: 0,
   });
 };

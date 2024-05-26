@@ -12,7 +12,7 @@ export const RequireAuth: FC<ChildrenProps> = ({ children }) => {
     return <Navigate to={`/${routes.login}`} replace />;
   }
 
-  const { isFetching, data, isError } = useUserData(id);
+  const { isFetching, data, isError } = useUserData();
 
   if ((!isFetching && (!data || data.id !== id)) || isError) {
     return <Navigate to={`/${routes.login}`} replace />;
