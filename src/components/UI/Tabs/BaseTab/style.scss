@@ -1,0 +1,33 @@
+.tab {
+  @apply flex h-16 w-full cursor-pointer flex-row gap-2 px-3;
+  transition: all ease 0.2s;
+
+  &:hover {
+    @apply bg-[--main-color-2-shadow-3];
+  }
+
+  &:active {
+    @apply bg-[--main-color-2-shadow-2];
+  }
+
+  &__avatar-image {
+    @apply h-auto w-auto;
+  }
+  &__info {
+    @apply flex w-full flex-row items-center justify-between;
+    &_name {
+      @apply my-auto text-xl font-bold;
+    }
+    &_avatar-placeholder {
+      @apply my-auto mr-5 flex h-14 w-14 min-w-14 items-center justify-center rounded-full bg-[--accent-color-2-light] text-2xl capitalize;
+    }
+    &_last-message {
+      @apply max-h-6 overflow-hidden text-base font-normal;
+    }
+    &_message-time {
+      @apply ml-auto text-base font-normal;
+    }
+    &_last-seen {
+    }
+  }
+}

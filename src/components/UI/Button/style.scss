@@ -1,19 +1,12 @@
 @use '../../../styles/mixins.scss' as *;
 
 .button {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 22px;
-  background-color: transparent;
+  @apply flex cursor-pointer items-center gap-3 rounded-lg bg-transparent px-6 py-4 text-[var(--accent-color-1-default)];
   border: 1px solid var(--accent-color-1-default);
-  border-radius: 4px;
   @include font-text-accent;
-  color: var(--accent-color-1-default);
   transition-property: border-color, background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease;
-  cursor: pointer;
 
   &:hover {
     background: var(--accent-color-1-shadow-3);
@@ -38,13 +31,14 @@
   }
 
   &--icon-only {
-    display: flex;
-    padding: 0;
-    border-style: none;
-    background-color: transparent;
+    @apply flex h-12 w-12 justify-center border-none bg-transparent p-0;
+
+    a {
+      @apply flex h-12 w-12 items-center justify-center border-none bg-transparent p-0;
+    }
 
     &:hover {
-      background-color: transparent;
+      background-color: var(--main-color-2-shadow-2);
     }
 
     &:active {
@@ -53,13 +47,11 @@
   }
 
   &--w-icon {
-    padding-top: 11px;
-    padding-bottom: 11px;
+    @apply py-3;
   }
 
   &--wo-borders {
-    border-style: none;
-    padding: 0;
+    @apply border-none p-0;
 
     &:hover {
       background-color: transparent;
@@ -73,16 +65,6 @@
   }
 
   &:disabled {
-    cursor: default;
-    color: var(--main-color-2-shadow-1);
-    border-color: var(--main-color-2-shadow-1);
-
-    &:hover {
-      background-color: transparent;
-    }
-
-    &:active {
-      background-color: transparent;
-    }
+    @apply cursor-default border-[--main-color-2-shadow-1] bg-transparent text-[var(--main-color-2-shadow-1)];
   }
 }

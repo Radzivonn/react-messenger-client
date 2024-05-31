@@ -16,6 +16,10 @@ export default class AuthService {
     localStorage.removeItem('accessToken');
   }
 
+  public static hasAccessToken() {
+    return localStorage.getItem('accessToken') ? true : false;
+  }
+
   public static register(name: string, email: string, password: string) {
     try {
       const reqBody = { name, email, password };
@@ -40,13 +44,9 @@ export default class AuthService {
     }
   }
 
-  public static logout() {
-    try {
-      const response: Promise<KyResponse> = api.post(`user/${endpoints.logout}`);
-      return response;
-    } catch (e) {
-      console.error(e);
-    }
+  public static logout(userId: string) {
+    const response: Promise<KyResponse> = api.post(`user/${endpoints.logout}/${userId}`);
+    return response;
   }
 
   public static refreshTokens() {

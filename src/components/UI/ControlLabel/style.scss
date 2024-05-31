@@ -1,30 +1,19 @@
 .checkbox-field {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  user-select: none;
-  color: var(--main-color-2-default);
+  @apply flex cursor-pointer select-none items-center gap-2 text-[--main-color-2-default];
   transition: color 0.2s ease;
-  cursor: pointer;
 
   &__input {
     display: none;
   }
 
   &__checker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    aspect-ratio:  1 / 1;
+    @apply flex w-5 items-center justify-center rounded;
+    aspect-ratio: 1 / 1;
     border: 1px solid currentColor;
-    border-radius: 4px;
     transition: background-color 0.2s ease;
 
     svg {
-      width: 12px;
-      height: 12px;
-      fill: var(--main-color-3);
+      @apply h-3 w-3 fill-[var(--main-color-3)];
       display: none;
     }
   }
@@ -41,4 +30,3 @@
     color: var(--main-color-1);
   }
 }
-

@@ -1,15 +1,10 @@
 @use '../../styles/mixins.scss' as *;
 
 .login {
-  padding: 32px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @apply flex flex-col items-center px-0 py-8;
 
   &__container {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    @apply flex flex-col gap-8;
   }
 
   &__title {
@@ -18,5 +13,12 @@
 
   &__description {
     text-align: center;
+  }
+
+  .link {
+    color: var(--accent-color-1-default);
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

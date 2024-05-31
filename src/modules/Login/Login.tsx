@@ -9,12 +9,16 @@ import { useForm } from 'react-hook-form';
 import { formFields } from './formFields';
 import { loginSchema } from './schemes';
 import AuthService from '../../API/services/AuthService/AuthService';
+import { Link, useNavigate } from 'react-router-dom';
+import { routes } from '../../router/routes';
 
-export const Login = () => {
+export const LoginModule = () => {
   const form = useForm({
     resolver: yupResolver(loginSchema),
     mode: 'all',
   });
+
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
@@ -25,9 +29,10 @@ export const Login = () => {
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    const user = await AuthService.login(data.email, data.password);
-    if (user) {
-      AuthService.saveAccessToken(user.accessToken);
+    const userData = await AuthService.login(data.email, data.password);
+    if (userData) {
+      AuthService.saveAccessToken(userData.accessToken);
+      navigate(`/users/${userData.user.id}`, { replace: true });
     }
   });
 
@@ -40,21 +45,28 @@ export const Login = () => {
           <p className="login__description">Please sign in below to continue</p>
         </header>
         <Form className="login__form" action="" onSubmit={onSubmit}>
-          {formFields.map(({ name, ...data }, index) => (
-            <TextField
-              {...data}
-              key={name}
-              id={`input-${index}`}
-              isValid={!errors[name]}
-              helpText={errors[name]?.message}
-              {...register(name)}
-            />
-          ))}
+          <fieldset className="form__fieldset">
+            {formFields.map(({ name, ...data }, index) => (
+              <TextField
+                {...data}
+                key={name}
+                id={`input-${index}`}
+                isValid={!errors[name]}
+                helpText={errors[name]?.message}
+                {...register(name)}
+              />
+            ))}
+          </fieldset>
           <ControlLabel checked={isRemember} label="Remember me" onChange={handleRememberCheck} />
           <Button accent className="form__button" type="submit">
             Sign in
           </Button>
-          <p className="form__note">{`Not a member? `}</p>
+          <p className="form__note">
+            {`Not a member? `}
+            <Link className="link" to={`/${routes.registration}`}>
+              Join us!
+            </Link>
+          </p>
         </Form>
       </div>
     </section>
