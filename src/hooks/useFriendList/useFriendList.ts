@@ -5,7 +5,7 @@ export const useFriendList = (userId: string) => {
   return useQuery({
     queryKey: ['friendList', userId],
     queryFn: () => UserService.getFriends(userId),
-    staleTime: 60000, // ! test value
+    staleTime: Infinity, // ! test value
     retry: 1,
   });
 };
