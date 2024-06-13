@@ -1,4 +1,4 @@
-import { User } from '../../../types/types';
+import { Chat, User } from '../../../types/types';
 import api from '../../http';
 import AuthService from '../AuthService/AuthService';
 import endpoints from './endpoints';
@@ -17,18 +17,12 @@ export default class UserService {
 
   public static addFriend(userId: string, friendId: string) {
     const reqBody = { userId, friendId };
-    const friendsIds: Promise<string[]> = api
-      .post(`user/${endpoints.addFriend}`, { json: reqBody })
-      .json();
-    return friendsIds;
+    return api.post(`user/${endpoints.addFriend}`, { json: reqBody });
   }
 
   public static removeFriend(userId: string, friendId: string) {
     const reqBody = { userId, friendId };
-    const friendsIds: Promise<string[]> = api
-      .delete(`user/${endpoints.removeFriend}`, { json: reqBody })
-      .json();
-    return friendsIds;
+    return api.delete(`user/${endpoints.removeFriend}`, { json: reqBody });
   }
 
   public static getFriends(userId: string) {
@@ -41,5 +35,10 @@ export default class UserService {
       .get(`user/${userId}/${endpoints.searching}/${search}`)
       .json();
     return users;
+  }
+
+  public static getUserChats(userId: string) {
+    const chat: Promise<Chat[]> = api.get(`user/${endpoints.getChatList}/${userId}`).json();
+    return chat;
   }
 }
