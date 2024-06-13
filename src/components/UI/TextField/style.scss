@@ -31,10 +31,6 @@
     padding: 12px 48px 12px 12px;
     font: inherit;
 
-    &::placeholder {
-      visibility: hidden;
-    }
-
     &::-webkit-calendar-picker-indicator {
       @apply absolute bottom-0 right-3 top-0 mx-0 my-auto h-6 w-6 opacity-0;
       z-index: 1;
