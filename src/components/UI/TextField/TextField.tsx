@@ -24,23 +24,30 @@ export const TextField = forwardRef<HTMLInputElement, ITextFieldProps>(
       <div className={`${className ?? ''} text-field ${isValid ? '' : 'text-field--invalid'}`}>
         <div className="text-field__container">
           <input
-            {...props}
             ref={ref}
             onChange={onChange}
             className="text-field__input"
-            id={id}
             placeholder=""
             type={inputType}
             autoComplete="on"
+            {...props}
           />
-          <label className="text-field__label" htmlFor={id}>
-            {label}
-          </label>
-          <fieldset className="text-field__fieldset">
-            <legend className="text-field__legend">
-              <span>{label}</span>
-            </legend>
-          </fieldset>
+          {label ? (
+            <>
+              <label className="text-field__label" htmlFor={id}>
+                {label}
+              </label>
+              <fieldset className="text-field__fieldset">
+                <legend className="text-field__legend">
+                  <span>{label}</span>
+                </legend>
+              </fieldset>
+            </>
+          ) : (
+            <fieldset className="text-field__fieldset">
+              <legend className="text-field__legend"></legend>
+            </fieldset>
+          )}
           <div
             className="text-field__icon-container"
             style={{ pointerEvents: isInteractive ? 'auto' : 'none' }}
