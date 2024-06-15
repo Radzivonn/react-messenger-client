@@ -5,18 +5,19 @@ import { useDebounce } from '../../../hooks/useDebounce/useDebounce';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useOutletContext } from 'react-router-dom';
 import { routes } from '../../../router/routes';
+import { MainPageComponentOutletContextType } from '../../../types/types';
 
 export const UserSearch = () => {
-  const { id } = useParams() as { id: string };
+  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search);
   const { isFetching: isFetchingSearchData, data: searchData } = useUsersSearch(
-    id,
+    userId,
     debouncedSearch,
   );
-  const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(id);
+  const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(userId);
 
   if (isError) return <Navigate to={`/${routes.login}`} replace />;
 
@@ -40,15 +41,13 @@ export const UserSearch = () => {
           <UserTab
             key={user.id}
             name={user.name}
-            userId={id}
+            userId={userId}
             friendId={user.id}
             isFriend={Boolean(friends.find((friend) => friend.id === user.id))}
           />
         ))
-      ) : debouncedSearch ? (
-        <h2 className="m-auto text-xl italic">No such users were found</h2>
       ) : (
-        <></>
+        debouncedSearch && <h2 className="m-auto text-xl italic">No such users were found</h2>
       )}
     </>
   );
