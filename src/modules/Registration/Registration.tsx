@@ -10,8 +10,11 @@ import { profileFormSchema } from './schemes';
 import AuthService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const RegistrationModule = () => {
+  const queryClient = useQueryClient();
+
   const profileForm = useForm({
     resolver: yupResolver(profileFormSchema),
     mode: 'all',
@@ -30,6 +33,7 @@ export const RegistrationModule = () => {
     );
     if (userData) {
       AuthService.saveAccessToken(userData.accessToken);
+      void queryClient.invalidateQueries({ queryKey: ['userData'] });
       navigate(`/users/${userData.user.id}`, { replace: true });
     }
   });
