@@ -1,0 +1,30 @@
+.chat-wrapper {
+  @apply flex h-screen w-full flex-col;
+  &__input-section {
+    @apply mt-2 flex w-full flex-row justify-between gap-2 self-end;
+  }
+  &__messages-section {
+    @apply flex h-[94.22%] w-full flex-col overflow-y-scroll pr-3;
+  }
+}
+
+.message {
+  @apply mt-7 flex min-h-9 w-fit min-w-6 flex-row justify-between gap-4 rounded-lg bg-[var(--message-bg-color)] px-2 text-lg text-[white];
+
+  &__text {
+    @apply break-all;
+  }
+  &__username,
+  &__time {
+    @apply self-end text-sm;
+  }
+  &__username {
+    position: relative;
+    bottom: -16px;
+    left: -5px;
+  }
+}
+
+.friend-header {
+  @apply flex justify-between border-2 border-[--main-color-3] bg-[--main-color-5] p-3;
+}
