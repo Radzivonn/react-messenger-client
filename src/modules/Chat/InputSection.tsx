@@ -15,7 +15,6 @@ interface Props extends ComponentProps<'section'> {
 export const InputSection: FC<Props> = ({ chatId, userName }) => {
   const { socket } = useContext(SocketContext);
   const [inputValue, setInputValue] = useState('');
-  // console.log('INPUT component RERENDER');
 
   const sendMessage = () => {
     if (socket && inputValue.length) {
