@@ -1,12 +1,14 @@
-import React, { ComponentProps, FC } from 'react';
+import React, { ComponentProps, FC, useState } from 'react';
 import './style.scss';
-import { InputSection } from './InputSection';
+import { Message } from '../../types/types';
 import { useUserData } from '../../hooks/useUserData/useUserData';
-import { TailSpinner } from '../../components/UI/Spinners/TailSpinner';
-import { MessagesList } from './MessagesList';
+import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
 import { Navigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
+import { TailSpinner } from '../../components/UI/Spinners/TailSpinner';
 import { FriendDataHeader } from './FriendDataHeader';
+import { MessagesList } from './MessagesList';
+import { InputSection } from './InputSection';
 
 interface Props extends ComponentProps<'section'> {
   userId: string;
@@ -16,7 +18,10 @@ interface Props extends ComponentProps<'section'> {
 }
 
 export const Chat: FC<Props> = ({ userId, receiverId, receiverName, chatId }) => {
+  const [messages, setMessages] = useState<Message[]>([]);
   const { isFetching, data, isError } = useUserData();
+
+  useSocketSetup(userId, receiverId, chatId, setMessages);
 
   if (isError) return <Navigate to={`/${routes.login}`} replace />;
 
@@ -25,7 +30,7 @@ export const Chat: FC<Props> = ({ userId, receiverId, receiverName, chatId }) =>
   return (
     <section className="chat-wrapper">
       <FriendDataHeader receiverName={receiverName} />
-      <MessagesList userId={userId} receiverId={receiverId} chatId={chatId} />
+      <MessagesList messages={messages} />
       <InputSection chatId={chatId} userName={data.name} />
     </section>
   );

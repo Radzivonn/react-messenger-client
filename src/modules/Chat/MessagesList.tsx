@@ -1,15 +1,11 @@
-import React, { ComponentProps, FC, useEffect, useRef, useState } from 'react';
+import React, { ComponentProps, FC, useEffect, useRef } from 'react';
 import { Message } from '../../types/types';
-import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
 
 interface Props extends ComponentProps<'section'> {
-  userId: string;
-  receiverId: string;
-  chatId: string;
+  messages: Message[];
 }
 
-export const MessagesList: FC<Props> = ({ userId, receiverId, chatId }) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+export const MessagesList: FC<Props> = ({ messages }) => {
   const lastMessage = useRef<HTMLDivElement>(null);
 
   // scroll
@@ -18,8 +14,6 @@ export const MessagesList: FC<Props> = ({ userId, receiverId, chatId }) => {
       lastMessage.current?.scrollIntoView({ behavior: 'instant' });
     }, 10);
   }, [messages]);
-
-  useSocketSetup(userId, receiverId, chatId, setMessages);
 
   if (!messages.length) {
     return <h2 className="m-auto text-xl italic">No messages here yet</h2>;
