@@ -1,5 +1,5 @@
 .main-sidebar {
-  @apply flex h-screen w-2/6 min-w-60 flex-col gap-3 bg-[var(--main-color-5)]   xl:w-1/4;
+  @apply flex h-screen w-2/6 min-w-60 flex-col gap-3 bg-[var(--main-color-5)] xl:w-1/4;
 
   &__title {
     @apply mx-3 my-3 text-3xl font-bold capitalize;

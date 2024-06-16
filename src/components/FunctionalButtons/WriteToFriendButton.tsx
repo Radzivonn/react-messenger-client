@@ -2,10 +2,9 @@ import React, { FC } from 'react';
 import { Button } from '../UI/Button/Button';
 import WriteToFriendIcon from '../../assets/icons/write-pencil.svg?react';
 import { useSearchParams } from 'react-router-dom';
+import { IFriendListActionButtonProps } from './types';
 
-interface Props {
-  userId: string;
-  friendId: string;
+interface Props extends IFriendListActionButtonProps {
   friendName: string;
 }
 

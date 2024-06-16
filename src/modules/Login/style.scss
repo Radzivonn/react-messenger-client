@@ -17,8 +17,10 @@
 
   .link {
     color: var(--accent-color-1-default);
-    &:hover {
-      text-decoration: underline;
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

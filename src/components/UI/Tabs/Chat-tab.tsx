@@ -8,8 +8,6 @@ interface Props extends ComponentProps<'section'> {
 }
 
 export const ChatTab: FC<Props> = ({ receiverName, lastMessage, ...props }) => {
-  console.log(receiverName);
-
   return (
     <Tab {...props}>
       <div className="avatar-placeholder">{receiverName.slice(0, 1)}</div>
