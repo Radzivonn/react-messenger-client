@@ -46,12 +46,6 @@ const useSocketSetup = (
       setIsReceiverOnline(false);
     });
 
-    socket.on(WEBSOCKET_EVENTS.LEFT_ROOM, () => {
-      setSocket(undefined);
-      socket.removeAllListeners();
-      socket.close();
-    });
-
     socket.on(WEBSOCKET_EVENTS.DISCONNECT, (reason) => {
       console.log(`Disconnected by reason: ${reason}`);
     });
@@ -60,6 +54,9 @@ const useSocketSetup = (
 
     return () => {
       socket.emit(WEBSOCKET_EVENTS.LEAVE_ROOM, chatId);
+      setSocket(undefined);
+      socket.removeAllListeners();
+      socket.close();
     };
   }, [chatId]);
 };
