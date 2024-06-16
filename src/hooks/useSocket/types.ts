@@ -8,7 +8,6 @@ interface JoinedRoomSuccessfullyPayload {
 export interface ServerToClientEvents {
   receive_message: (message: Message) => void;
   joined_room_successfully: (payload: JoinedRoomSuccessfullyPayload) => void;
-  left_room: () => void;
   connect_participant: (isReceiverOnline: boolean) => void;
   disconnect_participant: () => void;
 }
