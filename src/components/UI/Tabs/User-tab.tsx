@@ -4,7 +4,7 @@ import { RemoveFriendButton } from '../../FunctionalButtons/RemoveFriendButton';
 import { AddFriendButton } from '../../FunctionalButtons/AddFriendButton';
 import { WriteToFriendButton } from '../../FunctionalButtons/WriteToFriendButton';
 
-interface Props extends ComponentProps<'div'> {
+interface Props extends ComponentProps<'section'> {
   name: string;
   isFriend: boolean;
   userId: string;
