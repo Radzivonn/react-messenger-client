@@ -8,6 +8,7 @@ export const useRemoveFriend = (userId: string, friendId: string) => {
     mutationKey: ['removeFriend', userId, friendId],
     mutationFn: () => UserService.removeFriend(userId, friendId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['friendList', userId] }),
-    retry: 1,
+    onError: () => queryClient.invalidateQueries({ queryKey: ['userData'] }),
+    retry: false,
   });
 };
