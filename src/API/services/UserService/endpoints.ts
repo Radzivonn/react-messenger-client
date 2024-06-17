@@ -4,6 +4,7 @@ const endpoints = {
   removeFriend: 'removeFriend',
   getFriends: 'friendList',
   searching: 'searching',
+  getChatList: 'chatList',
 };
 
 export default endpoints;

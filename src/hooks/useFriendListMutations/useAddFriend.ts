@@ -8,6 +8,7 @@ export const useAddFriend = (userId: string, friendId: string) => {
     mutationKey: ['addFriend', userId, friendId],
     mutationFn: () => UserService.addFriend(userId, friendId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['friendList', userId] }),
-    retry: 1,
+    onError: () => queryClient.invalidateQueries({ queryKey: ['userData'] }),
+    retry: false,
   });
 };

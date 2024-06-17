@@ -1,15 +1,19 @@
 import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
-import { routes } from '../../../router/routes';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
+import { MainPageComponentOutletContextType } from '../../../types/types';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const FriendList = () => {
-  const { id } = useParams() as { id: string };
-  const { isFetching, data, isError } = useFriendList(id);
+  const queryClient = useQueryClient();
+  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
+  const { isFetching, data, isError } = useFriendList(userId);
 
-  if (isError) return <Navigate to={`/${routes.login}`} replace />;
+  if (isError) {
+    void queryClient.invalidateQueries({ queryKey: ['userData'] });
+  }
 
   if (isFetching || !data) return <TailSpinner />;
 
@@ -21,7 +25,7 @@ export const FriendList = () => {
         <UserTab
           key={friend.id}
           name={friend.name}
-          userId={id}
+          userId={userId}
           friendId={friend.id}
           isFriend={true}
         />

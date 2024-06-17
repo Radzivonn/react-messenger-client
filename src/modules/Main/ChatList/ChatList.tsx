@@ -1,44 +1,47 @@
 import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useOutletContext, useSearchParams } from 'react-router-dom';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
-import { routes } from '../../../router/routes';
 import { ChatTab } from '../../../components/UI/Tabs/Chat-tab';
-
-// !!! temporary using mock data
-const data = [
-  {
-    id: '123',
-    name: 'John',
-    lastMessage: 'Hello',
-    lastMessageTime: '19:01',
-  },
-  {
-    id: '456',
-    name: 'Jane',
-    lastMessage: 'Hi',
-    lastMessageTime: '19:10',
-  },
-];
+import { MainPageComponentOutletContextType } from '../../../types/types';
+import { useChatList } from '../../../hooks/useChat/useChatList';
+import { useUserData } from '../../../hooks/useUserData/useUserData';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const ChatList = () => {
-  //   const { id } = useParams() as { id: string };
-  //   const { isPending, data, isError } = useChatList(id);
+  const queryClient = useQueryClient();
+  const [_searchParams, setSearchParams] = useSearchParams();
+  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
 
-  //   if (isError) return <Navigate to={`/${routes.login}`} replace />;
+  const { isFetching: isUserFetching, data: userData } = useUserData();
+  const { isFetching, data: chatListData, isError } = useChatList(userId);
 
-  //   if (isPending || !data) return <TailSpinner />;
+  if (isError) {
+    void queryClient.invalidateQueries({ queryKey: ['userData'] });
+  }
+
+  if (isFetching || isUserFetching || !chatListData || !userData) return <TailSpinner />;
 
   return (
     <>
-      {data.map((user) => (
-        <ChatTab
-          key={user.id}
-          name={user.name}
-          lastMessage={user.lastMessage}
-          lastMessageTime={user.lastMessageTime}
-        ></ChatTab>
-      ))}
+      {chatListData.map((chat) => {
+        const receiverId = chat.participantsIds.find((id) => id !== userId);
+        const receiverName = chat.participantsNames.find((name) => name !== userData.name);
+
+        if (!receiverId || !receiverName) throw Error('No valid data'); // !!!
+
+        const onClickToOpenChat = () => {
+          setSearchParams({ chatId: chat.chatId, receiverId, receiverName });
+        };
+
+        return (
+          <ChatTab
+            onClick={() => onClickToOpenChat()}
+            key={chat.chatId}
+            receiverName={receiverName}
+            lastMessage={chat.messages[chat.messages.length - 1]}
+          />
+        );
+      })}
     </>
   );
 };
-// !!! temporary using mock data

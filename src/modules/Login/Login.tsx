@@ -11,8 +11,11 @@ import { loginSchema } from './schemes';
 import AuthService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const LoginModule = () => {
+  const queryClient = useQueryClient();
+
   const form = useForm({
     resolver: yupResolver(loginSchema),
     mode: 'all',
@@ -32,6 +35,7 @@ export const LoginModule = () => {
     const userData = await AuthService.login(data.email, data.password);
     if (userData) {
       AuthService.saveAccessToken(userData.accessToken);
+      void queryClient.invalidateQueries({ queryKey: ['userData'] });
       navigate(`/users/${userData.user.id}`, { replace: true });
     }
   });

@@ -10,6 +10,9 @@ import { RequireAuth } from '../hocs/RequireAuth';
 import { NotFound } from '../pages/NotFound/NotFound';
 import { UserSearch } from '../modules/Main/UserSearch/UserSearch';
 import { CheckAuth } from '../hocs/CheckAuth';
+import { ChatList } from '../modules/Main/ChatList/ChatList';
+import { ReceiverProvider } from '../store/receiverData/receiverProvider';
+import { SocketProvider } from '../store/socket/socketProvider';
 
 export const AppRouter = () => {
   return (
@@ -21,11 +24,15 @@ export const AppRouter = () => {
             path={routes.main}
             element={
               <RequireAuth>
-                <Main />
+                <ReceiverProvider>
+                  <SocketProvider>
+                    <Main />
+                  </SocketProvider>
+                </ReceiverProvider>
               </RequireAuth>
             }
           >
-            <Route path={routes.chats} />
+            <Route path={routes.chats} element={<ChatList />} />
             <Route path={routes.friends} element={<FriendList />} />
             <Route path={routes.searching} element={<UserSearch />} />
           </Route>

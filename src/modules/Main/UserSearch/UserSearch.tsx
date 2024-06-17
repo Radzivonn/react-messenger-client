@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { TextField } from '../../../components/UI/TextField/TextField';
 import { useUsersSearch } from '../../../hooks/useUsersSearch/useUsersSearch';
 import { useDebounce } from '../../../hooks/useDebounce/useDebounce';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
-import { Navigate, useParams } from 'react-router-dom';
-import { routes } from '../../../router/routes';
+import { MainPageComponentOutletContextType } from '../../../types/types';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const UserSearch = () => {
-  const { id } = useParams() as { id: string };
+  const queryClient = useQueryClient();
+  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search);
   const { isFetching: isFetchingSearchData, data: searchData } = useUsersSearch(
-    id,
+    userId,
     debouncedSearch,
   );
-  const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(id);
+  const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(userId);
 
-  if (isError) return <Navigate to={`/${routes.login}`} replace />;
+  if (isError) {
+    void queryClient.invalidateQueries({ queryKey: ['userData'] });
+  }
 
   const isLoading = (isFetchingSearchData && !searchData) || (isFetchingFriends && !friends);
   const isAllDataLoaded = !!(searchData && searchData.length && friends); // !! - casting to boolean
@@ -40,15 +44,13 @@ export const UserSearch = () => {
           <UserTab
             key={user.id}
             name={user.name}
-            userId={id}
+            userId={userId}
             friendId={user.id}
             isFriend={Boolean(friends.find((friend) => friend.id === user.id))}
           />
         ))
-      ) : debouncedSearch ? (
-        <h2 className="m-auto text-xl italic">No such users were found</h2>
       ) : (
-        <></>
+        debouncedSearch && <h2 className="m-auto text-xl italic">No such users were found</h2>
       )}
     </>
   );
