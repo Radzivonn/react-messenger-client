@@ -3,8 +3,6 @@ import './style.scss';
 import { Message } from '../../types/types';
 import { useUserData } from '../../hooks/useUserData/useUserData';
 import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
-import { Navigate } from 'react-router-dom';
-import { routes } from '../../router/routes';
 import { TailSpinner } from '../../components/UI/Spinners/TailSpinner';
 import { FriendDataHeader } from './FriendDataHeader';
 import { MessagesList } from './MessagesList';
@@ -19,11 +17,9 @@ interface Props extends ComponentProps<'section'> {
 
 export const Chat: FC<Props> = ({ userId, receiverId, receiverName, chatId }) => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const { isFetching, data, isError } = useUserData();
+  const { isFetching, data } = useUserData();
 
   useSocketSetup(userId, receiverId, chatId, setMessages);
-
-  if (isError) return <Navigate to={`/${routes.login}`} replace />;
 
   if (isFetching || !data) return <TailSpinner />;
 

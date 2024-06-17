@@ -5,13 +5,19 @@ import { ChatTab } from '../../../components/UI/Tabs/Chat-tab';
 import { MainPageComponentOutletContextType } from '../../../types/types';
 import { useChatList } from '../../../hooks/useChat/useChatList';
 import { useUserData } from '../../../hooks/useUserData/useUserData';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const ChatList = () => {
+  const queryClient = useQueryClient();
   const [_searchParams, setSearchParams] = useSearchParams();
   const { userId } = useOutletContext<MainPageComponentOutletContextType>();
 
   const { isFetching: isUserFetching, data: userData } = useUserData();
-  const { isFetching, data: chatListData } = useChatList(userId);
+  const { isFetching, data: chatListData, isError } = useChatList(userId);
+
+  if (isError) {
+    void queryClient.invalidateQueries({ queryKey: ['userData'] });
+  }
 
   if (isFetching || isUserFetching || !chatListData || !userData) return <TailSpinner />;
 
@@ -21,7 +27,7 @@ export const ChatList = () => {
         const receiverId = chat.participantsIds.find((id) => id !== userId);
         const receiverName = chat.participantsNames.find((name) => name !== userData.name);
 
-        if (!receiverId || !receiverName) throw Error('No valid data');
+        if (!receiverId || !receiverName) throw Error('No valid data'); // !!!
 
         const onClickToOpenChat = () => {
           setSearchParams({ chatId: chat.chatId, receiverId, receiverName });

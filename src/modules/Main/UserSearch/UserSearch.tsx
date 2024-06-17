@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { TextField } from '../../../components/UI/TextField/TextField';
 import { useUsersSearch } from '../../../hooks/useUsersSearch/useUsersSearch';
 import { useDebounce } from '../../../hooks/useDebounce/useDebounce';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
-import { Navigate, useOutletContext } from 'react-router-dom';
-import { routes } from '../../../router/routes';
 import { MainPageComponentOutletContextType } from '../../../types/types';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const UserSearch = () => {
+  const queryClient = useQueryClient();
   const { userId } = useOutletContext<MainPageComponentOutletContextType>();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search);
@@ -19,7 +20,9 @@ export const UserSearch = () => {
   );
   const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(userId);
 
-  if (isError) return <Navigate to={`/${routes.login}`} replace />;
+  if (isError) {
+    void queryClient.invalidateQueries({ queryKey: ['userData'] });
+  }
 
   const isLoading = (isFetchingSearchData && !searchData) || (isFetchingFriends && !friends);
   const isAllDataLoaded = !!(searchData && searchData.length && friends); // !! - casting to boolean
