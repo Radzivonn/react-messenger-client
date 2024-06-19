@@ -1,10 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Socket, io } from 'socket.io-client';
 import { Message, WEBSOCKET_EVENTS } from '../../types/types';
 import { ClientToServerEvents, ServerToClientEvents } from './types';
-import { SocketContext } from '../../store/socket/socketContext';
-import { ReceiverContext } from '../../store/receiverData/receiverContext';
 import { useQueryClient } from '@tanstack/react-query';
+import { useSocketStore } from '../../store/socket/socketStore';
+import { useReceiverStore } from '../../store/receiver/receiverStore';
 
 const useSocketSetup = (
   userId: string,
@@ -13,13 +13,12 @@ const useSocketSetup = (
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
 ) => {
   const queryClient = useQueryClient();
-  const { setSocket } = useContext(SocketContext);
-  const { setIsReceiverOnline } = useContext(ReceiverContext);
-
-  if (!setSocket || !setIsReceiverOnline) return; // !!! сделать проверку на подлинность всех id прежде чем делать запросы
+  const setSocket = useSocketStore((state) => state.setSocket);
+  const resetSocket = useSocketStore((state) => state.resetSocket);
+  const setReceiverStatus = useReceiverStore((state) => state.setReceiverStatus);
 
   useEffect(() => {
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:5000/');
+    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:5050/');
 
     socket.on(WEBSOCKET_EVENTS.CONNECTION_ERROR, () => {
       console.log('connection_error');
@@ -39,11 +38,11 @@ const useSocketSetup = (
     });
 
     socket.on(WEBSOCKET_EVENTS.CONNECT_PARTICIPANT, (isReceiverOnline) => {
-      setIsReceiverOnline(isReceiverOnline);
+      setReceiverStatus(isReceiverOnline);
     });
 
     socket.on(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, () => {
-      setIsReceiverOnline(false);
+      setReceiverStatus(false);
     });
 
     socket.on(WEBSOCKET_EVENTS.DISCONNECT, (reason) => {
@@ -54,7 +53,7 @@ const useSocketSetup = (
 
     return () => {
       socket.emit(WEBSOCKET_EVENTS.LEAVE_ROOM, chatId);
-      setSocket(undefined);
+      resetSocket();
       socket.removeAllListeners();
       socket.close();
     };
