@@ -50,7 +50,7 @@ export const UserSearch = () => {
           />
         ))
       ) : (
-        debouncedSearch && <h2 className="m-auto text-xl italic">No such users were found</h2>
+        debouncedSearch && <h2 className="text-hint">No such users were found</h2>
       )}
     </>
   );

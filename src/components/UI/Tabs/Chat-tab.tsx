@@ -11,7 +11,7 @@ export const ChatTab: FC<Props> = ({ receiverName, lastMessage, ...props }) => {
   return (
     <Tab {...props}>
       <div className="avatar-placeholder">{receiverName.slice(0, 1)}</div>
-      <div className=" flex w-fit max-w-[45%] flex-col justify-start gap-1">
+      <div className="ml-3 flex w-fit max-w-[45%] flex-col justify-start gap-1">
         <h3 className="tab__info_name">{receiverName}</h3>
         <p className="tab__info_last-message"> {lastMessage.message} </p>
       </div>

@@ -4,8 +4,10 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { mainPageRoutes } from '../../../router/routes';
 import AddFriendIcon from '../../../assets/icons/add-friend-icon.svg?react';
 import { Button } from '../../../components/UI/Button/Button';
+import { useChatSettingsStore } from '../../../store/chatSettings/chatSettingsStore';
 
 export const Sidebar: FC<ComponentProps<'aside'>> = ({ children }) => {
+  const isMobile = useChatSettingsStore((state) => state.isMobile);
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
   const activeTab = pathname.slice(pathname.lastIndexOf('/') + 1);
@@ -13,7 +15,7 @@ export const Sidebar: FC<ComponentProps<'aside'>> = ({ children }) => {
   const isAnyTabOpened = Object.values(mainPageRoutes).find((route) => route === activeTab);
 
   return (
-    <aside className="main-sidebar">
+    <aside className={`main-sidebar main-sidebar--${isMobile ? 'mobile' : 'desktop'}`}>
       <div className="flex flex-row justify-between">
         <h2 className="main-sidebar__title">
           {isAnyTabOpened ? activeTab : 'Select any tab please'}

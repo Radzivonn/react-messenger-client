@@ -44,7 +44,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
         {isChatActive && isChatOpened ? (
           <Chat userId={id} receiverId={receiverId} receiverName={receiverName} chatId={chatId} />
         ) : (
-          <h2 className="m-auto text-xl italic">Select a chat to start messaging</h2>
+          !isMobile && <h2 className="text-hint">Select a chat to start messaging</h2>
         )}
       </div>
     </main>

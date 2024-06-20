@@ -16,7 +16,7 @@ export const MessagesList: FC<Props> = ({ messages }) => {
   }, [messages]);
 
   if (!messages.length) {
-    return <h2 className="m-auto text-xl italic">No messages here yet</h2>;
+    return <h2 className="text-hint">No messages here yet</h2>;
   }
 
   return (
