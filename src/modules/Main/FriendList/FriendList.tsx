@@ -17,7 +17,7 @@ export const FriendList = () => {
 
   if (isFetching || !data) return <TailSpinner />;
 
-  if (!data.length) return <h2 className="m-auto text-xl italic">Your friends list is empty</h2>;
+  if (!data.length) return <h2 className="text-hint">Your friends list is empty</h2>;
 
   return (
     <>

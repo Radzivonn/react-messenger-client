@@ -1,8 +1,8 @@
-import React, { ComponentProps, FC, useContext, useState } from 'react';
+import React, { ComponentProps, FC, useState } from 'react';
 import { TextField } from '../../components/UI/TextField/TextField';
 import { Button } from '../../components/UI/Button/Button';
-import { SocketContext } from '../../store/socket/socketContext';
 import { Message, WEBSOCKET_EVENTS } from '../../types/types';
+import { useSocketStore } from '../../store/socket/socketStore';
 
 const getTime = () =>
   `${new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()}`;
@@ -13,7 +13,7 @@ interface Props extends ComponentProps<'section'> {
 }
 
 export const InputSection: FC<Props> = ({ chatId, userName }) => {
-  const { socket } = useContext(SocketContext);
+  const socket = useSocketStore((state) => state.socket);
   const [inputValue, setInputValue] = useState('');
 
   const sendMessage = () => {

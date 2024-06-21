@@ -13,7 +13,7 @@
   &__info {
     @apply flex w-full flex-row items-center justify-between;
     &_name {
-      @apply my-auto text-xl font-bold;
+      @apply my-auto overflow-hidden text-xl font-bold;
     }
     &_last-message {
       @apply max-h-6 overflow-hidden text-base font-normal;

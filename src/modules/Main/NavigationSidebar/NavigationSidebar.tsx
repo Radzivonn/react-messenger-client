@@ -4,7 +4,7 @@ import AuthService from '../../../API/services/AuthService/AuthService';
 import ChatIcon from './assets/chat-icon.svg?react';
 import FriendsIcon from './assets/friends-icon.svg?react';
 import LogoutIcon from './assets/logout-icon.svg?react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import './style.scss';
 import { routes } from '../../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
@@ -33,14 +33,14 @@ export const NavigationSidebar: FC<Props> = ({ userId }) => {
   return (
     <aside className="nav-sidebar">
       <Button accent className="form__button button--icon-only">
-        <Link to={`${routes.chats}?${searchParams.toString()}`}>
+        <NavLink to={`${routes.chats}?${searchParams.toString()}`}>
           <ChatIcon className="icon" />
-        </Link>
+        </NavLink>
       </Button>
       <Button accent className="form__button button--icon-only">
-        <Link to={`${routes.friends}?${searchParams.toString()}`}>
+        <NavLink to={`${routes.friends}?${searchParams.toString()}`}>
           <FriendsIcon className="icon" />
-        </Link>
+        </NavLink>
       </Button>
       <Button accent className="form__button button--icon-only" onClick={onLogout}>
         <LogoutIcon className="icon" />

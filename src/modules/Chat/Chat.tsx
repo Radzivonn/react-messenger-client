@@ -4,7 +4,7 @@ import { Message } from '../../types/types';
 import { useUserData } from '../../hooks/useUserData/useUserData';
 import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
 import { TailSpinner } from '../../components/UI/Spinners/TailSpinner';
-import { FriendDataHeader } from './FriendDataHeader';
+import { FriendDataHeader } from './FriendDataHeader/FriendDataHeader';
 import { MessagesList } from './MessagesList';
 import { InputSection } from './InputSection';
 

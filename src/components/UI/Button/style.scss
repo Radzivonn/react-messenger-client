@@ -18,6 +18,12 @@
     background: var(--accent-color-1-shadow-2);
   }
 
+  /* for NavLink component */
+  .active {
+    @apply rounded-lg bg-[var(--accent-color-2-light)];
+    background-blend-mode: color;
+  }
+
   &--accent {
     background-color: var(--accent-color-1-default);
     border: 1px solid var(--accent-color-1-default);

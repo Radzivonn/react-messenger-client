@@ -11,8 +11,6 @@ import { NotFound } from '../pages/NotFound/NotFound';
 import { UserSearch } from '../modules/Main/UserSearch/UserSearch';
 import { CheckAuth } from '../hocs/CheckAuth';
 import { ChatList } from '../modules/Main/ChatList/ChatList';
-import { ReceiverProvider } from '../store/receiverData/receiverProvider';
-import { SocketProvider } from '../store/socket/socketProvider';
 
 export const AppRouter = () => {
   return (
@@ -24,11 +22,7 @@ export const AppRouter = () => {
             path={routes.main}
             element={
               <RequireAuth>
-                <ReceiverProvider>
-                  <SocketProvider>
-                    <Main />
-                  </SocketProvider>
-                </ReceiverProvider>
+                <Main />
               </RequireAuth>
             }
           >
