@@ -22,10 +22,10 @@ export const UserTab: FC<Props> = ({ name, isFriend, userId, friendId, ...props 
         {isFriend ? (
           <>
             <WriteToFriendButton userId={userId} friendId={friendId} friendName={name} />
-            <RemoveFriendButton userId={userId} friendId={friendId} />
+            <RemoveFriendButton userId={userId} friendId={friendId} friendName={name} />
           </>
         ) : (
-          <AddFriendButton userId={userId} friendId={friendId} />
+          <AddFriendButton userId={userId} friendId={friendId} friendName={name} />
         )}
       </div>
     </Tab>

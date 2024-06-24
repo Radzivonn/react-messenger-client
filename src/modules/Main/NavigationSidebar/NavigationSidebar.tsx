@@ -8,6 +8,7 @@ import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import './style.scss';
 import { routes } from '../../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 interface Props extends ComponentProps<'aside'> {
   userId: string;
@@ -26,6 +27,7 @@ export const NavigationSidebar: FC<Props> = ({ userId }) => {
     } finally {
       AuthService.removeAccessToken();
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
+      toast.info('You are logged out!');
       navigate(`/${routes.login}`, { replace: true });
     }
   };

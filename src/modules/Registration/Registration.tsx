@@ -11,6 +11,7 @@ import AuthService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 export const RegistrationModule = () => {
   const queryClient = useQueryClient();
@@ -34,8 +35,9 @@ export const RegistrationModule = () => {
     if (userData) {
       AuthService.saveAccessToken(userData.accessToken);
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
+      toast.success('You are successfully registered!');
       navigate(`/users/${userData.user.id}`, { replace: true });
-    }
+    } else toast.error('This user was not found');
   });
 
   return (

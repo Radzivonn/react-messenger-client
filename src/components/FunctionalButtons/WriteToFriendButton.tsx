@@ -5,14 +5,14 @@ import { useSearchParams } from 'react-router-dom';
 import { IFriendListActionButtonProps } from './types';
 import { useChatSettingsStore } from '../../store/chatSettings/chatSettingsStore';
 
-interface Props extends IFriendListActionButtonProps {
-  friendName: string;
-}
-
 const getCombinedId = (userId: string, friendId: string) =>
   userId > friendId ? userId + friendId : friendId + userId;
 
-export const WriteToFriendButton: FC<Props> = ({ userId, friendId, friendName }) => {
+export const WriteToFriendButton: FC<IFriendListActionButtonProps> = ({
+  userId,
+  friendId,
+  friendName,
+}) => {
   const setIsChatOpened = useChatSettingsStore((state) => state.setIsChatOpened);
   const [_searchParams, setSearchParams] = useSearchParams();
   const chatId = getCombinedId(userId, friendId);
