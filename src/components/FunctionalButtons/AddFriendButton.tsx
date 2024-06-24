@@ -5,8 +5,12 @@ import { IFriendListActionButtonProps } from './types';
 import { useAddFriend } from '../../hooks/useFriendListMutations/useAddFriend';
 import { TailSpinner } from '../UI/Spinners/TailSpinner';
 
-export const AddFriendButton: FC<IFriendListActionButtonProps> = ({ userId, friendId }) => {
-  const { isPending, mutate } = useAddFriend(userId, friendId);
+export const AddFriendButton: FC<IFriendListActionButtonProps> = ({
+  userId,
+  friendId,
+  friendName,
+}) => {
+  const { isPending, mutate } = useAddFriend(userId, friendId, friendName);
 
   if (isPending) return <TailSpinner width="30" height="30" wrapperStyle={{ margin: '0' }} />;
 
