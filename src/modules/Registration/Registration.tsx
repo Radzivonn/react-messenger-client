@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { profileFormFields } from './formFields';
 import { TextField } from '../../components/UI/TextField/TextField';
 import { profileFormSchema } from './schemes';
-import AuthService from '../../API/services/AuthService/AuthService';
+import authService from '../../API/services/authService/authService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
@@ -27,13 +27,13 @@ export const RegistrationModule = () => {
   const { errors } = formState;
 
   const onSubmit = handleSubmit(async (profileInfo) => {
-    const userData = await AuthService.register(
+    const userData = await authService.register(
       profileInfo.userName,
       profileInfo.email,
       profileInfo.password,
     );
     if (userData) {
-      AuthService.saveAccessToken(userData.accessToken);
+      authService.saveAccessToken(userData.accessToken);
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
       toast.success('You are successfully registered!');
       navigate(`/users/${userData.user.id}`, { replace: true });

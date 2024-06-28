@@ -3,28 +3,30 @@ import api from '../../http';
 import endpoints from './endpoints';
 import { AuthResponse } from './models';
 
-export default class AuthService {
-  public static getAuthHeader() {
+class AuthService {
+  private readonly BASE_URL = 'auth';
+
+  public getAuthHeader() {
     return `Bearer ${localStorage.getItem('accessToken')}`;
   }
 
-  public static saveAccessToken(accessToken: string) {
+  public saveAccessToken(accessToken: string) {
     localStorage.setItem('accessToken', accessToken);
   }
 
-  public static removeAccessToken() {
+  public removeAccessToken() {
     localStorage.removeItem('accessToken');
   }
 
-  public static hasAccessToken() {
+  public hasAccessToken() {
     return localStorage.getItem('accessToken') ? true : false;
   }
 
-  public static register(name: string, email: string, password: string) {
+  public register(name: string, email: string, password: string) {
     try {
       const reqBody = { name, email, password };
       const user: Promise<AuthResponse> = api
-        .post(`user/${endpoints.registration}`, { json: reqBody })
+        .post(`${this.BASE_URL}/${endpoints.registration}`, { json: reqBody })
         .json();
       return user;
     } catch (e) {
@@ -32,11 +34,11 @@ export default class AuthService {
     }
   }
 
-  public static login(email: string, password: string) {
+  public login(email: string, password: string) {
     try {
       const reqBody = { email, password };
       const user: Promise<AuthResponse> = api
-        .post(`user/${endpoints.login}`, { json: reqBody })
+        .post(`${this.BASE_URL}/${endpoints.login}`, { json: reqBody })
         .json();
       return user;
     } catch (e) {
@@ -44,17 +46,22 @@ export default class AuthService {
     }
   }
 
-  public static logout(userId: string) {
-    const response: Promise<KyResponse> = api.post(`user/${endpoints.logout}/${userId}`);
+  public logout(userId: string) {
+    const response: Promise<KyResponse> = api.post(
+      `${this.BASE_URL}/${endpoints.logout}/${userId}`,
+    );
     return response;
   }
 
-  public static refreshTokens() {
+  public refreshTokens() {
     try {
-      const user: Promise<AuthResponse> = api.get(`user/${endpoints.refresh}`).json();
+      const user: Promise<AuthResponse> = api.get(`${this.BASE_URL}/${endpoints.refresh}`).json();
       return user;
     } catch (e) {
       console.error(e);
     }
   }
 }
+
+const authService = new AuthService();
+export default authService;

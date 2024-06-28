@@ -1,44 +1,22 @@
-import { Chat, User } from '../../../types/types';
+import { User } from '../../../types/types';
 import api from '../../http';
-import AuthService from '../AuthService/AuthService';
+import authService from '../authService/authService';
 import endpoints from './endpoints';
 
-export default class UserService {
+class UserService {
+  private readonly BASE_URL = 'user';
+
   /** Get user data by access jwt from local storage */
-  public static getUserData() {
+  public getUserData() {
     try {
-      if (!AuthService.hasAccessToken()) return null;
-      const user: Promise<User> = api.get(`user/${endpoints.getUserData}`).json();
+      if (!authService.hasAccessToken()) return null;
+      const user: Promise<User> = api.get(`${this.BASE_URL}/${endpoints.getUserData}`).json();
       return user;
     } catch (e) {
       console.error(e);
     }
   }
-
-  public static addFriend(userId: string, friendId: string) {
-    const reqBody = { userId, friendId };
-    return api.post(`user/${endpoints.addFriend}`, { json: reqBody });
-  }
-
-  public static removeFriend(userId: string, friendId: string) {
-    const reqBody = { userId, friendId };
-    return api.delete(`user/${endpoints.removeFriend}`, { json: reqBody });
-  }
-
-  public static getFriends(userId: string) {
-    const friends: Promise<User[]> = api.get(`user/${endpoints.getFriends}/${userId}`).json();
-    return friends;
-  }
-
-  public static searchUsers(userId: string, search: string) {
-    const users: Promise<User[]> = api
-      .get(`user/${userId}/${endpoints.searching}/${search}`)
-      .json();
-    return users;
-  }
-
-  public static getUserChats(userId: string) {
-    const chat: Promise<Chat[]> = api.get(`user/${endpoints.getChatList}/${userId}`).json();
-    return chat;
-  }
 }
+
+const userService = new UserService();
+export default userService;

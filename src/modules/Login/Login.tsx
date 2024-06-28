@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { formFields } from './formFields';
 import { loginSchema } from './schemes';
-import AuthService from '../../API/services/AuthService/AuthService';
+import authService from '../../API/services/authService/authService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
@@ -33,9 +33,9 @@ export const LoginModule = () => {
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    const userData = await AuthService.login(data.email, data.password);
+    const userData = await authService.login(data.email, data.password);
     if (userData) {
-      AuthService.saveAccessToken(userData.accessToken);
+      authService.saveAccessToken(userData.accessToken);
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
       toast.success('You are successfully logged in!');
       navigate(`/users/${userData.user.id}`, { replace: true });

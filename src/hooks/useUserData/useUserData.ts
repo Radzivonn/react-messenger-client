@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import UserService from '../../API/services/UserService/UserService';
+import userService from '../../API/services/userService/userService';
 
 export const useUserData = () => {
   return useQuery({
     queryKey: ['userData'],
-    queryFn: () => UserService.getUserData(),
+    queryFn: () => userService.getUserData(),
     staleTime: 60000, // 60 seconds
     retry: false,
   });

@@ -1,9 +1,9 @@
 import ky, { AfterResponseHook, BeforeRequestHook } from 'ky';
-import AuthService from '../services/AuthService/AuthService';
+import authService from '../services/authService/authService';
 import { STATUS_CODES } from '../../types/types';
 
 export const beforeRequestHook: BeforeRequestHook = (req) => {
-  req.headers.set('Authorization', AuthService.getAuthHeader());
+  req.headers.set('Authorization', authService.getAuthHeader());
 };
 
 /** This implementation uses a self-invoking function to track retry to prevent the hook function from looping in case of a repeated 403 response */
@@ -13,10 +13,10 @@ export const afterResponseHook = (function (): AfterResponseHook {
     if (res.status === STATUS_CODES.UNAUTHORIZED && !isRetry) {
       try {
         isRetry = true;
-        const user = await AuthService.refreshTokens();
+        const user = await authService.refreshTokens();
         if (user) {
           req.headers.set('Authorization', `Bearer ${user.accessToken}`);
-          AuthService.saveAccessToken(user.accessToken);
+          authService.saveAccessToken(user.accessToken);
           return ky(req);
         }
       } catch (e) {

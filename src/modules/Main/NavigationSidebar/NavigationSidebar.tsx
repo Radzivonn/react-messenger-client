@@ -1,6 +1,6 @@
 import React, { ComponentProps, FC } from 'react';
 import { Button } from '../../../components/UI/Button/Button';
-import AuthService from '../../../API/services/AuthService/AuthService';
+import authService from '../../../API/services/authService/authService';
 import ChatIcon from './assets/chat-icon.svg?react';
 import FriendsIcon from './assets/friends-icon.svg?react';
 import LogoutIcon from './assets/logout-icon.svg?react';
@@ -21,11 +21,11 @@ export const NavigationSidebar: FC<Props> = ({ userId }) => {
 
   const onLogout = async () => {
     try {
-      await AuthService.logout(userId);
+      await authService.logout(userId);
     } catch (e) {
       console.error(e);
     } finally {
-      AuthService.removeAccessToken();
+      authService.removeAccessToken();
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
       toast.info('You are logged out!');
       navigate(`/${routes.login}`, { replace: true });
