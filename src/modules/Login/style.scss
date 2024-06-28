@@ -1,0 +1,26 @@
+@use '../../styles/mixins.scss' as *;
+
+.login {
+  @apply flex flex-col items-center px-0 py-8;
+
+  &__container {
+    @apply flex flex-col gap-8;
+  }
+
+  &__title {
+    @include font-title;
+  }
+
+  &__description {
+    text-align: center;
+  }
+
+  .link {
+    color: var(--accent-color-1-default);
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

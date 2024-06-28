@@ -1,0 +1,84 @@
+@use '../../../styles/mixins.scss' as *;
+
+.button {
+  @apply flex cursor-pointer items-center gap-3 rounded-lg bg-transparent px-6 py-4 text-[var(--accent-color-1-default)];
+  border: 1px solid var(--accent-color-1-default);
+  @include font-text-accent;
+  transition-property: border-color, background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--accent-color-1-shadow-3);
+    }
+  }
+
+  &:active {
+    background: var(--accent-color-1-shadow-2);
+  }
+
+  /* for NavLink component */
+  .active {
+    @apply rounded-lg bg-[var(--accent-color-2-light)];
+    background-blend-mode: color;
+  }
+
+  &--accent {
+    background-color: var(--accent-color-1-default);
+    border: 1px solid var(--accent-color-1-default);
+    color: var(--main-color-3);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--accent-color-1-light);
+      }
+    }
+
+    &:active {
+      background-color: var(--accent-color-1-shadow-1);
+    }
+  }
+
+  &--icon-only {
+    @apply flex h-12 w-12 justify-center border-none bg-transparent p-0;
+
+    a {
+      @apply flex h-12 w-12 items-center justify-center border-none bg-transparent p-0;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--main-color-2-shadow-2);
+      }
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  &--w-icon {
+    @apply py-3;
+  }
+
+  &--wo-borders {
+    @apply border-none p-0;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: transparent;
+        color: var(--accent-color-1-light);
+      }
+    }
+
+    &:active {
+      background-color: transparent;
+      color: var(--accent-color-1-shadow-1);
+    }
+  }
+
+  &:disabled {
+    @apply cursor-default border-[--main-color-2-shadow-1] bg-transparent text-[var(--main-color-2-shadow-1)];
+  }
+}

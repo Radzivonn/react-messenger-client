@@ -1,0 +1,85 @@
+@use '../../../styles/mixins.scss' as *;
+
+.form {
+  @apply flex w-full flex-col gap-7;
+
+  &__fieldset {
+    @apply relative m-0 flex flex-col gap-5 rounded-lg border-none bg-[var(--main-color-4)] px-3 py-7;
+
+    @media (min-width: 768px) {
+      padding: 28px 24px 28px;
+    }
+  }
+
+  &__fieldset-headline {
+    @apply grid items-start gap-2;
+    grid-template-columns: 1fr auto;
+
+    button {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+    }
+
+    label {
+      grid-column: 1 / 2;
+      justify-self: start;
+    }
+  }
+
+  &__fieldset-content {
+    @apply grid justify-center gap-x-4 gap-y-6;
+    grid-template-columns: minmax(100px, 350px);
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(100px, 350px));
+    }
+
+    &--stack {
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(1, minmax(100px, 350px));
+      }
+    }
+  }
+
+  &__legend {
+    top: 28px;
+    @include font-text-accent;
+    padding: 0;
+  }
+
+  &__button {
+    align-self: center;
+  }
+
+  &__note {
+    align-self: center;
+  }
+
+  &__fieldset-list {
+    @apply flex w-full flex-col gap-x-6 gap-y-4;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+
+  &__fieldset-item {
+    @apply flex flex-col gap-1;
+
+    dt {
+      color: var(--main-color-2-shadow-1);
+    }
+    dd {
+      margin: 0;
+    }
+  }
+
+  &__fieldset-button {
+    align-self: center;
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
+    max-width: 720px;
+  }
+}

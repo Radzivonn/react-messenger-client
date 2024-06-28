@@ -1,12 +1,5 @@
 @use '../styles/mixins.scss' as *;
 
-body {
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
-
 html {
   background-color: var(--main-color-3);
   @include font-text-regular;
@@ -14,17 +7,16 @@ html {
   margin-right: calc(100% - 100vw);
 }
 
+body {
+  @apply flex flex-col overflow-x-hidden scroll-smooth;
+}
+
 #root {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  @apply flex grow flex-col;
 }
 
 .page-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
+  @apply flex grow flex-col justify-center;
 
   &--scroll-block {
     overflow: hidden;
@@ -47,4 +39,12 @@ html {
 .icon {
   fill: currentColor;
   transition: fill 0.2s ease;
+}
+
+.avatar-placeholder {
+  @apply my-auto flex h-14 w-14 min-w-14 items-center justify-center rounded-full bg-[--accent-color-2-light] text-2xl capitalize;
+}
+
+.text-hint {
+  @apply m-auto select-none text-xl italic;
 }
