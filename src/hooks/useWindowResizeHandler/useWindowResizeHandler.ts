@@ -1,19 +1,17 @@
 import { useEffect } from 'react';
 import { useChatSettingsStore } from '../../store/chatSettings/chatSettingsStore';
 
-const useWindowResizeHandler = (isChatActive: boolean, MOBILE_BREAKPOINT = 768) => {
-  const { setIsMobile, setIsChatOpened } = useChatSettingsStore();
+const useWindowResizeHandler = (MOBILE_BREAKPOINT = 768) => {
+  const { setIsMobile } = useChatSettingsStore();
 
-  const resizeHandler = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+  // TODO fix: A lot of state changing operations
+  const setDeviceType = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
 
   useEffect(() => {
-    const isCurrentMobile = window.innerWidth < MOBILE_BREAKPOINT;
-    setIsMobile(isCurrentMobile);
+    setDeviceType();
 
-    if (isChatActive) setIsChatOpened(true);
-
-    window.addEventListener('resize', resizeHandler);
-    return () => window.removeEventListener('resize', resizeHandler);
+    window.addEventListener('resize', setDeviceType);
+    return () => window.removeEventListener('resize', setDeviceType);
   }, []);
 };
 
