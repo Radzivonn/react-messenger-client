@@ -27,8 +27,10 @@ export const NavigationSidebar: FC<Props> = ({ userId }) => {
     } finally {
       authService.removeAccessToken();
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
-      toast.info('You are logged out!');
+
       navigate(`/${routes.login}`, { replace: true });
+
+      toast.info('You are logged out!');
     }
   };
 

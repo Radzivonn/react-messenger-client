@@ -7,12 +7,14 @@ import { Button } from '../../../components/UI/Button/Button';
 import { useChatSettingsStore } from '../../../store/chatSettings/chatSettingsStore';
 
 export const Sidebar: FC<ComponentProps<'aside'>> = ({ children }) => {
-  const isMobile = useChatSettingsStore((state) => state.isMobile);
-  const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
+
+  const { pathname } = useLocation();
   const activeTab = pathname.slice(pathname.lastIndexOf('/') + 1);
   const isFriendsTabOpened = activeTab === mainPageRoutes.friends;
   const isAnyTabOpened = Object.values(mainPageRoutes).find((route) => route === activeTab);
+
+  const isMobile = useChatSettingsStore((state) => state.isMobile);
 
   return (
     <aside className={`main-sidebar main-sidebar--${isMobile ? 'mobile' : 'desktop'}`}>

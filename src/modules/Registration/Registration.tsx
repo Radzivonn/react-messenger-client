@@ -34,9 +34,11 @@ export const RegistrationModule = () => {
     );
     if (userData) {
       authService.saveAccessToken(userData.accessToken);
+
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
+      navigate(`/users/${userData.user.id}/${userData.user.name}`, { replace: true });
+
       toast.success('You are successfully registered!');
-      navigate(`/users/${userData.user.id}`, { replace: true });
     } else toast.error('This user was not found');
   });
 

@@ -36,9 +36,11 @@ export const LoginModule = () => {
     const userData = await authService.login(data.email, data.password);
     if (userData) {
       authService.saveAccessToken(userData.accessToken);
+
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
+      navigate(`/users/${userData.user.id}/${userData.user.name}`, { replace: true });
+
       toast.success('You are successfully logged in!');
-      navigate(`/users/${userData.user.id}`, { replace: true });
     } else toast.error('This user was not found');
   });
 
