@@ -42,7 +42,7 @@ body {
 }
 
 .avatar-placeholder {
-  @apply my-auto flex h-14 w-14 min-w-14 items-center justify-center rounded-full bg-[--accent-color-2-light] text-2xl capitalize;
+  @apply relative my-auto flex h-14 w-14 min-w-14 items-center justify-center rounded-full bg-[--accent-color-2-light];
 }
 
 .text-hint {
