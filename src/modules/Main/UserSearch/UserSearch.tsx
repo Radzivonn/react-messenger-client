@@ -12,20 +12,23 @@ import { useQueryClient } from '@tanstack/react-query';
 export const UserSearch = () => {
   const queryClient = useQueryClient();
   const { userId } = useOutletContext<MainPageComponentOutletContextType>();
+
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search);
+
   const { isFetching: isFetchingSearchData, data: searchData } = useUsersSearch(
     userId,
     debouncedSearch,
   );
   const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(userId);
 
+  const isLoading = (isFetchingSearchData && !searchData) || (isFetchingFriends && !friends); // ???
+  const isAllDataLoaded = !!(searchData && searchData.length && friends);
+
+  // ??? Сделано для инвалидации данных пользователя с последующей проверкой через RequireAuth hoc на авторизацию
   if (isError) {
     void queryClient.invalidateQueries({ queryKey: ['userData'] });
   }
-
-  const isLoading = (isFetchingSearchData && !searchData) || (isFetchingFriends && !friends);
-  const isAllDataLoaded = !!(searchData && searchData.length && friends); // !! - casting to boolean
 
   return (
     <>
@@ -47,10 +50,11 @@ export const UserSearch = () => {
             userId={userId}
             friendId={user.id}
             isFriend={Boolean(friends.find((friend) => friend.id === user.id))}
+            isOnline={user.online}
           />
         ))
       ) : (
-        debouncedSearch && <h2 className="text-hint">No such users were found</h2>
+        debouncedSearch.length && <h2 className="text-hint">No such users were found</h2>
       )}
     </>
   );

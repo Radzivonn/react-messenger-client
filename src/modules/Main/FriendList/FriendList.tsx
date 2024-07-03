@@ -11,6 +11,7 @@ export const FriendList = () => {
   const { userId } = useOutletContext<MainPageComponentOutletContextType>();
   const { isFetching, data, isError } = useFriendList(userId);
 
+  // ??? Сделано для инвалидации данных пользователя с последующей проверкой через RequireAuth hoc на авторизацию
   if (isError) {
     void queryClient.invalidateQueries({ queryKey: ['userData'] });
   }
@@ -28,6 +29,7 @@ export const FriendList = () => {
           userId={userId}
           friendId={friend.id}
           isFriend={true}
+          isOnline={friend.online}
         />
       ))}
     </>

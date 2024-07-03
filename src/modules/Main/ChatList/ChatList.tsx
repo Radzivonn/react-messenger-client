@@ -4,44 +4,69 @@ import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { ChatTab } from '../../../components/UI/Tabs/Chat-tab';
 import { MainPageComponentOutletContextType } from '../../../types/types';
 import { useChatList } from '../../../hooks/useChat/useChatList';
-import { useUserData } from '../../../hooks/useUserData/useUserData';
 import { useQueryClient } from '@tanstack/react-query';
 import { useChatSettingsStore } from '../../../store/chatSettings/chatSettingsStore';
+import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 
 export const ChatList = () => {
   const queryClient = useQueryClient();
-  const setIsChatOpened = useChatSettingsStore((state) => state.setIsChatOpened);
   const [_searchParams, setSearchParams] = useSearchParams();
-  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
+  const { userId, userName } = useOutletContext<MainPageComponentOutletContextType>();
 
-  const { isFetching: isUserFetching, data: userData } = useUserData();
-  const { isFetching, data: chatListData, isError } = useChatList(userId);
+  const setIsChatOpened = useChatSettingsStore((state) => state.setIsChatOpened);
 
-  if (isError) {
+  const {
+    isFetching: isChatListFetching,
+    data: chatListData,
+    isError: isChatListError,
+  } = useChatList(userId, userName);
+  const {
+    isFetching: isFriendListFetching,
+    data: friendListData,
+    isError: isFriendListError,
+  } = useFriendList(userId);
+
+  // ??? Сделано для инвалидации данных пользователя с последующей проверкой через RequireAuth hoc на авторизацию
+  if (isChatListError || isFriendListError) {
     void queryClient.invalidateQueries({ queryKey: ['userData'] });
   }
 
-  if (isFetching || isUserFetching || !chatListData || !userData) return <TailSpinner />;
+  if (isChatListFetching || isFriendListFetching || !friendListData || !chatListData) {
+    return <TailSpinner />;
+  }
+
+  const findOnlineStatus = (id: string) => {
+    const userWithOnlineStatus = friendListData.find((friend) => friend.id === id);
+    if (!userWithOnlineStatus) return false;
+    return userWithOnlineStatus.online;
+  };
 
   return (
     <>
       {chatListData.map((chat) => {
-        const receiverId = chat.participantsIds.find((id) => id !== userId);
-        const receiverName = chat.participantsNames.find((name) => name !== userData.name);
+        const receiver = chat.participants.find((user) => user.userId !== userId);
 
-        if (!receiverId || !receiverName) throw Error('No valid data');
+        if (!receiver) return <></>;
+
+        const onlineStatus = findOnlineStatus(receiver.userId);
 
         const onClickToOpenChat = () => {
           setIsChatOpened(true);
-          setSearchParams({ chatId: chat.chatId, receiverId, receiverName });
+          setSearchParams({
+            chatId: chat.chatId,
+            receiverId: receiver.userId,
+            receiverName: receiver.userName,
+            isOnline: String(onlineStatus),
+          });
         };
 
         return (
           <ChatTab
             onClick={() => onClickToOpenChat()}
             key={chat.chatId}
-            receiverName={receiverName}
+            receiverName={receiver.userName}
             lastMessage={chat.messages[chat.messages.length - 1]}
+            isOnline={onlineStatus}
           />
         );
       })}
