@@ -16,6 +16,11 @@ class UserService {
       console.error(e);
     }
   }
+
+  public changeOnlineStatus(userId: string, online: boolean) {
+    const reqBody = { userId, online };
+    return api.put(`${this.BASE_URL}/${endpoints.changeOnlineStatus}`, { json: reqBody }).json();
+  }
 }
 
 const userService = new UserService();

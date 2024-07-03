@@ -5,6 +5,7 @@ const endpoints = {
   getFriends: 'friendList',
   searching: 'searching',
   getChatList: 'chatList',
+  changeOnlineStatus: 'changeOnlineStatus',
 };
 
 export default endpoints;
