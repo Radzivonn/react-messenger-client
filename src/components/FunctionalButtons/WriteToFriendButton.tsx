@@ -11,7 +11,6 @@ const getCombinedId = (userId: string, friendId: string) =>
 export const WriteToFriendButton: FC<IWriteToFriendButtonProps> = ({
   userId,
   friendId,
-  friendName,
   isOnline,
 }) => {
   const setIsChatOpened = useChatSettingsStore((state) => state.setIsChatOpened);
@@ -22,7 +21,6 @@ export const WriteToFriendButton: FC<IWriteToFriendButtonProps> = ({
     setSearchParams({
       chatId,
       receiverId: friendId,
-      receiverName: friendName,
       isOnline: isOnline.toString(),
     });
     setIsChatOpened(true);

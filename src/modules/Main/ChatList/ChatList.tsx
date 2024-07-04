@@ -51,13 +51,12 @@ export const ChatList = () => {
         const onlineStatus = findOnlineStatus(receiver.userId);
 
         const onClickToOpenChat = () => {
-          setIsChatOpened(true);
           setSearchParams({
             chatId: chat.chatId,
             receiverId: receiver.userId,
-            receiverName: receiver.userName,
             isOnline: String(onlineStatus),
           });
+          setIsChatOpened(true);
         };
 
         return (
