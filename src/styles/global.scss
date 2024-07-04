@@ -48,3 +48,10 @@ body {
 .text-hint {
   @apply m-auto select-none text-xl italic;
 }
+
+.online-status-marker {
+  fill: var(--online-status-marker-color);
+  stroke: var(--main-color-5);
+  stroke-width: 3px;
+  transition: var(--base-transition);
+}
