@@ -54,7 +54,7 @@ export const UserSearch = () => {
           />
         ))
       ) : (
-        debouncedSearch.length && <h2 className="text-hint">No such users were found</h2>
+        debouncedSearch.length > 0 && <h2 className="text-hint">No such users were found</h2>
       )}
     </>
   );
