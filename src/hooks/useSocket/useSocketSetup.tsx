@@ -13,7 +13,7 @@ const useSocketSetup = (userId: string) => {
 
   const setSocket = useSocketStore((state) => state.setSocket);
   const resetSocket = useSocketStore((state) => state.resetSocket);
-  const { setCurrentChat, addMessage } = useChatStore();
+  const { setCurrentChat, addMessage, clearChatData } = useChatStore();
 
   useEffect(() => {
     const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:5050/');
@@ -23,9 +23,7 @@ const useSocketSetup = (userId: string) => {
       changeOnlineStatus(true);
     });
 
-    socket.on(WEBSOCKET_EVENTS.CONNECTION_ERROR, () => {
-      console.log('connection_error');
-    });
+    socket.on(WEBSOCKET_EVENTS.CONNECTION_ERROR, () => console.log('connection_error'));
 
     socket.on(WEBSOCKET_EVENTS.JOINED_ROOM_SUCCESSFULLY, ({ chat, isCreated }) => {
       setCurrentChat(chat);
@@ -34,6 +32,8 @@ const useSocketSetup = (userId: string) => {
       }
       void queryClient.invalidateQueries({ queryKey: ['friendList', userId] });
     });
+
+    socket.on(WEBSOCKET_EVENTS.LEFT_ROOM_SUCCESSFULLY, () => clearChatData());
 
     socket.on(WEBSOCKET_EVENTS.RECEIVE_MESSAGE, (message) => {
       addMessage(message);

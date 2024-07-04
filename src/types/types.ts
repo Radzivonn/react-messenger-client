@@ -46,7 +46,6 @@ export interface JoinRoomPayload {
   chatId: string;
   userId: string;
   receiverId: string;
-  receiverName: string;
 }
 
 export interface ClientToServerEvents {

@@ -8,23 +8,24 @@ import useChat from '../../hooks/useChat/useChat';
 import { useChatStore } from '../../store/chatData/chatData';
 
 interface Props extends ComponentProps<'section'> {
-  chatId: string;
   userId: string;
   userName: string;
-  receiverId: string;
-  receiverName: string;
 }
 
-export const Chat: FC<Props> = ({ chatId, userId, userName, receiverId, receiverName }) => {
+export const Chat: FC<Props> = ({ userId, userName }) => {
   const currentChat = useChatStore((state) => state.currentChat);
 
-  useChat(chatId, userId, receiverId, receiverName);
+  useChat(userId);
 
   return (
     <section className="chat-wrapper">
       {currentChat ? (
         <>
-          <FriendDataHeader receiverName={receiverName} />
+          <FriendDataHeader
+            receiverName={
+              currentChat.participants.find((user) => user.userId !== userId)?.userName ?? 'NoName'
+            }
+          />
           <MessagesList messages={currentChat.messages} />
           <InputSection chatId={currentChat.chatId} userName={userName} />
         </>
