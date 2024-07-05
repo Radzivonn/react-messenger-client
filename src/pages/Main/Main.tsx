@@ -19,7 +19,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
 
   const { isMobile, isChatOpened } = useChatSettingsStore();
 
-  const isSidebarActive = !(isMobile && isChatOpened);
+  const isSidebarOpened = isMobile && isChatOpened ? false : true;
 
   useBeforeUnload(() => changeOnlineStatus(false));
   useWindowResizeHandler();
@@ -29,7 +29,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
     <main className="main-page">
       <div className="main-page__content">
         <NavigationSidebar userId={id} />
-        {isSidebarActive && (
+        {isSidebarOpened && (
           <Sidebar>
             <Outlet context={{ userId: id, userName: name }} />
           </Sidebar>

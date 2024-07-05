@@ -3,12 +3,12 @@ import { useOutletContext } from 'react-router-dom';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
-import { MainPageComponentOutletContextType } from '../../../types/types';
+import { MainPageComponentOutletContext } from '../../../types/types';
 import { useQueryClient } from '@tanstack/react-query';
 
 export const FriendList = () => {
   const queryClient = useQueryClient();
-  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
+  const { userId } = useOutletContext<MainPageComponentOutletContext>();
   const { isFetching, data, isError } = useFriendList(userId);
 
   // ??? Сделано для инвалидации данных пользователя с последующей проверкой через RequireAuth hoc на авторизацию

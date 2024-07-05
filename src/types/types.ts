@@ -72,7 +72,7 @@ export interface IChat {
   messages: Message[];
 }
 
-export interface MainPageComponentOutletContextType {
+export interface MainPageComponentOutletContext {
   userId: string;
   userName: string;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useOutletContext, useSearchParams } from 'react-router-dom';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { ChatTab } from '../../../components/UI/Tabs/Chat-tab';
-import { MainPageComponentOutletContextType } from '../../../types/types';
+import { MainPageComponentOutletContext } from '../../../types/types';
 import { useChatList } from '../../../hooks/useChat/useChatList';
 import { useQueryClient } from '@tanstack/react-query';
 import { useChatSettingsStore } from '../../../store/chatSettings/chatSettingsStore';
@@ -11,7 +11,7 @@ import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 export const ChatList = () => {
   const queryClient = useQueryClient();
   const [_searchParams, setSearchParams] = useSearchParams();
-  const { userId, userName } = useOutletContext<MainPageComponentOutletContextType>();
+  const { userId, userName } = useOutletContext<MainPageComponentOutletContext>();
 
   const setIsChatOpened = useChatSettingsStore((state) => state.setIsChatOpened);
 
@@ -35,7 +35,7 @@ export const ChatList = () => {
     return <TailSpinner />;
   }
 
-  const findOnlineStatus = (id: string) => {
+  const getOnlineStatus = (id: string) => {
     const userWithOnlineStatus = friendListData.find((friend) => friend.id === id);
     if (!userWithOnlineStatus) return false;
     return userWithOnlineStatus.online;
@@ -48,7 +48,7 @@ export const ChatList = () => {
 
         if (!receiver) return <></>;
 
-        const onlineStatus = findOnlineStatus(receiver.userId);
+        const onlineStatus = getOnlineStatus(receiver.userId);
 
         const onClickToOpenChat = () => {
           setSearchParams({
