@@ -17,21 +17,24 @@ export const Chat: FC<Props> = ({ userId, userName }) => {
 
   useChat(userId);
 
+  if (!currentChat) {
+    return (
+      <section className="chat-wrapper">
+        <TailSpinner />
+      </section>
+    );
+  }
+
+  const receiver = currentChat.participants.find((user) => user.userId !== userId);
+
   return (
     <section className="chat-wrapper">
-      {currentChat ? (
-        <>
-          <FriendDataHeader
-            receiverName={
-              currentChat.participants.find((user) => user.userId !== userId)?.userName ?? 'NoName'
-            }
-          />
-          <MessagesList messages={currentChat.messages} />
-          <InputSection chatId={currentChat.chatId} userName={userName} />
-        </>
-      ) : (
-        <TailSpinner />
-      )}
+      <FriendDataHeader
+        receiverId={receiver?.userId ?? ''}
+        receiverName={receiver?.userName ?? 'NoName'}
+      />
+      <MessagesList messages={currentChat.messages} />
+      <InputSection chatId={currentChat.chatId} userName={userName} />
     </section>
   );
 };
