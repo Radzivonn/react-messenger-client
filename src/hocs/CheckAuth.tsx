@@ -15,5 +15,5 @@ export const CheckAuth: FC<ChildrenProps> = ({ children }) => {
     return <TailSpinner />;
   }
 
-  return <Navigate to={`/users/${data.id}`} replace />;
+  return <Navigate to={`/users/${data.id}/${data.name}`} replace />;
 };
