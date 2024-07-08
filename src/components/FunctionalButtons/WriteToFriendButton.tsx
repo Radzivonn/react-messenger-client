@@ -2,26 +2,22 @@ import React, { FC } from 'react';
 import { Button } from '../UI/Button/Button';
 import WriteToFriendIcon from '../../assets/icons/write-pencil.svg?react';
 import { useSearchParams } from 'react-router-dom';
-import { IWriteToFriendButtonProps } from './types';
-import { useChatSettingsStore } from '../../store/chatSettings/chatSettingsStore';
+import { IFriendListActionButtonProps } from './types';
+import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
 
 const getCombinedId = (userId: string, friendId: string) =>
   userId > friendId ? userId + friendId : friendId + userId;
 
-export const WriteToFriendButton: FC<IWriteToFriendButtonProps> = ({
-  userId,
-  friendId,
-  isOnline,
-}) => {
-  const setIsChatOpened = useChatSettingsStore((state) => state.setIsChatOpened);
+export const WriteToFriendButton: FC<IFriendListActionButtonProps> = ({ userId, friendId }) => {
   const [_searchParams, setSearchParams] = useSearchParams();
+  const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);
+
   const chatId = getCombinedId(userId, friendId);
 
   const onClickToOpenChat = () => {
     setSearchParams({
       chatId,
       receiverId: friendId,
-      isOnline: isOnline.toString(),
     });
     setIsChatOpened(true);
   };

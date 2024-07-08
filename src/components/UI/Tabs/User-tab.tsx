@@ -23,12 +23,7 @@ export const UserTab: FC<Props> = ({ name, friendId, userId, isFriend, isOnline,
       <div className="flex gap-2">
         {isFriend ? (
           <>
-            <WriteToFriendButton
-              userId={userId}
-              friendId={friendId}
-              friendName={name}
-              isOnline={isOnline}
-            />
+            <WriteToFriendButton userId={userId} friendId={friendId} friendName={name} />
             <RemoveFriendButton userId={userId} friendId={friendId} friendName={name} />
           </>
         ) : (

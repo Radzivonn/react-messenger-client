@@ -3,7 +3,3 @@ export interface IFriendListActionButtonProps {
   friendId: string;
   friendName: string;
 }
-
-export interface IWriteToFriendButtonProps extends IFriendListActionButtonProps {
-  isOnline: boolean;
-}
