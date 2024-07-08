@@ -2,7 +2,7 @@ import React, { ComponentProps, FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ArrowIcon from '../../../../assets/icons/arrow_left_icon.svg?react';
 import { Button } from '../../../../components/UI/Button/Button';
-import { useChatSettingsStore } from '../../../../store/chatSettings/chatSettingsStore';
+import { useAppSettingsStore } from '../../../../store/appSettings/appSettingsStore';
 import { AvatarPlaceholder } from '../../../../components/UI/AvatarPlaceholder/AvatarPlaceholder';
 
 interface Props extends ComponentProps<'section'> {
@@ -11,7 +11,7 @@ interface Props extends ComponentProps<'section'> {
 }
 
 export const MobileHeader: FC<Props> = ({ receiverName, isOnline }) => {
-  const setIsChatOpened = useChatSettingsStore((state) => state.setIsChatOpened);
+  const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);
   const [_searchParams, setSearchParams] = useSearchParams();
 
   const onCloseChat = () => {

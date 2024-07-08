@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useChatSettingsStore } from '../../store/chatSettings/chatSettingsStore';
+import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
 
 const useWindowResizeHandler = (MOBILE_BREAKPOINT = 768) => {
-  const { setIsMobile } = useChatSettingsStore();
+  const { setIsMobile } = useAppSettingsStore();
 
   // TODO fix: A lot of state changing operations
   const setDeviceType = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
