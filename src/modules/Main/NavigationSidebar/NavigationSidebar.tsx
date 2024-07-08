@@ -9,6 +9,8 @@ import './style.scss';
 import { routes } from '../../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import { WEBSOCKET_EVENTS } from '../../../types/types';
+import { useSocketStore } from '../../../store/socket/socketStore';
 
 interface Props extends ComponentProps<'aside'> {
   userId: string;
@@ -18,6 +20,7 @@ export const NavigationSidebar: FC<Props> = ({ userId }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
+  const socket = useSocketStore((state) => state.socket);
 
   const onLogout = async () => {
     try {
@@ -25,10 +28,13 @@ export const NavigationSidebar: FC<Props> = ({ userId }) => {
     } catch (e) {
       console.error(e);
     } finally {
-      authService.removeAccessToken();
-      void queryClient.invalidateQueries({ queryKey: ['userData'] });
+      if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, userId);
 
+      authService.removeAccessToken();
       navigate(`/${routes.login}`, { replace: true });
+
+      void queryClient.invalidateQueries({ queryKey: ['userData'] });
+      void queryClient.invalidateQueries({ queryKey: ['chatList', userId] });
 
       toast.info('You are logged out!');
     }

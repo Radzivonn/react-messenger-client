@@ -1,29 +1,34 @@
 import React, { ComponentProps, FC } from 'react';
 import './style.scss';
-import { Outlet, useBeforeUnload, useParams } from 'react-router-dom';
+import { Outlet, useBeforeUnload, useParams, useSearchParams } from 'react-router-dom';
+import { WEBSOCKET_EVENTS } from '../../types/types';
 import { NavigationSidebar } from '../../modules/Main/NavigationSidebar/NavigationSidebar';
 import { Sidebar } from '../../modules/Main/Sidebar/Sidebar';
 import { Chat } from '../../modules/Chat/Chat';
-import { useChatSettingsStore } from '../../store/chatSettings/chatSettingsStore';
+import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
 import useWindowResizeHandler from '../../hooks/useWindowResizeHandler/useWindowResizeHandler';
 import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
-import { useChangeOnlineStatus } from '../../hooks/useUserData/useChangeOnlineStatus';
+import { useSocketStore } from '../../store/socket/socketStore';
 
 type userSearchParams = { id: string; name: string };
 
 export const Main: FC<ComponentProps<'main'>> = () => {
   // * id and name can't be undefined because RequireAuth hoc check id before going to this route
   const { id, name } = useParams() as Readonly<userSearchParams>;
+  const [searchParams] = useSearchParams();
+  const chatId = searchParams.get('chatId');
 
-  const { mutate: changeOnlineStatus } = useChangeOnlineStatus(id);
-
-  const { isMobile, isChatOpened } = useChatSettingsStore();
+  const { isMobile, isChatOpened } = useAppSettingsStore();
+  const socket = useSocketStore((state) => state.socket);
 
   const isSidebarOpened = isMobile && isChatOpened ? false : true;
+  const isTextHintShow = !isMobile && !isChatOpened ? true : false;
 
-  useBeforeUnload(() => changeOnlineStatus(false));
+  useBeforeUnload(() => {
+    if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, id);
+  });
   useWindowResizeHandler();
-  useSocketSetup(id);
+  useSocketSetup(id, name, chatId);
 
   return (
     <main className="main-page">
@@ -34,11 +39,8 @@ export const Main: FC<ComponentProps<'main'>> = () => {
             <Outlet context={{ userId: id, userName: name }} />
           </Sidebar>
         )}
-        {isChatOpened ? (
-          <Chat userId={id} userName={name} />
-        ) : (
-          !isMobile && <h2 className="text-hint">Select a chat to start messaging</h2>
-        )}
+        {isChatOpened && <Chat userId={id} userName={name} />}
+        {isTextHintShow && <h2 className="text-hint">Select a chat to start messaging</h2>}
       </div>
     </main>
   );

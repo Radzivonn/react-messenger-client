@@ -4,17 +4,13 @@ import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
 import { MainPageComponentOutletContext } from '../../../types/types';
-import { useQueryClient } from '@tanstack/react-query';
+import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';
 
 export const FriendList = () => {
-  const queryClient = useQueryClient();
   const { userId } = useOutletContext<MainPageComponentOutletContext>();
-  const { isFetching, data, isError } = useFriendList(userId);
+  const { isFetching, data } = useFriendList(userId);
 
-  // ??? Сделано для инвалидации данных пользователя с последующей проверкой через RequireAuth hoc на авторизацию
-  if (isError) {
-    void queryClient.invalidateQueries({ queryKey: ['userData'] });
-  }
+  const onlineStatuses = useFriendsOnlineStatusesStore((state) => state.onlineStatuses);
 
   if (isFetching || !data) return <TailSpinner />;
 
@@ -29,7 +25,7 @@ export const FriendList = () => {
           userId={userId}
           friendId={friend.id}
           isFriend={true}
-          isOnline={friend.online}
+          isOnline={onlineStatuses[friend.id] ?? false}
         />
       ))}
     </>

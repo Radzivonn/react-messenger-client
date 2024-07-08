@@ -7,11 +7,9 @@ import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
 import { MainPageComponentOutletContext } from '../../../types/types';
-import { useQueryClient } from '@tanstack/react-query';
+import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';
 
 export const UserSearch = () => {
-  const queryClient = useQueryClient();
-
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search);
 
@@ -20,16 +18,13 @@ export const UserSearch = () => {
     userId,
     debouncedSearch,
   );
-  const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(userId);
+  const { isFetching: isFetchingFriends, data: friends } = useFriendList(userId);
+
+  const onlineStatuses = useFriendsOnlineStatusesStore((state) => state.onlineStatuses);
 
   const isLoading = (isFetchingSearchData && !searchData) || (isFetchingFriends && !friends);
   const isNoSearchData = searchData && searchData.length === 0 && debouncedSearch.length > 0;
   const isAllDataLoaded = !!(searchData && friends);
-
-  // ??? Сделано для инвалидации данных пользователя с последующей проверкой через RequireAuth hoc на авторизацию
-  if (isError) {
-    void queryClient.invalidateQueries({ queryKey: ['userData'] });
-  }
 
   return (
     <>
@@ -51,7 +46,7 @@ export const UserSearch = () => {
             userId={userId}
             friendId={user.id}
             isFriend={Boolean(friends.find((friend) => friend.id === user.id))}
-            isOnline={user.online}
+            isOnline={onlineStatuses[user.id] ?? false}
           />
         ))}
     </>
