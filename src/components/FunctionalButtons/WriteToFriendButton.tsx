@@ -15,10 +15,13 @@ export const WriteToFriendButton: FC<IFriendListActionButtonProps> = ({ userId, 
   const chatId = getCombinedId(userId, friendId);
 
   const onClickToOpenChat = () => {
-    setSearchParams({
-      chatId,
-      receiverId: friendId,
-    });
+    setSearchParams(
+      {
+        chatId,
+        receiverId: friendId,
+      },
+      { replace: true },
+    );
     setIsChatOpened(true);
   };
 

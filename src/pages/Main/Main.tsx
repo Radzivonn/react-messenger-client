@@ -22,7 +22,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
   const socket = useSocketStore((state) => state.socket);
 
   const isSidebarOpened = isMobile && isChatOpened ? false : true;
-  const isTextHintShow = !isMobile && !isChatOpened ? true : false;
+  const isTextHintShow = !isMobile && (!isChatOpened || !chatId) ? true : false;
 
   useBeforeUnload(() => {
     if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, id);
@@ -39,7 +39,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
             <Outlet context={{ userId: id, userName: name }} />
           </Sidebar>
         )}
-        {isChatOpened && <Chat userId={id} userName={name} />}
+        {isChatOpened && chatId && <Chat userId={id} userName={name} />}
         {isTextHintShow && <h2 className="text-hint">Select a chat to start messaging</h2>}
       </div>
     </main>

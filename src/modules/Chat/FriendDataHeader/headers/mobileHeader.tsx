@@ -15,7 +15,7 @@ export const MobileHeader: FC<Props> = ({ receiverName, isOnline }) => {
   const [_searchParams, setSearchParams] = useSearchParams();
 
   const onCloseChat = () => {
-    setSearchParams({});
+    setSearchParams({}, { replace: true });
     setIsChatOpened(false);
   };
 

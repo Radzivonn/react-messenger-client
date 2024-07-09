@@ -28,10 +28,13 @@ export const ChatList = () => {
         if (!receiver) return <></>;
 
         const onClickToOpenChat = () => {
-          setSearchParams({
-            chatId: chat.chatId,
-            receiverId: receiver.userId,
-          });
+          setSearchParams(
+            {
+              chatId: chat.chatId,
+              receiverId: receiver.userId,
+            },
+            { replace: true },
+          );
           setIsChatOpened(true);
         };
 
