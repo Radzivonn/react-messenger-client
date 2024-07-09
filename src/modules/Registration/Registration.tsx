@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { profileFormFields } from './formFields';
 import { TextField } from '../../components/UI/TextField/TextField';
 import { profileFormSchema } from './schemes';
-import authService from '../../API/services/authService/authService';
+import authService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';

@@ -1,5 +1,5 @@
 import ky, { AfterResponseHook, BeforeRequestHook } from 'ky';
-import authService from '../services/authService/authService';
+import authService from '../services/AuthService/AuthService';
 import { STATUS_CODES } from '../../types/types';
 
 export const beforeRequestHook: BeforeRequestHook = (req) => {

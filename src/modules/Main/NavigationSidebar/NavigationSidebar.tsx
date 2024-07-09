@@ -1,6 +1,6 @@
 import React, { ComponentProps, FC } from 'react';
 import { Button } from '../../../components/UI/Button/Button';
-import authService from '../../../API/services/authService/authService';
+import authService from '../../../API/services/AuthService/AuthService';
 import ChatIcon from './assets/chat-icon.svg?react';
 import FriendsIcon from './assets/friends-icon.svg?react';
 import LogoutIcon from './assets/logout-icon.svg?react';

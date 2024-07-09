@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { formFields } from './formFields';
 import { loginSchema } from './schemes';
-import authService from '../../API/services/authService/authService';
+import authService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
