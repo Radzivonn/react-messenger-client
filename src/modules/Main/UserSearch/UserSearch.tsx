@@ -7,7 +7,6 @@ import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
 import { MainPageComponentOutletContext } from '../../../types/types';
-import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';
 
 export const UserSearch = () => {
   const [search, setSearch] = useState('');
@@ -19,8 +18,6 @@ export const UserSearch = () => {
     debouncedSearch,
   );
   const { isFetching: isFetchingFriends, data: friends } = useFriendList(userId);
-
-  const onlineStatuses = useFriendsOnlineStatusesStore((state) => state.onlineStatuses);
 
   const isLoading = (isFetchingSearchData && !searchData) || (isFetchingFriends && !friends);
   const isNoSearchData = searchData && searchData.length === 0 && debouncedSearch.length > 0;
@@ -46,7 +43,7 @@ export const UserSearch = () => {
             userId={userId}
             friendId={user.id}
             isFriend={Boolean(friends.find((friend) => friend.id === user.id))}
-            isOnline={onlineStatuses[user.id] ?? false}
+            isOnline={user.online}
           />
         ))}
     </>

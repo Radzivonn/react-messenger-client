@@ -15,7 +15,7 @@ export const NotFound = () => {
           </p>
           <Link to={`/${routes.login}`} replace>
             <Button accent className="error-section__button">
-              Back to login page
+              Return to previous page
             </Button>
           </Link>
         </div>

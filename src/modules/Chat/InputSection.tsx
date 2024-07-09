@@ -25,6 +25,7 @@ export const InputSection: FC<Props> = ({ chatId, userName }) => {
         message: inputValue,
       };
       socket.emit(WEBSOCKET_EVENTS.SEND_MESSAGE, message);
+      setInputValue('');
     }
   };
 
