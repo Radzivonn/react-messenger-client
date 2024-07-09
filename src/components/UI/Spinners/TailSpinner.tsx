@@ -6,7 +6,7 @@ export const TailSpinner: FC<TailSpinProps> = (props) => {
     <TailSpin
       height="80"
       width="80"
-      color="#feffb5"
+      color="var(--accent-color-2-light)"
       radius="1"
       wrapperStyle={{ margin: 'auto' }}
       visible={true}

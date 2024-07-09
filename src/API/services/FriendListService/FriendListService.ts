@@ -1,4 +1,4 @@
-import { User } from '../../../types/types';
+import { UserWithOnlineStatus } from '../../../types/types';
 import api from '../../http';
 import endpoints from './endpoints';
 
@@ -16,14 +16,14 @@ class FriendListService {
   }
 
   public getFriends(userId: string) {
-    const friends: Promise<User[]> = api
+    const friends: Promise<UserWithOnlineStatus[]> = api
       .get(`${this.BASE_URL}/${endpoints.getFriends}/${userId}`)
       .json();
     return friends;
   }
 
   public searchUsers(userId: string, search: string) {
-    const users: Promise<User[]> = api
+    const users: Promise<UserWithOnlineStatus[]> = api
       .get(`${this.BASE_URL}/${userId}/${endpoints.searching}/${search}`)
       .json();
     return users;

@@ -1,6 +1,6 @@
 import { User } from '../../../types/types';
 import api from '../../http';
-import authService from '../authService/authService';
+import authService from '../AuthService/AuthService';
 import endpoints from './endpoints';
 
 class UserService {

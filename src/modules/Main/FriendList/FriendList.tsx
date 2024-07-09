@@ -3,17 +3,14 @@ import { useOutletContext } from 'react-router-dom';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
-import { MainPageComponentOutletContextType } from '../../../types/types';
-import { useQueryClient } from '@tanstack/react-query';
+import { MainPageComponentOutletContext } from '../../../types/types';
+import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';
 
 export const FriendList = () => {
-  const queryClient = useQueryClient();
-  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
-  const { isFetching, data, isError } = useFriendList(userId);
+  const { userId } = useOutletContext<MainPageComponentOutletContext>();
+  const { isFetching, data } = useFriendList(userId);
 
-  if (isError) {
-    void queryClient.invalidateQueries({ queryKey: ['userData'] });
-  }
+  const onlineStatuses = useFriendsOnlineStatusesStore((state) => state.onlineStatuses);
 
   if (isFetching || !data) return <TailSpinner />;
 
@@ -28,6 +25,7 @@ export const FriendList = () => {
           userId={userId}
           friendId={friend.id}
           isFriend={true}
+          isOnline={onlineStatuses[friend.id] ?? false}
         />
       ))}
     </>

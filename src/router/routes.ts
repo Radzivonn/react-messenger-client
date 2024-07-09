@@ -1,6 +1,6 @@
 const routes = {
   base: '/',
-  main: 'users/:id', // main page is the chat page only for auth users
+  main: 'users/:id/:name', // main page is the chat page only for auth users
   registration: 'registration',
   login: 'login',
   chats: 'chats',

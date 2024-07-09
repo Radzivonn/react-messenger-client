@@ -1,51 +1,46 @@
-import React, { ComponentProps, FC, useEffect } from 'react';
-import { Outlet, useParams, useSearchParams } from 'react-router-dom';
+import React, { ComponentProps, FC } from 'react';
+import './style.scss';
+import { Outlet, useBeforeUnload, useParams, useSearchParams } from 'react-router-dom';
+import { WEBSOCKET_EVENTS } from '../../types/types';
 import { NavigationSidebar } from '../../modules/Main/NavigationSidebar/NavigationSidebar';
 import { Sidebar } from '../../modules/Main/Sidebar/Sidebar';
-import './style.scss';
 import { Chat } from '../../modules/Chat/Chat';
-import { useChatSettingsStore } from '../../store/chatSettings/chatSettingsStore';
+import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
+import useWindowResizeHandler from '../../hooks/useWindowResizeHandler/useWindowResizeHandler';
+import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
+import { useSocketStore } from '../../store/socket/socketStore';
 
-type userIdSearchParams = { id: string };
+type userSearchParams = { id: string; name: string };
 
 export const Main: FC<ComponentProps<'main'>> = () => {
-  // * id can't be undefined because RequireAuth hoc check id before going to this route
-  const { id } = useParams() as Readonly<userIdSearchParams>;
-
+  // * id and name can't be undefined because RequireAuth hoc check id before going to this route
+  const { id, name } = useParams() as Readonly<userSearchParams>;
   const [searchParams] = useSearchParams();
   const chatId = searchParams.get('chatId');
-  const receiverId = searchParams.get('receiverId');
-  const receiverName = searchParams.get('receiverName');
-  const { isMobile, setIsMobile, isChatOpened, setIsChatOpened } = useChatSettingsStore();
-  const isChatActive = !!(chatId && receiverId && receiverName);
-  const isSidebarActive = !(isMobile && isChatActive && isChatOpened);
 
-  const resizeHandler = () => setIsMobile(window.innerWidth < 768);
+  const { isMobile, isChatOpened } = useAppSettingsStore();
+  const socket = useSocketStore((state) => state.socket);
 
-  useEffect(() => {
-    const isCurrentMobile = window.innerWidth < 768;
-    setIsMobile(isCurrentMobile);
+  const isSidebarOpened = isMobile && isChatOpened ? false : true;
+  const isTextHintShow = !isMobile && !isChatOpened ? true : false;
 
-    if (isChatActive) setIsChatOpened(isChatActive);
-
-    window.addEventListener('resize', resizeHandler);
-    return () => window.removeEventListener('resize', resizeHandler);
-  }, []);
+  useBeforeUnload(() => {
+    if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, id);
+  });
+  useWindowResizeHandler();
+  useSocketSetup(id, name, chatId);
 
   return (
     <main className="main-page">
       <div className="main-page__content">
         <NavigationSidebar userId={id} />
-        {isSidebarActive && (
+        {isSidebarOpened && (
           <Sidebar>
-            <Outlet context={{ userId: id }} />
+            <Outlet context={{ userId: id, userName: name }} />
           </Sidebar>
         )}
-        {isChatActive && isChatOpened ? (
-          <Chat userId={id} receiverId={receiverId} receiverName={receiverName} chatId={chatId} />
-        ) : (
-          !isMobile && <h2 className="text-hint">Select a chat to start messaging</h2>
-        )}
+        {isChatOpened && <Chat userId={id} userName={name} />}
+        {isTextHintShow && <h2 className="text-hint">Select a chat to start messaging</h2>}
       </div>
     </main>
   );

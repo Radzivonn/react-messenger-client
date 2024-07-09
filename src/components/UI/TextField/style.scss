@@ -12,7 +12,7 @@
     font-size: 1em;
     transform: translate(14px, 12.5px);
     transform-origin: top left;
-    transition: all 0.2s ease;
+    transition: var(--base-transition);
     pointer-events: none;
     user-select: none;
     color: var(--main-color-2-shadow-1);

@@ -6,19 +6,19 @@ import { useUserData } from '../hooks/useUserData/useUserData';
 import { TailSpinner } from '../components/UI/Spinners/TailSpinner';
 
 export const RequireAuth: FC<ChildrenProps> = ({ children }) => {
-  const { id } = useParams();
+  const { id, name } = useParams();
 
-  if (!id) {
+  if (!id || !name) {
     return <Navigate to={`/${routes.login}`} replace />;
   }
 
   const { isFetching, data, isError } = useUserData();
 
-  if ((!isFetching && (!data || data.id !== id)) || isError) {
+  if ((!isFetching && (!data || data.id !== id || data.name !== name)) || isError) {
     return <Navigate to={`/${routes.login}`} replace />;
   }
 
-  if (isFetching) {
+  if (isFetching || !data) {
     return <TailSpinner />;
   }
 

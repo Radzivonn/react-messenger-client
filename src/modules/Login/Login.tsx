@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { formFields } from './formFields';
 import { loginSchema } from './schemes';
-import authService from '../../API/services/authService/authService';
+import authService from '../../API/services/AuthService/AuthService';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { useQueryClient } from '@tanstack/react-query';
@@ -36,9 +36,11 @@ export const LoginModule = () => {
     const userData = await authService.login(data.email, data.password);
     if (userData) {
       authService.saveAccessToken(userData.accessToken);
+
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
+      navigate(`/users/${userData.user.id}/${userData.user.name}`, { replace: true });
+
       toast.success('You are successfully logged in!');
-      navigate(`/users/${userData.user.id}`, { replace: true });
     } else toast.error('This user was not found');
   });
 

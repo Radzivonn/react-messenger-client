@@ -6,26 +6,25 @@ import { useDebounce } from '../../../hooks/useDebounce/useDebounce';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
 import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
-import { MainPageComponentOutletContextType } from '../../../types/types';
-import { useQueryClient } from '@tanstack/react-query';
+import { MainPageComponentOutletContext } from '../../../types/types';
+import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';
 
 export const UserSearch = () => {
-  const queryClient = useQueryClient();
-  const { userId } = useOutletContext<MainPageComponentOutletContextType>();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search);
+
+  const { userId } = useOutletContext<MainPageComponentOutletContext>();
   const { isFetching: isFetchingSearchData, data: searchData } = useUsersSearch(
     userId,
     debouncedSearch,
   );
-  const { isFetching: isFetchingFriends, data: friends, isError } = useFriendList(userId);
+  const { isFetching: isFetchingFriends, data: friends } = useFriendList(userId);
 
-  if (isError) {
-    void queryClient.invalidateQueries({ queryKey: ['userData'] });
-  }
+  const onlineStatuses = useFriendsOnlineStatusesStore((state) => state.onlineStatuses);
 
   const isLoading = (isFetchingSearchData && !searchData) || (isFetchingFriends && !friends);
-  const isAllDataLoaded = !!(searchData && searchData.length && friends); // !! - casting to boolean
+  const isNoSearchData = searchData && searchData.length === 0 && debouncedSearch.length > 0;
+  const isAllDataLoaded = !!(searchData && friends);
 
   return (
     <>
@@ -37,9 +36,9 @@ export const UserSearch = () => {
         value={search}
         onChange={(evt) => setSearch(evt.target.value)}
       />
-      {isLoading ? (
-        <TailSpinner />
-      ) : isAllDataLoaded ? (
+      {isLoading && <TailSpinner />}
+      {isNoSearchData && <h2 className="text-hint">No such users were found</h2>}
+      {isAllDataLoaded &&
         searchData.map((user) => (
           <UserTab
             key={user.id}
@@ -47,11 +46,9 @@ export const UserSearch = () => {
             userId={userId}
             friendId={user.id}
             isFriend={Boolean(friends.find((friend) => friend.id === user.id))}
+            isOnline={onlineStatuses[user.id] ?? false}
           />
-        ))
-      ) : (
-        debouncedSearch && <h2 className="text-hint">No such users were found</h2>
-      )}
+        ))}
     </>
   );
 };

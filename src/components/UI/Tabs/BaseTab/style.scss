@@ -1,12 +1,16 @@
 .tab {
   @apply flex h-16 w-full cursor-pointer flex-row gap-2 px-3;
-  transition: all ease 0.2s;
+  transition: var(--base-transition);
 
   @media (hover: hover) {
     &:hover {
       @apply bg-[--main-color-2-shadow-3];
+      .online-status-marker {
+        stroke: var(--main-color-2-shadow-3);
+      }
     }
   }
+
   &__avatar-image {
     @apply h-auto w-auto;
   }

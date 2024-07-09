@@ -42,9 +42,16 @@ body {
 }
 
 .avatar-placeholder {
-  @apply my-auto flex h-14 w-14 min-w-14 items-center justify-center rounded-full bg-[--accent-color-2-light] text-2xl capitalize;
+  @apply relative my-auto flex h-14 w-14 min-w-14 items-center justify-center rounded-full bg-[--accent-color-2-light];
 }
 
 .text-hint {
   @apply m-auto select-none text-xl italic;
+}
+
+.online-status-marker {
+  fill: var(--online-status-marker-color);
+  stroke: var(--main-color-5);
+  stroke-width: 3px;
+  transition: var(--base-transition);
 }

@@ -1,33 +1,40 @@
-import React, { ComponentProps, FC, useState } from 'react';
+import React, { ComponentProps, FC } from 'react';
 import './style.scss';
-import { Message } from '../../types/types';
-import { useUserData } from '../../hooks/useUserData/useUserData';
-import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
 import { TailSpinner } from '../../components/UI/Spinners/TailSpinner';
 import { FriendDataHeader } from './FriendDataHeader/FriendDataHeader';
 import { MessagesList } from './MessagesList';
 import { InputSection } from './InputSection';
+import useChat from '../../hooks/useChat/useChat';
+import { useChatStore } from '../../store/chatData/chatData';
 
 interface Props extends ComponentProps<'section'> {
   userId: string;
-  receiverId: string;
-  receiverName: string;
-  chatId: string;
+  userName: string;
 }
 
-export const Chat: FC<Props> = ({ userId, receiverId, receiverName, chatId }) => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const { isFetching, data } = useUserData();
+export const Chat: FC<Props> = ({ userId, userName }) => {
+  const currentChat = useChatStore((state) => state.currentChat);
 
-  useSocketSetup(userId, receiverId, chatId, setMessages);
+  useChat(userId);
 
-  if (isFetching || !data) return <TailSpinner />;
+  if (!currentChat) {
+    return (
+      <section className="chat-wrapper">
+        <TailSpinner />
+      </section>
+    );
+  }
+
+  const receiver = currentChat.participants.find((user) => user.userId !== userId);
 
   return (
     <section className="chat-wrapper">
-      <FriendDataHeader receiverName={receiverName} />
-      <MessagesList messages={messages} />
-      <InputSection chatId={chatId} userName={data.name} />
+      <FriendDataHeader
+        receiverId={receiver?.userId ?? ''}
+        receiverName={receiver?.userName ?? 'NoName'}
+      />
+      <MessagesList messages={currentChat.messages} />
+      <InputSection chatId={currentChat.chatId} userName={userName} />
     </section>
   );
 };
