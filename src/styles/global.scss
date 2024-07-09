@@ -55,3 +55,14 @@ body {
   stroke-width: 3px;
   transition: var(--base-transition);
 }
+
+// only for PC
+@media (hover: hover) {
+  ::-webkit-scrollbar {
+    @apply w-2 bg-[var(--main-color-5)];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-[var(--accent-color-2-shadow-1)];
+  }
+}

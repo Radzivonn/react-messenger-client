@@ -9,7 +9,7 @@
 }
 
 .message {
-  @apply mt-7 flex min-h-9 w-fit min-w-6 flex-row justify-between gap-4 rounded-lg bg-[var(--message-bg-color)] px-2 text-lg text-[white];
+  @apply mt-7 flex min-h-9 w-fit min-w-6 flex-row justify-between gap-4 rounded-lg bg-[var(--accent-color-2-shadow-1)] px-2 text-lg text-[white];
 
   &__text {
     @apply overflow-hidden break-all;
