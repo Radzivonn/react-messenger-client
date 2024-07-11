@@ -1,7 +1,7 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useFriendList } from '../../../hooks/useFriendList/useFriendList';
-import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
+import { TailSpinner } from '../../../components/UI/Loaders/TailSpinner';
 import { UserTab } from '../../../components/UI/Tabs/User-tab';
 import { MainPageComponentOutletContext } from '../../../types/types';
 import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';

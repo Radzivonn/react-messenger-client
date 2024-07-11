@@ -1,6 +1,6 @@
 import React from 'react';
 import { useOutletContext, useSearchParams } from 'react-router-dom';
-import { TailSpinner } from '../../../components/UI/Spinners/TailSpinner';
+import { TailSpinner } from '../../../components/UI/Loaders/TailSpinner';
 import { ChatTab } from '../../../components/UI/Tabs/Chat-tab';
 import { MainPageComponentOutletContext } from '../../../types/types';
 import { useChatList } from '../../../hooks/useChat/useChatList';

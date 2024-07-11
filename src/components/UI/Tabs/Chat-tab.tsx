@@ -11,7 +11,7 @@ interface Props extends ComponentProps<'section'> {
 
 export const ChatTab: FC<Props> = ({ receiverName, lastMessage, isOnline, ...props }) => {
   return (
-    <Tab {...props}>
+    <Tab {...props} className="tab--with-highlight">
       <AvatarPlaceholder name={receiverName} isOnline={isOnline} />
       <div className="ml-3 flex w-fit max-w-[45%] flex-col justify-start gap-1">
         <h3 className="tab__info_name">{receiverName}</h3>

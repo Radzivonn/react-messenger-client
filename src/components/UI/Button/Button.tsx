@@ -10,7 +10,7 @@ export const Button: FC<IButtonProps> = ({ accent, className, type = 'button', .
     <button
       {...props}
       type={type}
-      className={`button ${accent ?? false ? 'button--accent' : ''} ${className ?? ''}`}
+      className={`button ${accent ? 'button--accent' : ''} ${className ?? ''}`}
     ></button>
   );
 };

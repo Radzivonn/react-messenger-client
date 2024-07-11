@@ -32,7 +32,7 @@ export const TextField = forwardRef<HTMLInputElement, ITextFieldProps>(
             autoComplete="on"
             {...props}
           />
-          {label ? (
+          {label && (
             <>
               <label className="text-field__label" htmlFor={id}>
                 {label}
@@ -43,10 +43,6 @@ export const TextField = forwardRef<HTMLInputElement, ITextFieldProps>(
                 </legend>
               </fieldset>
             </>
-          ) : (
-            <fieldset className="text-field__fieldset">
-              <legend className="text-field__legend"></legend>
-            </fieldset>
           )}
           <div
             className="text-field__icon-container"

@@ -18,9 +18,9 @@ export const UserTab: FC<Props> = ({ name, friendId, userId, isFriend, isOnline,
     <Tab {...props}>
       <div className="flex gap-2 overflow-hidden">
         <AvatarPlaceholder name={name} isOnline={isOnline} />
-        <h3 className="tab__info_name ml-3">{name}</h3>
+        <h3 className="tab__info_name ml-2">{name}</h3>
       </div>
-      <div className="flex gap-2">
+      <div className="ml-1 flex gap-2">
         {isFriend ? (
           <>
             <WriteToFriendButton userId={userId} friendId={friendId} friendName={name} />

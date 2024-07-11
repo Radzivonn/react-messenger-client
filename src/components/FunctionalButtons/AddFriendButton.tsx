@@ -15,7 +15,7 @@ export const AddFriendButton: FC<IFriendListActionButtonProps> = ({
   if (isPending) return <TailSpinner width="30" height="30" wrapperStyle={{ margin: '0' }} />;
 
   return (
-    <Button accent className="form__button button--icon-only" onClick={() => mutate()}>
+    <Button className="form__button button--icon-only" onClick={() => mutate()}>
       <AddFriendIcon className="icon" />
     </Button>
   );

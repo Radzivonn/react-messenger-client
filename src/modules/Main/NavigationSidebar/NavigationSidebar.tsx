@@ -42,17 +42,17 @@ export const NavigationSidebar: FC<Props> = ({ userId }) => {
 
   return (
     <aside className="nav-sidebar">
-      <Button accent className="form__button button--icon-only">
+      <Button className="form__button button--icon-only">
         <NavLink to={`${routes.chats}?${searchParams.toString()}`}>
           <ChatIcon className="icon" />
         </NavLink>
       </Button>
-      <Button accent className="form__button button--icon-only">
+      <Button className="form__button button--icon-only">
         <NavLink to={`${routes.friends}?${searchParams.toString()}`}>
           <FriendsIcon className="icon" />
         </NavLink>
       </Button>
-      <Button accent className="form__button button--icon-only" onClick={onLogout}>
+      <Button className="form__button button--icon-only" onClick={onLogout}>
         <LogoutIcon className="icon" />
       </Button>
     </aside>

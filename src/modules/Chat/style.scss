@@ -1,30 +1,106 @@
 .chat-wrapper {
   @apply flex h-screen w-full flex-col;
   &__input-section {
-    @apply mt-2 flex w-full flex-row justify-between gap-2 self-end;
+    @apply flex w-full flex-row justify-between gap-2 self-end border-l-2 border-[var(--main-color-3)] bg-[var(--main-color-5)];
   }
   &__messages-section {
-    @apply flex h-[94.22%] w-full flex-col overflow-y-scroll px-3;
+    @apply flex h-[94.22%] w-full flex-col overflow-y-scroll px-4;
   }
 }
 
 .message {
-  @apply mt-7 flex min-h-9 w-fit min-w-6 flex-row justify-between gap-4 rounded-lg bg-[var(--accent-color-2-shadow-1)] px-2 text-lg text-[white];
+  @apply relative mt-3 flex w-fit min-w-6 max-w-[50%] flex-row justify-between gap-2 rounded-lg bg-[var(--accent-color-2-shadow-1)] px-2 py-[6px] text-lg text-[white];
+
+  &::before {
+    @apply absolute bottom-[-2px] h-[15px] w-5 rounded content-[''];
+    clip-path: polygon(70% 0, 0% 70%, 100% 100%);
+  }
+
+  &--receiver {
+    @apply self-start bg-[var(--main-color-5)];
+    &::before {
+      background-color: var(--main-color-5);
+      left: -5px;
+      transform: scaleX(-1) rotate(-10deg);
+    }
+  }
+
+  &--my {
+    align-self: flex-end;
+    &::before {
+      background-color: var(--accent-color-2-shadow-1);
+      right: -5px;
+      transform: rotate(-10deg);
+    }
+  }
 
   &__text {
     @apply overflow-hidden break-all;
   }
-  &__username,
+
+  // &__username,
   &__time {
     @apply self-end text-sm;
   }
-  &__username {
-    position: relative;
-    bottom: -16px;
-    left: -5px;
+
+  // &__username {
+  //   position: relative;
+  //   bottom: -25px;
+  //   left: -5px;
+  // }
+
+  @media (max-width: 992px) {
+    & {
+      @apply max-w-full;
+    }
+  }
+
+  @media (max-width: 391px) {
+    & {
+      @apply text-base;
+    }
   }
 }
 
 .friend-header {
-  @apply flex justify-between border-2 border-[--main-color-3] bg-[--main-color-5] p-3;
+  @apply flex max-h-[87px] justify-between border-l-2 border-[--main-color-3] bg-[--main-color-5] p-3;
+
+  &--desktop {
+    .user-info {
+      @apply mr-6 flex w-40 gap-5;
+    }
+  }
+
+  &--mobile {
+    .user-info {
+      @apply m-auto flex w-40 gap-5;
+    }
+  }
+
+  .user-info-container {
+    @apply flex flex-col gap-2;
+  }
+
+  .user-info-name {
+    @apply text-xl font-bold;
+  }
+
+  .user-info-status-text {
+    &--online {
+      @apply text-[var(--accent-color-2-light)];
+    }
+    &--offline {
+      color: var(--main-color-2-default);
+    }
+  }
+
+  @media (max-width: 391px) {
+    .user-info-name {
+      @apply text-lg font-bold;
+    }
+
+    .user-info-status-text {
+      @apply text-sm;
+    }
+  }
 }

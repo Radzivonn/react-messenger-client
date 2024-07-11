@@ -59,7 +59,7 @@ body {
 // only for PC
 @media (hover: hover) {
   ::-webkit-scrollbar {
-    @apply w-2 bg-[var(--main-color-5)];
+    @apply w-[6px] bg-[var(--main-color-3)];
   }
 
   ::-webkit-scrollbar-thumb {
