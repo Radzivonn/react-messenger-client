@@ -25,7 +25,10 @@ export const Main: FC<ComponentProps<'main'>> = () => {
   const isTextHintShow = !isMobile && (!isChatOpened || !chatId) ? true : false;
 
   useBeforeUnload(() => {
-    if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, id);
+    if (socket) {
+      if (chatId) socket.emit(WEBSOCKET_EVENTS.STOP_TYPING, chatId, id);
+      socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, id);
+    }
   });
   useWindowResizeHandler();
   useSocketSetup(id, name, chatId);
@@ -39,7 +42,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
             <Outlet context={{ userId: id, userName: name }} />
           </Sidebar>
         )}
-        {isChatOpened && chatId && <Chat userId={id} userName={name} />}
+        {isChatOpened && chatId && <Chat chatId={chatId} userId={id} userName={name} />}
         {isTextHintShow && <h2 className="text-hint">Select a chat to start messaging</h2>}
       </div>
     </main>

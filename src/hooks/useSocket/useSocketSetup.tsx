@@ -7,15 +7,21 @@ import { useSocketStore } from '../../store/socket/socketStore';
 import { useChatStore } from '../../store/chatData/chatData';
 import { useFriendsOnlineStatusesStore } from '../../store/onlineStatuses/onlineStatuses';
 import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
+import { useReceiverStore } from '../../store/receiver/receiverStore';
+import { useSearchParams } from 'react-router-dom';
 
 const useSocketSetup = (userId: string, userName: string, chatId: string | null) => {
   const queryClient = useQueryClient();
+
+  const [searchParams] = useSearchParams();
+  const receiverId = searchParams.get('receiverId');
 
   const { socket, setSocket } = useSocketStore();
   const resetSocket = useSocketStore((state) => state.resetSocket);
   const { setCurrentChat, addMessage, clearChatData } = useChatStore();
   const { addOnlineStatus, setOnlineStatuses } = useFriendsOnlineStatusesStore();
   const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);
+  const setIsReceiverTyping = useReceiverStore((state) => state.setIsReceiverTyping);
 
   useEffect(() => {
     const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:5050/');
@@ -42,10 +48,6 @@ const useSocketSetup = (userId: string, userName: string, chatId: string | null)
       addOnlineStatus(userId, true);
     });
 
-    socket.on(WEBSOCKET_EVENTS.PARTICIPANT_DISCONNECTED, (userId) => {
-      addOnlineStatus(userId, false);
-    });
-
     socket.on(WEBSOCKET_EVENTS.DISCONNECT, (reason) =>
       console.log(`Disconnected by reason: ${reason}`),
     );
@@ -63,7 +65,6 @@ const useSocketSetup = (userId: string, userName: string, chatId: string | null)
     if (socket) {
       socket.on(WEBSOCKET_EVENTS.RECEIVE_MESSAGE, (message) => {
         void queryClient.invalidateQueries({ queryKey: ['chatList', userId] }); // !!! optimize because fetch all chats bad idea
-
         if (message.chatId === chatId) {
           addMessage(message);
         }
@@ -74,6 +75,29 @@ const useSocketSetup = (userId: string, userName: string, chatId: string | null)
       };
     }
   }, [chatId, socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on(WEBSOCKET_EVENTS.RECEIVER_START_TYPING, (userId) => {
+        if (receiverId === userId) setIsReceiverTyping(true);
+      });
+
+      socket.on(WEBSOCKET_EVENTS.RECEIVER_STOP_TYPING, (userId) => {
+        if (receiverId === userId) setIsReceiverTyping(false);
+      });
+
+      socket.on(WEBSOCKET_EVENTS.PARTICIPANT_DISCONNECTED, (userId) => {
+        addOnlineStatus(userId, false);
+        if (receiverId === userId) setIsReceiverTyping(false); // in case the receiver leaves the page
+      });
+
+      return () => {
+        socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_START_TYPING);
+        socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_STOP_TYPING);
+        socket.removeListener(WEBSOCKET_EVENTS.PARTICIPANT_DISCONNECTED);
+      };
+    }
+  }, [receiverId, socket]);
 };
 
 export default useSocketSetup;

@@ -3,6 +3,7 @@ import { WEBSOCKET_EVENTS } from '../../types/types';
 import { useSearchParams } from 'react-router-dom';
 import { useSocketStore } from '../../store/socket/socketStore';
 import { useChatStore } from '../../store/chatData/chatData';
+import { useReceiverStore } from '../../store/receiver/receiverStore';
 
 const useChat = (userId: string) => {
   const [searchParams] = useSearchParams();
@@ -11,6 +12,7 @@ const useChat = (userId: string) => {
 
   const socket = useSocketStore((state) => state.socket);
   const clearChatData = useChatStore((state) => state.clearChatData);
+  const setIsReceiverTyping = useReceiverStore((state) => state.setIsReceiverTyping);
 
   useEffect(() => {
     if (socket && chatId && receiverId) {
@@ -20,7 +22,9 @@ const useChat = (userId: string) => {
         receiverId,
       });
 
+      /* when leave chat */
       return () => {
+        setIsReceiverTyping(false);
         clearChatData();
       };
     }

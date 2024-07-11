@@ -1,23 +1,26 @@
 import React, { ComponentProps, FC } from 'react';
 import './style.scss';
-import { TailSpinner } from '../../components/UI/Spinners/TailSpinner';
+import { TailSpinner } from '../../components/UI/Loaders/TailSpinner';
 import { FriendDataHeader } from './FriendDataHeader/FriendDataHeader';
 import { MessagesList } from './MessagesList';
 import { InputSection } from './InputSection';
 import useChat from '../../hooks/useChat/useChat';
 import { useChatStore } from '../../store/chatData/chatData';
+import { useSocketStore } from '../../store/socket/socketStore';
 
 interface Props extends ComponentProps<'section'> {
+  chatId: string;
   userId: string;
   userName: string;
 }
 
-export const Chat: FC<Props> = ({ userId, userName }) => {
+export const Chat: FC<Props> = ({ chatId, userId, userName }) => {
   const currentChat = useChatStore((state) => state.currentChat);
+  const socket = useSocketStore((state) => state.socket);
 
   useChat(userId);
 
-  if (!currentChat) {
+  if (!currentChat || !socket) {
     return (
       <section className="chat-wrapper">
         <TailSpinner />
@@ -33,8 +36,8 @@ export const Chat: FC<Props> = ({ userId, userName }) => {
         receiverId={receiver?.userId ?? ''}
         receiverName={receiver?.userName ?? 'NoName'}
       />
-      <MessagesList messages={currentChat.messages} />
-      <InputSection chatId={currentChat.chatId} userName={userName} />
+      <MessagesList messages={currentChat.messages} userName={userName} />
+      <InputSection socket={socket} chatId={chatId} userId={userId} userName={userName} />
     </section>
   );
 };

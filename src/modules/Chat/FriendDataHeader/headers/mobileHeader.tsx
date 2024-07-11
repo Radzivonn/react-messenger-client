@@ -1,18 +1,13 @@
-import React, { ComponentProps, FC } from 'react';
+import React, { FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ArrowIcon from '../../../../assets/icons/arrow_left_icon.svg?react';
 import { Button } from '../../../../components/UI/Button/Button';
 import { useAppSettingsStore } from '../../../../store/appSettings/appSettingsStore';
-import { AvatarPlaceholder } from '../../../../components/UI/AvatarPlaceholder/AvatarPlaceholder';
+import { ChildrenProps } from './types';
 
-interface Props extends ComponentProps<'section'> {
-  receiverName: string;
-  isOnline: boolean;
-}
-
-export const MobileHeader: FC<Props> = ({ receiverName, isOnline }) => {
-  const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);
+export const MobileHeader: FC<ChildrenProps> = ({ children }) => {
   const [_searchParams, setSearchParams] = useSearchParams();
+  const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);
 
   const onCloseChat = () => {
     setSearchParams({}, { replace: true });
@@ -20,17 +15,11 @@ export const MobileHeader: FC<Props> = ({ receiverName, isOnline }) => {
   };
 
   return (
-    <section className="friend-header">
+    <section className="friend-header friend-header--mobile">
       <Button className="button--icon-only" onClick={() => onCloseChat()}>
         <ArrowIcon className="icon w-7" />
       </Button>
-      <div className="m-auto flex gap-5">
-        <AvatarPlaceholder name={receiverName} isOnline={isOnline} />
-        <div className="flex flex-col gap-2">
-          <h2 className="name"> {receiverName} </h2>
-          <p className="online-status"> {isOnline ? 'Online' : 'Offline'} </p>
-        </div>
-      </div>
+      {children}
     </section>
   );
 };
