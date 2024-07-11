@@ -3,7 +3,7 @@ import { Button } from '../UI/Button/Button';
 import RemoveFriendIcon from '../../assets/icons/remove-friend-icon.svg?react';
 import { IFriendListActionButtonProps } from './types';
 import { useRemoveFriend } from '../../hooks/useFriendListMutations/useRemoveFriend';
-import { TailSpinner } from '../UI/Spinners/TailSpinner';
+import { TailSpinner } from '../UI/Loaders/TailSpinner';
 
 export const RemoveFriendButton: FC<IFriendListActionButtonProps> = ({
   userId,
