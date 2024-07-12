@@ -1,5 +1,5 @@
 .chat-wrapper {
-  @apply flex h-screen w-full flex-col;
+  @apply flex h-screen max-w-full flex-grow flex-col;
   &__input-section {
     @apply flex w-full flex-row justify-between gap-2 self-end border-l-2 border-[var(--main-color-3)] bg-[var(--main-color-5)];
   }
@@ -9,10 +9,10 @@
 }
 
 .message {
-  @apply relative mt-3 flex w-fit min-w-6 max-w-[50%] flex-row justify-between gap-2 rounded-lg bg-[var(--accent-color-2-shadow-1)] px-2 py-[6px] text-lg text-[white];
+  @apply relative mt-3 flex w-fit min-w-6 max-w-[50%] flex-row flex-wrap justify-end rounded-xl bg-[var(--accent-color-2-shadow-1)] px-2 pb-2 pt-1 text-lg text-[white];
 
   &::before {
-    @apply absolute bottom-[-2px] h-[15px] w-5 rounded content-[''];
+    @apply absolute bottom-[-2px] h-[13px] w-7 rounded content-[''];
     clip-path: polygon(70% 0, 0% 70%, 100% 100%);
   }
 
@@ -20,8 +20,8 @@
     @apply self-start bg-[var(--main-color-5)];
     &::before {
       background-color: var(--main-color-5);
-      left: -5px;
-      transform: scaleX(-1) rotate(-10deg);
+      left: -8px;
+      transform: scaleX(-1) rotate(-9deg);
     }
   }
 
@@ -29,8 +29,8 @@
     align-self: flex-end;
     &::before {
       background-color: var(--accent-color-2-shadow-1);
-      right: -5px;
-      transform: rotate(-10deg);
+      right: -8px;
+      transform: rotate(-9deg);
     }
   }
 
@@ -38,16 +38,9 @@
     @apply overflow-hidden break-all;
   }
 
-  // &__username,
   &__time {
-    @apply self-end text-sm;
+    @apply ml-3 max-h-[14px] self-end text-sm;
   }
-
-  // &__username {
-  //   position: relative;
-  //   bottom: -25px;
-  //   left: -5px;
-  // }
 
   @media (max-width: 992px) {
     & {

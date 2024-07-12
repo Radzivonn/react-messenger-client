@@ -3,7 +3,7 @@ import { afterResponseHook, beforeRequestHook } from './hooks';
 import { STATUS_CODES } from '../../types/types';
 
 const api = ky.create({
-  prefixUrl: 'http://localhost:5000', // ? temporary url
+  prefixUrl: 'http://localhost:5050', // ? temporary url
   credentials: 'include',
   hooks: {
     beforeRequest: [beforeRequestHook],

@@ -1,5 +1,10 @@
 .main-sidebar {
-  @apply flex h-screen w-2/6 min-w-64 flex-col gap-3 bg-[var(--main-color-5)] xl:w-1/4;
+  @apply flex h-screen w-1/4 min-w-72 max-w-md flex-col gap-3 bg-[var(--main-color-5)] xl:w-1/4 xl:min-w-80 2xl:min-w-96;
+
+  @media (max-width: 991px) {
+    min-width: 260px;
+    max-width: 300px;
+  }
 
   &__title {
     @apply mx-3 my-3 text-3xl font-bold capitalize;
@@ -11,5 +16,6 @@
 
   &--mobile {
     width: 100%;
+    max-width: none;
   }
 }

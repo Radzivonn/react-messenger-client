@@ -1,5 +1,9 @@
 import * as yup from 'yup';
-import { userNameSchema, emailSchema, passwordSchema } from '../../validations/validationSchemes';
+import {
+  userNameSchema,
+  emailSchema,
+  passwordSchema,
+} from '../../../../validations/validationSchemes';
 
 export const profileFormSchema = yup.object({
   userName: userNameSchema,

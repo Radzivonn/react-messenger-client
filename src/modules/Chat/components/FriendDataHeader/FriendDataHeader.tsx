@@ -1,8 +1,8 @@
 import React, { ComponentProps, FC } from 'react';
-import { useAppSettingsStore } from '../../../store/appSettings/appSettingsStore';
-import { DesktopHeader } from './headers/desktopHeader';
+import { useAppSettingsStore } from '../../../../store/appSettings/appSettingsStore';
+import { useFriendsOnlineStatusesStore } from '../../../../store/onlineStatuses/onlineStatuses';
 import { MobileHeader } from './headers/mobileHeader';
-import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';
+import { DesktopHeader } from './headers/desktopHeader';
 import { UserInfo } from './headers/UserInfo';
 
 interface Props extends ComponentProps<'section'> {

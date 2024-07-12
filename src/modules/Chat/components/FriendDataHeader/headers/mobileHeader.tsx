@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import ArrowIcon from '../../../../assets/icons/arrow_left_icon.svg?react';
-import { Button } from '../../../../components/UI/Button/Button';
-import { useAppSettingsStore } from '../../../../store/appSettings/appSettingsStore';
 import { ChildrenProps } from './types';
+import { useSearchParams } from 'react-router-dom';
+import { useAppSettingsStore } from '../../../../../store/appSettings/appSettingsStore';
+import { Button } from '../../../../../components/UI/Button/Button';
+import ArrowIcon from '../../../../../assets/icons/arrow_left_icon.svg?react';
 
 export const MobileHeader: FC<ChildrenProps> = ({ children }) => {
   const [_searchParams, setSearchParams] = useSearchParams();

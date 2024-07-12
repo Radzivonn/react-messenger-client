@@ -1,15 +1,15 @@
 import React, { ComponentProps, FC, useRef, useState } from 'react';
-import { TextField } from '../../components/UI/TextField/TextField';
-import { Button } from '../../components/UI/Button/Button';
+import { TextField } from '../../../components/UI/TextField/TextField';
+import { Button } from '../../../components/UI/Button/Button';
 import {
   ClientToServerEvents,
   Message,
   ServerToClientEvents,
   WEBSOCKET_EVENTS,
-} from '../../types/types';
+} from '../../../types/types';
 import { Socket } from 'socket.io-client';
-import { useChatStore } from '../../store/chatData/chatData';
-import MessagePlaneIcon from '../../assets/icons/message-plane.svg?react';
+import { useChatStore } from '../../../store/chatData/chatData';
+import MessagePlaneIcon from '../../../assets/icons/message-plane.svg?react';
 
 const getTime = () =>
   `${new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()}`;
