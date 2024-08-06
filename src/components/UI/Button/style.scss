@@ -43,10 +43,6 @@
   &--icon-only {
     @apply flex h-12 w-12 justify-center border-none bg-transparent p-0;
 
-    a {
-      @apply flex h-12 w-12 items-center justify-center border-none bg-transparent p-0;
-    }
-
     @media (hover: hover) {
       &:hover {
         background-color: var(--main-color-2-shadow-3);
@@ -55,6 +51,21 @@
 
     &:active {
       background-color: transparent;
+    }
+
+    &--with-accent-bg {
+      @apply border-4 border-solid border-[var(--popup-bg-color-1)] bg-[var(--accent-color-2-light)];
+
+      @media (hover: hover) {
+        &:hover,
+        &:active {
+          background-color: var(--accent-color-2-shadow-1);
+        }
+      }
+    }
+
+    a {
+      @apply flex h-12 w-12 items-center justify-center border-none bg-transparent p-0;
     }
   }
 
@@ -88,5 +99,9 @@
 
   &--hidden {
     transform: scale(0);
+  }
+
+  &--rounded {
+    border-radius: 50%;
   }
 }
