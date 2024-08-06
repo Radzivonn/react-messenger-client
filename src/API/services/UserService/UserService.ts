@@ -1,3 +1,4 @@
+import { KyResponse } from 'ky';
 import { User } from '../../../types/types';
 import api from '../../http';
 import authService from '../AuthService/AuthService';
@@ -12,6 +13,34 @@ class UserService {
       if (!authService.hasAccessToken()) return null;
       const user: Promise<User> = api.get(`${this.BASE_URL}/${endpoints.getUserData}`).json();
       return user;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  public getAvatarImage(userId: string) {
+    try {
+      const avatar: Promise<{ avatarPath: string }> = api
+        .get(`${this.BASE_URL}/${userId}/${endpoints.getAvatarImage}`)
+        .json();
+
+      return avatar;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  public updateAvatarImage(userId: string, image: File) {
+    try {
+      const data = new FormData();
+      data.append('avatar', image);
+
+      const response: Promise<KyResponse> = api
+        .post(`${this.BASE_URL}/${userId}/${endpoints.updateAvatarImage}`, {
+          body: data,
+        })
+        .json();
+      return response;
     } catch (e) {
       console.error(e);
     }
