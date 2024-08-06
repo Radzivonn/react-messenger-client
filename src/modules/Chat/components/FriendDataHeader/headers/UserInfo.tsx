@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Props } from './types';
 import { useReceiverStore } from '../../../../../store/receiver/receiverStore';
-import { AvatarPlaceholder } from '../../../../../components/UI/AvatarPlaceholder/AvatarPlaceholder';
+import { AvatarPlaceholder } from '../../../../../components/UI/AvatarUI/AvatarPlaceholder';
 import { ThreeDotsLoader } from '../../../../../components/UI/Loaders/ThreeDots';
 
 export const UserInfo: FC<Props> = ({ receiverName, isOnline }) => {

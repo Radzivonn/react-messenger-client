@@ -3,7 +3,7 @@ import { Tab } from './BaseTab/Tab';
 import { RemoveFriendButton } from '../../FunctionalButtons/RemoveFriendButton';
 import { AddFriendButton } from '../../FunctionalButtons/AddFriendButton';
 import { WriteToFriendButton } from '../../FunctionalButtons/WriteToFriendButton';
-import { AvatarPlaceholder } from '../AvatarPlaceholder/AvatarPlaceholder';
+import { AvatarPlaceholder } from '../AvatarUI/AvatarPlaceholder';
 
 interface Props extends ComponentProps<'section'> {
   name: string;
