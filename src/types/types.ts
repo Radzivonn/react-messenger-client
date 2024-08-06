@@ -10,6 +10,29 @@ export interface User {
   role: string;
 }
 
+export interface IAvatar {
+  userId: string;
+  avatarPath: string;
+}
+
+export interface Message {
+  chatId: string;
+  date: string;
+  name: string;
+  message: string;
+}
+
+interface Participant {
+  userId: string;
+  userName: string;
+}
+
+export interface IChat {
+  chatId: string;
+  participants: Participant[];
+  messages: Message[];
+}
+
 export interface UserWithOnlineStatus extends User {
   online: boolean;
 }
@@ -69,24 +92,6 @@ export interface ClientToServerEvents {
   leave_room: () => void;
   disconnect_participant: (userId: string) => void;
   connect_participant: (userId: string, userName: string) => void;
-}
-
-export interface Message {
-  chatId: string;
-  date: string;
-  name: string;
-  message: string;
-}
-
-interface Participant {
-  userId: string;
-  userName: string;
-}
-
-export interface IChat {
-  chatId: string;
-  participants: Participant[];
-  messages: Message[];
 }
 
 export interface MainPageComponentOutletContext {
