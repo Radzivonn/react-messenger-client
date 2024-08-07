@@ -10,7 +10,7 @@ export const LinkToSearching: FC = () => {
   return (
     <Link to={`${mainPageRoutes.searching}?${searchParams.toString()}`} className="self-center">
       <Button accent className="form__button button--icon-only">
-        <AddFriendIcon className="icon" />
+        <AddFriendIcon />
       </Button>
     </Link>
   );

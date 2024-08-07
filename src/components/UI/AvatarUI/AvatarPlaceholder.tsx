@@ -6,11 +6,12 @@ interface Props extends ComponentProps<'div'> {
   isOnline: boolean;
 }
 
-export const AvatarPlaceholder: FC<Props> = ({ name, isOnline }) => {
+export const AvatarPlaceholder: FC<Props> = ({ className, name, isOnline, children }) => {
   return (
-    <div className="avatar-placeholder">
-      <p className="absolute text-2xl capitalize">{name.slice(0, 1)}</p>
+    <div className={`avatar ${className ?? ''}`}>
+      <p className="absolute capitalize">{name.slice(0, 1)}</p>
       {isOnline && <OnlineStatusMarker />}
+      {children}
     </div>
   );
 };
