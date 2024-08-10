@@ -19,14 +19,14 @@ export const FriendDataHeader: FC<Props> = ({ receiverId, receiverName }) => {
   if (isMobile) {
     return (
       <MobileHeader>
-        <UserInfo receiverName={receiverName} isOnline={isReceiverOnline} />
+        <UserInfo receiverId={receiverId} receiverName={receiverName} isOnline={isReceiverOnline} />
       </MobileHeader>
     );
   }
 
   return (
     <DesktopHeader>
-      <UserInfo receiverName={receiverName} isOnline={isReceiverOnline} />
+      <UserInfo receiverId={receiverId} receiverName={receiverName} isOnline={isReceiverOnline} />
     </DesktopHeader>
   );
 };

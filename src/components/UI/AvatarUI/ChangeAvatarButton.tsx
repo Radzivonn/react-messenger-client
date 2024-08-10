@@ -25,22 +25,20 @@ export const ChangeAvatarButton: FC<Props> = ({ userId, ...props }) => {
   };
 
   return (
-    <>
-      <Button
-        {...props}
-        className="button--icon-only button--icon-only--with-accent-bg relative translate-x-12 translate-y-12 gap-0"
-        rounded
-        onClick={() => runFilePicker()}
-      >
-        <input
-          type="file"
-          accept="image/*"
-          ref={filePicker}
-          onChange={(e) => onChangeFilePicker(e)}
-          className="hidden"
-        />
-        <CameraIcon />
-      </Button>
-    </>
+    <Button
+      {...props}
+      className="button--icon-only button--icon-only--with-accent-bg relative translate-x-12 translate-y-12 gap-0"
+      rounded
+      onClick={() => runFilePicker()}
+    >
+      <input
+        type="file"
+        accept="image/*"
+        ref={filePicker}
+        onChange={(e) => onChangeFilePicker(e)}
+        className="hidden"
+      />
+      <CameraIcon />
+    </Button>
   );
 };

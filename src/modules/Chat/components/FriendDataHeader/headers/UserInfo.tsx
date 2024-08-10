@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
 import { Props } from './types';
 import { useReceiverStore } from '../../../../../store/receiver/receiverStore';
-import { AvatarPlaceholder } from '../../../../../components/UI/AvatarUI/AvatarPlaceholder';
+import { AvatarImage } from '../../../../../components/UI/AvatarUI/AvatarImage';
 import { ThreeDotsLoader } from '../../../../../components/UI/Loaders/ThreeDots';
 
-export const UserInfo: FC<Props> = ({ receiverName, isOnline }) => {
+export const UserInfo: FC<Props> = ({ receiverId, receiverName, isOnline }) => {
   const isReceiverTyping = useReceiverStore((state) => state.isReceiverTyping);
+
   return (
     <div className="user-info">
-      <AvatarPlaceholder name={receiverName} isOnline={isOnline} />
+      <AvatarImage userId={receiverId} name={receiverName} isOnline={false} />
       <div className="user-info-container">
         <h2 className="user-info-name"> {receiverName} </h2>
         {isReceiverTyping ? (

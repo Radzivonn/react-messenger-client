@@ -9,6 +9,7 @@ import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
 import useWindowResizeHandler from '../../hooks/useWindowResizeHandler/useWindowResizeHandler';
 import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
 import { useSocketStore } from '../../store/socket/socketStore';
+import { SettingsPopup } from '../../modules/Main/SettingsPopup/SettingsPopup';
 
 type userSearchParams = { id: string; name: string };
 
@@ -18,7 +19,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
   const [searchParams] = useSearchParams();
   const chatId = searchParams.get('chatId');
 
-  const { isMobile, isChatOpened } = useAppSettingsStore();
+  const { isMobile, isChatOpened, isSettingsOpened } = useAppSettingsStore();
   const socket = useSocketStore((state) => state.socket);
 
   const isSidebarOpened = isMobile && isChatOpened ? false : true;
@@ -34,17 +35,20 @@ export const Main: FC<ComponentProps<'main'>> = () => {
   useSocketSetup(id, name, chatId);
 
   return (
-    <main className="main-page">
-      <div className="main-page__content">
-        <NavigationSidebar userId={id} />
-        {isSidebarOpened && (
-          <Sidebar>
-            <Outlet context={{ userId: id, userName: name }} />
-          </Sidebar>
-        )}
-        {isChatOpened && chatId && <Chat chatId={chatId} userId={id} userName={name} />}
-        {isTextHintShow && <h2 className="text-hint">Select a chat to start messaging</h2>}
-      </div>
-    </main>
+    <>
+      <main className="main-page">
+        <div className="main-page__content">
+          <NavigationSidebar userId={id} />
+          {isSidebarOpened && (
+            <Sidebar>
+              <Outlet context={{ userId: id, userName: name }} />
+            </Sidebar>
+          )}
+          {isChatOpened && chatId && <Chat chatId={chatId} userId={id} userName={name} />}
+          {isTextHintShow && <h2 className="text-hint">Select a chat to start messaging</h2>}
+        </div>
+      </main>
+      <SettingsPopup className={`${isSettingsOpened ? '' : 'popup-wrapper--closed'}`} />
+    </>
   );
 };
