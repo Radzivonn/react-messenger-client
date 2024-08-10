@@ -10,33 +10,34 @@
 
   @media (hover: hover) {
     &:hover {
-      background: var(--accent-color-1-shadow-3);
+      background: var(--accent-color-1-shadow-1);
     }
   }
 
   &:active {
-    background: var(--accent-color-1-shadow-2);
+    background: transparent;
   }
 
   /* for NavLink component */
   .active {
-    @apply rounded-lg bg-[var(--accent-color-2-light)];
+    @apply rounded-lg bg-[var(--accent-color-1-default)];
     background-blend-mode: color;
   }
 
   &--accent {
     background-color: var(--accent-color-1-default);
-    border: 1px solid var(--accent-color-1-default);
+    border: 1px solid var(--accent-color-2-shadow-1);
     color: var(--main-color-3);
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--accent-color-1-light);
+        background-color: var(--accent-color-1-default);
+        opacity: 0.8;
       }
     }
 
     &:active {
-      background-color: var(--accent-color-1-shadow-1);
+      background-color: var(--accent-color-2-shadow-1);
     }
   }
 
@@ -45,7 +46,8 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--main-color-2-shadow-3);
+        background-color: transparent;
+        opacity: 0.8;
       }
     }
 
@@ -54,12 +56,12 @@
     }
 
     &--with-accent-bg {
-      @apply border-4 border-solid border-[var(--popup-bg-color-1)] bg-[var(--accent-color-2-light)];
+      @apply border-4 border-solid border-[var(--popup-bg-color-1)] bg-[var(--accent-color-1-default)];
 
       @media (hover: hover) {
         &:hover,
         &:active {
-          background-color: var(--accent-color-2-shadow-1);
+          background-color: var(--accent-color-1-default);
         }
       }
     }
@@ -79,7 +81,7 @@
     @media (hover: hover) {
       &:hover {
         background-color: transparent;
-        color: var(--accent-color-1-light);
+        color: var(--accent-color-1-default);
       }
     }
 

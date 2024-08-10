@@ -10,7 +10,7 @@ interface OnlineStatusesStore {
 export const useFriendsOnlineStatusesStore = create<OnlineStatusesStore>()(
   devtools((set) => ({
     onlineStatuses: {},
-    setOnlineStatuses: (onlineStatuses) => set(() => ({ onlineStatuses: onlineStatuses })),
+    setOnlineStatuses: (onlineStatuses) => set(() => ({ onlineStatuses })),
     addOnlineStatus: (friendId, onlineStatus) =>
       set(({ onlineStatuses }) => {
         return {

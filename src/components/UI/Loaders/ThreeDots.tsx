@@ -6,7 +6,7 @@ export const ThreeDotsLoader: FC<ThreeDotsProps> = (props) => {
     <ThreeDots
       height="20"
       width="30"
-      color="var(--accent-color-2-light)"
+      color="var(--accent-color-1-default)"
       ariaLabel="three-dots-loading"
       wrapperStyle={{ margin: 'auto' }}
       visible={true}
