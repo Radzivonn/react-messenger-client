@@ -1,5 +1,5 @@
 .popup-wrapper {
-  @apply fixed z-40 h-screen w-screen bg-black bg-opacity-40;
+  @apply fixed z-40 flex h-screen w-screen items-center justify-center bg-black bg-opacity-40;
   transition: opacity ease 0.2s;
   visibility: initial;
   opacity: 1;
@@ -10,8 +10,7 @@
   }
 
   .popup-content {
-    @apply absolute left-1/2 top-1/2 z-50 mr-[50%] h-[90vh] w-[420px] rounded-md bg-[var(--popup-bg-color-1)] p-5;
-    transform: translate(-50%, -50%);
+    @apply relative z-50 h-[75vh] w-[420px] rounded-md bg-[var(--popup-bg-color-1)] p-5;
 
     @media (max-width: 481px) {
       & {
@@ -26,15 +25,11 @@
     }
 
     #cross {
-      @apply absolute right-7 top-7 h-[24px] w-[2px] rotate-45 cursor-pointer rounded-lg bg-[var(--main-color-2-default)] opacity-65 hover:opacity-100;
-      &::after {
-        content: '';
-        @apply absolute h-[24px] w-[2px] rotate-90 rounded-lg bg-[var(--main-color-2-default)];
-      }
+      @apply mr-1 h-[24px] w-[2px];
     }
 
     .popup-header {
-      @apply mb-5 text-2xl font-medium;
+      @apply mb-5 flex justify-between text-2xl font-medium;
     }
 
     .user-data {
@@ -52,6 +47,7 @@
 }
 
 .change-option-popup-wrapper {
+  position: absolute;
   width: inherit;
   height: inherit;
   z-index: 100;
@@ -61,7 +57,6 @@
   .popup-content {
     width: 75%;
     height: fit-content;
-    top: 39%;
   }
 
   .popup-footer {

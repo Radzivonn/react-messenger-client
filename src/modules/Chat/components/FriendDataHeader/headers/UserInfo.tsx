@@ -9,7 +9,7 @@ export const UserInfo: FC<Props> = ({ receiverId, receiverName, isOnline }) => {
 
   return (
     <div className="user-info">
-      <AvatarImage userId={receiverId} name={receiverName} isOnline={false} />
+      <AvatarImage userId={receiverId} name={receiverName} isOnline={false} isOpenable={true} />
       <div className="user-info-container">
         <h2 className="user-info-name"> {receiverName} </h2>
         {isReceiverTyping ? (

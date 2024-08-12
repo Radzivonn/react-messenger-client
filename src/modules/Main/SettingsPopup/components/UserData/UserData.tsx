@@ -22,6 +22,7 @@ export const UserData = () => {
           userId={data.id}
           name={data.name}
           isOnline={false}
+          isOpenable={true}
         >
           <ChangeAvatarButton userId={data.id} />
         </AvatarImage>

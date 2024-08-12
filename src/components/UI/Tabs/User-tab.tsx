@@ -17,7 +17,7 @@ export const UserTab: FC<Props> = ({ name, friendId, userId, isFriend, isOnline,
   return (
     <Tab {...props}>
       <div className="flex gap-2 overflow-hidden">
-        <AvatarImage userId={friendId} name={name} isOnline={isOnline} />
+        <AvatarImage userId={friendId} name={name} isOnline={isOnline} isOpenable={false} />
         <h3 className="tab__info_name ml-2">{name}</h3>
       </div>
       <div className="ml-1 flex gap-2">
