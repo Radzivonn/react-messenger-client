@@ -1,10 +1,8 @@
 const endpoints = {
   getUserData: 'getData',
-  addFriend: 'addFriend',
-  removeFriend: 'removeFriend',
-  getFriends: 'friendList',
-  searching: 'searching',
-  getChatList: 'chatList',
+  updateAvatarImage: 'updateAvatarImage',
+  getAvatarImage: 'getAvatarImage',
+  updateUserName: 'updateUserName',
 };
 
 export default endpoints;

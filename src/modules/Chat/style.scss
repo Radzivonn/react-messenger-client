@@ -9,7 +9,7 @@
 }
 
 .message {
-  @apply relative mt-3 flex w-fit min-w-6 max-w-[50%] flex-row flex-wrap justify-end rounded-xl bg-[var(--accent-color-2-shadow-1)] px-2 pb-2 pt-1 text-lg text-[white];
+  @apply relative mt-3 flex w-fit min-w-6 max-w-[50%] flex-row flex-wrap justify-end rounded-xl bg-[var(--accent-color-1-shadow-1)] px-2 pb-2 pt-1 text-lg text-[white];
 
   &::before {
     @apply absolute bottom-[-2px] h-[13px] w-7 rounded content-[''];
@@ -28,7 +28,7 @@
   &--my {
     align-self: flex-end;
     &::before {
-      background-color: var(--accent-color-2-shadow-1);
+      background-color: var(--accent-color-1-shadow-1);
       right: -8px;
       transform: rotate(-9deg);
     }
@@ -80,7 +80,7 @@
 
   .user-info-status-text {
     &--online {
-      @apply text-[var(--accent-color-2-light)];
+      @apply text-[var(--accent-color-1-default)];
     }
     &--offline {
       color: var(--main-color-2-default);

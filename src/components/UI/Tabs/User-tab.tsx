@@ -3,7 +3,7 @@ import { Tab } from './BaseTab/Tab';
 import { RemoveFriendButton } from '../../FunctionalButtons/RemoveFriendButton';
 import { AddFriendButton } from '../../FunctionalButtons/AddFriendButton';
 import { WriteToFriendButton } from '../../FunctionalButtons/WriteToFriendButton';
-import { AvatarPlaceholder } from '../AvatarPlaceholder/AvatarPlaceholder';
+import { AvatarImage } from '../AvatarUI/AvatarImage';
 
 interface Props extends ComponentProps<'section'> {
   name: string;
@@ -17,7 +17,7 @@ export const UserTab: FC<Props> = ({ name, friendId, userId, isFriend, isOnline,
   return (
     <Tab {...props}>
       <div className="flex gap-2 overflow-hidden">
-        <AvatarPlaceholder name={name} isOnline={isOnline} />
+        <AvatarImage userId={friendId} name={name} isOnline={isOnline} isOpenable={false} />
         <h3 className="tab__info_name ml-2">{name}</h3>
       </div>
       <div className="ml-1 flex gap-2">

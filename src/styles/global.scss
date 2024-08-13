@@ -41,8 +41,14 @@ body {
   transition: fill 0.2s ease;
 }
 
-.avatar-placeholder {
-  @apply relative my-auto flex h-14 w-14 min-w-14 items-center justify-center rounded-full bg-[--accent-color-2-light];
+.avatar {
+  @apply relative my-auto flex h-14 w-14 min-w-14 cursor-pointer items-center justify-center rounded-full bg-[--accent-color-1-default] text-2xl;
+  .avatar-image {
+    @apply absolute left-0 top-0 rounded-full object-cover;
+    max-width: inherit;
+    width: inherit;
+    height: inherit;
+  }
 }
 
 .text-hint {
@@ -54,6 +60,14 @@ body {
   stroke: var(--main-color-5);
   stroke-width: 3px;
   transition: var(--base-transition);
+}
+
+#cross {
+  @apply h-[24px] w-[2px] rotate-45 cursor-pointer rounded-lg bg-[var(--main-color-2-default)] opacity-65 hover:opacity-100;
+  &::after {
+    content: '';
+    @apply absolute h-[24px] w-[2px] rotate-90 rounded-lg bg-[var(--main-color-2-default)];
+  }
 }
 
 // only for PC

@@ -38,7 +38,7 @@ export const LogoutButton: FC<Props> = ({ userId }) => {
 
   return (
     <Button className="form__button button--icon-only" onClick={onLogout}>
-      <LogoutIcon className="icon" />
+      <LogoutIcon />
     </Button>
   );
 };

@@ -42,6 +42,7 @@ export const ChatList = () => {
           <ChatTab
             onClick={() => onClickToOpenChat()}
             key={chat.chatId}
+            receiverId={receiver.userId}
             receiverName={receiver.userName}
             lastMessage={chat.messages[chat.messages.length - 1]}
             isOnline={onlineStatuses[receiver.userId] ?? false}
