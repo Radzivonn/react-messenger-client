@@ -14,6 +14,7 @@ export const UserData = () => {
   const isEditingPopupOpened = editingOption && currentInfo;
 
   if (isFetching || !data) return <TailSpinner />;
+
   return (
     <>
       <div className="user-data">
@@ -45,7 +46,10 @@ export const UserData = () => {
           userId={data.id}
           currentInfo={currentInfo}
           editingOption={editingOption}
-          onCancelCallback={() => setEditingOption(null)}
+          onCancelCallback={() => {
+            setEditingOption(null);
+            setCurrentInfo(null);
+          }}
         />
       )}
     </>

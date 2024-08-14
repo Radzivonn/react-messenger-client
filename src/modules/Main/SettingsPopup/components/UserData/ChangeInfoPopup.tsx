@@ -1,10 +1,11 @@
-import React, { ComponentProps, FC, useState } from 'react';
+import React, { ComponentProps, FC, useRef, useState } from 'react';
 import { TextField } from '../../../../../components/UI/TextField/TextField';
 import { editingOptions } from './editingOptions';
 import { Button } from '../../../../../components/UI/Button/Button';
 import { useQueryClient } from '@tanstack/react-query';
 import { updateUserDataReducer } from './updateUserDataReducer';
 import authService from '../../../../../API/services/AuthService/AuthService';
+import { useClickOutside } from '../../../../../hooks/useClickOutside/useClickOutside';
 
 interface Props extends ComponentProps<'section'> {
   userId: string;
@@ -20,6 +21,7 @@ export const ChangeInfoPopup: FC<Props> = ({
   editingOption,
   onCancelCallback,
 }) => {
+  const popupRef = useRef(null);
   const queryClient = useQueryClient();
   const [inputValue, setInputValue] = useState(currentInfo);
 
@@ -31,9 +33,11 @@ export const ChangeInfoPopup: FC<Props> = ({
     }
   };
 
+  useClickOutside(popupRef, onCancelCallback);
+
   return (
     <section className={`popup-wrapper change-option-popup-wrapper ${className}`}>
-      <div className="popup-content">
+      <div className="popup-content" ref={popupRef}>
         <div className="popup-header">
           <h2 className="text-xl"> Edit your {editingOption} </h2>
         </div>

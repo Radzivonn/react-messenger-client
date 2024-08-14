@@ -30,6 +30,10 @@
 
     .popup-header {
       @apply mb-5 flex justify-between text-2xl font-medium;
+
+      &__buttons {
+        @apply flex items-center gap-10;
+      }
     }
 
     .user-data {
@@ -43,6 +47,32 @@
         }
       }
     }
+  }
+}
+
+.action-menu {
+  @apply absolute right-16 top-12 z-40 rounded-lg bg-[var(--popup-bg-color-2)] p-2;
+
+  &__icon {
+    @apply flex cursor-pointer flex-col gap-1;
+
+    span,
+    span:before,
+    span:after {
+      @apply h-1 w-1 rounded-full bg-[var(--main-color-2-default)] opacity-65;
+    }
+
+    &:hover {
+      span,
+      span:before,
+      span:after {
+        @apply opacity-100;
+      }
+    }
+  }
+
+  &__button {
+    @apply flex h-10 w-full items-center justify-start rounded border-none bg-transparent p-2 text-sm text-[var(--red-selection)] hover:bg-[var(--main-color-2-shadow-2)];
   }
 }
 
