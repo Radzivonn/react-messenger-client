@@ -6,7 +6,7 @@ export const useChatList = (userId: string, userName: string) => {
     queryKey: ['chatList', userId],
     queryFn: () => chatService.getUserChats(userId, userName),
     select: (data) => data.filter((chat) => chat.messages.length),
-    staleTime: 60000, // 60 seconds
+    staleTime: 30000, // 30 seconds
     retry: false,
   });
 };

@@ -58,6 +58,14 @@ class UserService {
       console.error(e);
     }
   }
+
+  removeAccount(userId: string) {
+    try {
+      return api.delete(`${this.BASE_URL}/${userId}/${endpoints.removeAccount}`);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }
 
 const userService = new UserService();
