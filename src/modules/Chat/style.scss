@@ -1,9 +1,9 @@
 .chat-wrapper {
   @apply flex h-screen max-w-full flex-grow flex-col;
-  &__input-section {
-    @apply flex w-full flex-row justify-between gap-2 self-end border-l-2 border-[var(--main-color-3)] bg-[var(--main-color-5)];
+  .input-section {
+    @apply flex max-h-12 w-full flex-row justify-between self-end border-l-2 border-[var(--main-color-3)] bg-[var(--main-color-5)];
   }
-  &__messages-section {
+  .messages-section {
     @apply flex h-[94.22%] w-full flex-col overflow-y-scroll px-4;
   }
 }

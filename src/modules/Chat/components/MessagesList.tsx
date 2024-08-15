@@ -1,5 +1,5 @@
 import React, { ComponentProps, FC, useEffect, useRef } from 'react';
-import { Message } from '../../types/types';
+import { Message } from '../../../types/types';
 
 interface Props extends ComponentProps<'section'> {
   userName: string;
@@ -21,7 +21,7 @@ export const MessagesList: FC<Props> = ({ userName, messages }) => {
   }
 
   return (
-    <div className="chat-wrapper__messages-section">
+    <div className="messages-section">
       {messages.map((message, i, arr) => (
         <div
           className={`message message${message.name === userName ? '--my' : '--receiver'}`}

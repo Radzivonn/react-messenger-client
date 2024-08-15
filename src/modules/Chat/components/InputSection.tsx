@@ -9,7 +9,9 @@ import {
 } from '../../../types/types';
 import { Socket } from 'socket.io-client';
 import { useChatStore } from '../../../store/chatData/chatData';
-import MessagePlaneIcon from '../../../assets/icons/message-plane.svg?react';
+import MessagePlaneIcon from './assets/message-plane.svg?react';
+import EmojiIcon from './assets/emoji-icon.svg?react';
+import { EmojiPicker } from './EmojiPicker';
 
 const getTime = () =>
   `${new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()}`;
@@ -25,6 +27,7 @@ const TYPING_DELAY = 2000; // 2 sec
 
 export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) => {
   const [inputValue, setInputValue] = useState('');
+  const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState(false);
   const [isUserTyping, setIsUserTyping] = useState(false);
   const typingTimeout = useRef<NodeJS.Timeout>();
   const addMessage = useChatStore((state) => state.addMessage);
@@ -44,6 +47,7 @@ export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) =>
     addMessage(message);
 
     setInputValue('');
+    setIsEmojiPickerVisible(false);
   };
 
   const onKeyDownHandler = () => {
@@ -61,23 +65,34 @@ export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) =>
   };
 
   return (
-    <section className="chat-wrapper__input-section">
-      <TextField
-        name="message_input"
-        placeholder="Write a message..."
-        autoComplete="off"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        type="text"
-        className=" w-4/5 border-none"
-        onKeyDown={() => onKeyDownHandler()}
-      />
-      <Button
-        className={`button--icon-only button--no-hover ${inputValue ? '' : 'button--hidden'}`}
-        onClick={sendMessage}
-      >
-        <MessagePlaneIcon className="icon" />
-      </Button>
-    </section>
+    <>
+      {isEmojiPickerVisible && <EmojiPicker setInputValue={setInputValue} />}
+      <section className="input-section">
+        <TextField
+          name="message_input"
+          placeholder="Write a message..."
+          autoComplete="off"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          type="text"
+          className=" w-4/5 border-none"
+          onKeyDown={() => onKeyDownHandler()}
+        />
+        <div className="flex">
+          <Button
+            className={`button--icon-only button--no-hover ${inputValue ? '' : 'button--hidden'}`}
+            onClick={sendMessage}
+          >
+            <MessagePlaneIcon className="icon" />
+          </Button>
+          <Button
+            className={`button--icon-only button--no-hover`}
+            onClick={() => setIsEmojiPickerVisible((prev) => !prev)}
+          >
+            <EmojiIcon />
+          </Button>
+        </div>
+      </section>
+    </>
   );
 };
