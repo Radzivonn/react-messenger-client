@@ -17,7 +17,22 @@
     "noEmit": true,
     "jsx": "preserve",
     // "types": ["vitest/globals", "@testing-library/react", "@testing-library/jest-dom"],
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "src",
+    "paths": {
+      "API": ["API/*"],
+      "assets": ["assets/*"],
+      "components": ["components/*"],
+      "hocs": ["hocs/*"],
+      "hooks": ["hooks/*"],
+      "modules": ["modules/*"],
+      "pages": ["pages/*"],
+      "router": ["router/*"],
+      "store": ["store/*"],
+      "styles": ["styles/*"],
+      "types": ["types/*"],
+      "validations": ["validations/*"]
+    }
   },
   "include": ["src", "./types/types.d.ts", "vite.config.ts"],
   "references": [

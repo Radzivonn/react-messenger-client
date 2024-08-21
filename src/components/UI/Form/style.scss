@@ -1,4 +1,4 @@
-@use '../../../styles/mixins.scss' as *;
+@use 'styles/mixins.scss' as *;
 
 .form {
   @apply flex w-full flex-col gap-7;

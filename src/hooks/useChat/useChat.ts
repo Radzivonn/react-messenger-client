@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { WEBSOCKET_EVENTS } from '../../types/types';
+import { WEBSOCKET_EVENTS } from 'types/types';
 import { useSearchParams } from 'react-router-dom';
-import { useSocketStore } from '../../store/socket/socketStore';
-import { useChatStore } from '../../store/chatData/chatData';
-import { useReceiverStore } from '../../store/receiver/receiverStore';
+import { useSocketStore } from 'store/socket/socketStore';
+import { useChatStore } from 'store/chatData/chatData';
+import { useReceiverStore } from 'store/receiver/receiverStore';
 
 const useChat = (userId: string) => {
   const [searchParams] = useSearchParams();

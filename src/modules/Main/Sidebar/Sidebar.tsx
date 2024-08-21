@@ -1,8 +1,8 @@
 import React, { ComponentProps, FC } from 'react';
 import './style.scss';
 import { useLocation } from 'react-router-dom';
-import { mainPageRoutes } from '../../../router/routes';
-import { useAppSettingsStore } from '../../../store/appSettings/appSettingsStore';
+import { mainPageRoutes } from 'router/routes';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import { LinkToSearching } from './components/LinkToSearching';
 
 export const Sidebar: FC<ComponentProps<'aside'>> = ({ children }) => {

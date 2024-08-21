@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Props } from './types';
-import { useReceiverStore } from '../../../../../store/receiver/receiverStore';
-import { AvatarImage } from '../../../../../components/UI/AvatarUI/AvatarImage';
-import { ThreeDotsLoader } from '../../../../../components/UI/Loaders/ThreeDots';
+import { useReceiverStore } from 'store/receiver/receiverStore';
+import { AvatarImage } from 'components/UI/AvatarUI/AvatarImage';
+import { ThreeDotsLoader } from 'components/UI/Loaders/ThreeDots';
 
 export const UserInfo: FC<Props> = ({ receiverId, receiverName, isOnline }) => {
   const isReceiverTyping = useReceiverStore((state) => state.isReceiverTyping);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useOutletContext, useSearchParams } from 'react-router-dom';
-import { TailSpinner } from '../../../components/UI/Loaders/TailSpinner';
-import { ChatTab } from '../../../components/UI/Tabs/Chat-tab';
-import { MainPageComponentOutletContext } from '../../../types/types';
-import { useChatList } from '../../../hooks/useChat/useChatList';
-import { useAppSettingsStore } from '../../../store/appSettings/appSettingsStore';
-import { useFriendsOnlineStatusesStore } from '../../../store/onlineStatuses/onlineStatuses';
+import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
+import { ChatTab } from 'components/UI/Tabs/Chat-tab';
+import { MainPageComponentOutletContext } from 'types/types';
+import { useChatList } from 'hooks/useChat/useChatList';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
+import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatuses';
 
 export const ChatList = () => {
   const [_searchParams, setSearchParams] = useSearchParams();

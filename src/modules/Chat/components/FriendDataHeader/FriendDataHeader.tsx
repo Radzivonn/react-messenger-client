@@ -1,6 +1,6 @@
 import React, { ComponentProps, FC } from 'react';
-import { useAppSettingsStore } from '../../../../store/appSettings/appSettingsStore';
-import { useFriendsOnlineStatusesStore } from '../../../../store/onlineStatuses/onlineStatuses';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
+import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatuses';
 import { MobileHeader } from './headers/mobileHeader';
 import { DesktopHeader } from './headers/desktopHeader';
 import { UserInfo } from './headers/UserInfo';

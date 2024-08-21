@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import friendListService from '../../API/services/FriendListService/FriendListService';
+import friendListService from 'API/services/FriendListService/FriendListService';
 
 export const useAddFriend = (userId: string, friendId: string, friendName: string) => {
   const queryClient = useQueryClient();

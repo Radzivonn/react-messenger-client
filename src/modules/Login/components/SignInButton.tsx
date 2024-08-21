@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button } from '../../../components/UI/Button/Button';
+import { Button } from 'components/UI/Button/Button';
 
 export const SignInButton: FC = () => {
   return (

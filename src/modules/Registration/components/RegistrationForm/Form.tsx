@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { profileFormSchema } from './schemes';
 import { profileFormFields } from './formFields';
-import { TextField } from '../../../../components/UI/TextField/TextField';
-import { Form } from '../../../../components/UI/Form/Form';
-import authService from '../../../../API/services/AuthService/AuthService';
+import { TextField } from 'components/UI/TextField/TextField';
+import { Form } from 'components/UI/Form/Form';
+import authService from 'API/services/AuthService/AuthService';
 import { toast } from 'react-toastify';
 
 export const RegistrationForm: FC = () => {

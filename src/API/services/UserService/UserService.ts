@@ -1,6 +1,6 @@
 import { KyResponse } from 'ky';
-import { User } from '../../../types/types';
-import api from '../../http';
+import { User } from 'types/types';
+import api from 'API/http';
 import authService from '../AuthService/AuthService';
 import endpoints from './endpoints';
 import { AuthResponse } from '../AuthService/models';

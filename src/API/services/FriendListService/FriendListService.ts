@@ -1,5 +1,5 @@
-import { UserWithOnlineStatus } from '../../../types/types';
-import api from '../../http';
+import { UserWithOnlineStatus } from 'types/types';
+import api from 'API/http';
 import endpoints from './endpoints';
 
 class FriendListService {

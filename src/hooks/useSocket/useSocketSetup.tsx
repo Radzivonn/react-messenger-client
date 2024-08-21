@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { Socket, io } from 'socket.io-client';
-import { WEBSOCKET_EVENTS } from '../../types/types';
-import { ServerToClientEvents, ClientToServerEvents } from '../../types/types';
+import { WEBSOCKET_EVENTS } from 'types/types';
+import { ServerToClientEvents, ClientToServerEvents } from 'types/types';
 import { useQueryClient } from '@tanstack/react-query';
-import { useSocketStore } from '../../store/socket/socketStore';
-import { useChatStore } from '../../store/chatData/chatData';
-import { useFriendsOnlineStatusesStore } from '../../store/onlineStatuses/onlineStatuses';
-import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
-import { useReceiverStore } from '../../store/receiver/receiverStore';
+import { useSocketStore } from 'store/socket/socketStore';
+import { useChatStore } from 'store/chatData/chatData';
+import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatuses';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
+import { useReceiverStore } from 'store/receiver/receiverStore';
 import { useSearchParams } from 'react-router-dom';
 
 const useSocketSetup = (userId: string, userName: string, chatId: string | null) => {

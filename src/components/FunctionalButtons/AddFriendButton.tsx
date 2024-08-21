@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Button } from '../UI/Button/Button';
-import AddFriendIcon from '../../assets/icons/add-friend-icon.svg?react';
+import AddFriendIcon from 'assets/icons/add-friend-icon.svg?react';
 import { IFriendListActionButtonProps } from './types';
-import { useAddFriend } from '../../hooks/useFriendListMutations/useAddFriend';
+import { useAddFriend } from 'hooks/useFriendListMutations/useAddFriend';
 import { TailSpinner } from '../UI/Loaders/TailSpinner';
 
 export const AddFriendButton: FC<IFriendListActionButtonProps> = ({

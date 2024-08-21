@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { useAppSettingsStore } from '../../../../../store/appSettings/appSettingsStore';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import { ActionMenu } from './ActionMenu/ActionMenu';
-import { useClickOutside } from '../../../../../hooks/useClickOutside/useClickOutside';
+import { useClickOutside } from 'hooks/useClickOutside/useClickOutside';
 
 export const SettingsHeader = () => {
   const menuRef = useRef(null);

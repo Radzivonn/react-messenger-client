@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { IChat, Message } from '../../types/types';
+import { IChat, Message } from 'types/types';
 
 interface ChatStore {
   currentChat: IChat | null;

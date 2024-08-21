@@ -1,6 +1,6 @@
 import React, { ComponentProps, FC } from 'react';
 import { Tab } from './BaseTab/Tab';
-import { Message } from '../../../types/types';
+import { Message } from 'types/types';
 import { AvatarImage } from '../AvatarUI/AvatarImage';
 
 interface Props extends ComponentProps<'section'> {

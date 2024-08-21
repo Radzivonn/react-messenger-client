@@ -1,9 +1,9 @@
 import React, { type FC } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { type ChildrenProps } from './types';
-import { routes } from '../router/routes';
-import { useUserData } from '../hooks/useUserData/useUserData';
-import { TailSpinner } from '../components/UI/Loaders/TailSpinner';
+import { routes } from 'router/routes';
+import { useUserData } from 'hooks/useUserData/useUserData';
+import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
 
 export const RequireAuth: FC<ChildrenProps> = ({ children }) => {
   const { id, name } = useParams();

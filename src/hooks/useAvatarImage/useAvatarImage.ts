@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import userService from '../../API/services/UserService/UserService';
+import userService from 'API/services/UserService/UserService';
 
 export const useAvatarImage = (userId: string) => {
   return useQuery({

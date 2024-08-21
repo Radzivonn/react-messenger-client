@@ -1,5 +1,5 @@
-import api from '../../http';
-import { IChat } from '../../../types/types';
+import { IChat } from 'types/types';
+import api from 'API/http';
 import endpoints from './endpoints';
 
 class ChatService {
@@ -10,6 +10,10 @@ class ChatService {
       .get(`${this.BASE_URL}/${endpoints.getChatList}/${userId}/${userName}`)
       .json();
     return chats;
+  }
+
+  public getEmojiMartData() {
+    return api.get('https://cdn.jsdelivr.net/npm/@emoji-mart/data').json();
   }
 }
 

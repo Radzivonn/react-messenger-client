@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 
 const useWindowResizeHandler = (MOBILE_BREAKPOINT = 768) => {
   const { setIsMobile } = useAppSettingsStore();

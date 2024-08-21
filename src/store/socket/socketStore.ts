@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { Socket } from 'socket.io-client';
 import { devtools } from 'zustand/middleware';
-import { ServerToClientEvents, ClientToServerEvents } from '../../types/types';
+import { ServerToClientEvents, ClientToServerEvents } from 'types/types';
 
 interface SocketStore {
   socket: Socket<ServerToClientEvents, ClientToServerEvents> | null;

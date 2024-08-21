@@ -1,14 +1,9 @@
 import React, { ComponentProps, FC, useRef, useState } from 'react';
-import { TextField } from '../../../components/UI/TextField/TextField';
-import { Button } from '../../../components/UI/Button/Button';
-import {
-  ClientToServerEvents,
-  Message,
-  ServerToClientEvents,
-  WEBSOCKET_EVENTS,
-} from '../../../types/types';
+import { TextField } from 'components/UI/TextField/TextField';
+import { Button } from 'components/UI/Button/Button';
+import { ClientToServerEvents, Message, ServerToClientEvents, WEBSOCKET_EVENTS } from 'types/types';
 import { Socket } from 'socket.io-client';
-import { useChatStore } from '../../../store/chatData/chatData';
+import { useChatStore } from 'store/chatData/chatData';
 import MessagePlaneIcon from './assets/message-plane.svg?react';
 import EmojiIcon from './assets/emoji-icon.svg?react';
 import { EmojiPicker } from './EmojiPicker';

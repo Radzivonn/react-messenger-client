@@ -1,17 +1,17 @@
 import React, { ComponentProps, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { useSocketStore } from '../../../../../../store/socket/socketStore';
-import { Button } from '../../../../../../components/UI/Button/Button';
-import authService from '../../../../../../API/services/AuthService/AuthService';
+import { useSocketStore } from 'store/socket/socketStore';
+import { Button } from 'components/UI/Button/Button';
+import authService from 'API/services/AuthService/AuthService';
 import RecycleBinIcon from '../../assets/recycle-bin-icon.svg?react';
-import { WEBSOCKET_EVENTS } from '../../../../../../types/types';
-import { routes } from '../../../../../../router/routes';
+import { WEBSOCKET_EVENTS } from 'types/types';
+import { routes } from 'router/routes';
 import { toast } from 'react-toastify';
-import { useUserData } from '../../../../../../hooks/useUserData/useUserData';
-import { TailSpinner } from '../../../../../../components/UI/Loaders/TailSpinner';
-import { useAppSettingsStore } from '../../../../../../store/appSettings/appSettingsStore';
-import userService from '../../../../../../API/services/UserService/UserService';
+import { useUserData } from 'hooks/useUserData/useUserData';
+import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
+import userService from 'API/services/UserService/UserService';
 
 export const RemoveAccountButton: FC<ComponentProps<'button'>> = ({ className, children }) => {
   const navigate = useNavigate();

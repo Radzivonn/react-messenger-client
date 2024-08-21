@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import friendListService from '../../API/services/FriendListService/FriendListService';
+import friendListService from 'API/services/FriendListService/FriendListService';
 
 export const useFriendList = (userId: string) => {
   return useQuery({

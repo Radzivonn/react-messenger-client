@@ -1,11 +1,11 @@
 import React, { ComponentProps, FC, useRef, useState } from 'react';
-import { TextField } from '../../../../../components/UI/TextField/TextField';
+import { TextField } from 'components/UI/TextField/TextField';
 import { editingOptions } from './editingOptions';
-import { Button } from '../../../../../components/UI/Button/Button';
+import { Button } from 'components/UI/Button/Button';
 import { useQueryClient } from '@tanstack/react-query';
 import { updateUserDataReducer } from './updateUserDataReducer';
-import authService from '../../../../../API/services/AuthService/AuthService';
-import { useClickOutside } from '../../../../../hooks/useClickOutside/useClickOutside';
+import authService from 'API/services/AuthService/AuthService';
+import { useClickOutside } from 'hooks/useClickOutside/useClickOutside';
 
 interface Props extends ComponentProps<'section'> {
   userId: string;

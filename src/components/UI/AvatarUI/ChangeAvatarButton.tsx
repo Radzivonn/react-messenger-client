@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ComponentProps, FC, useRef } from 'react';
 import { Button } from '../Button/Button';
-import CameraIcon from '../../../assets/icons/camera-icon.svg?react';
-import userService from '../../../API/services/UserService/UserService';
+import CameraIcon from 'assets/icons/camera-icon.svg?react';
+import userService from 'API/services/UserService/UserService';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface Props extends ComponentProps<'button'> {

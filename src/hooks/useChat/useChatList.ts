@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import chatService from '../../API/services/ChatService/ChatService';
+import chatService from 'API/services/ChatService/ChatService';
 
 export const useChatList = (userId: string, userName: string) => {
   return useQuery({

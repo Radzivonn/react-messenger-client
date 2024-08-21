@@ -2,8 +2,8 @@ import React, { ComponentProps, FC, useRef } from 'react';
 import './style.scss';
 import { SettingsHeader } from './components/SettingsHeader/SettingsHeader';
 import { UserData } from './components/UserData/UserData';
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useAppSettingsStore } from '../../../store/appSettings/appSettingsStore';
+import { useClickOutside } from 'hooks/useClickOutside/useClickOutside';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 
 export const SettingsPopup: FC<ComponentProps<'section'>> = ({ className }) => {
   const settingsRef = useRef(null);

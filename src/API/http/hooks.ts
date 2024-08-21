@@ -1,6 +1,6 @@
 import ky, { AfterResponseHook, BeforeRequestHook } from 'ky';
 import authService from '../services/AuthService/AuthService';
-import { STATUS_CODES } from '../../types/types';
+import { STATUS_CODES } from 'types/types';
 
 export const beforeRequestHook: BeforeRequestHook = (req) => {
   req.headers.set('Authorization', authService.getAuthHeader());

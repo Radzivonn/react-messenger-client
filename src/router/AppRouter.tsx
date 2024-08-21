@@ -1,16 +1,16 @@
 import React from 'react';
-import { Registration } from '../pages/Registration';
-import { Login } from '../pages/Login';
+import { Registration } from 'pages/Registration';
+import { Login } from 'pages/Login';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { routes } from './routes';
 import { Layout } from './Layout';
-import { Main } from '../pages/Main/Main';
-import { FriendList } from '../modules/Main/FriendList/FriendList';
-import { RequireAuth } from '../hocs/RequireAuth';
-import { NotFound } from '../pages/NotFound/NotFound';
-import { UserSearch } from '../modules/Main/UserSearch/UserSearch';
-import { CheckAuth } from '../hocs/CheckAuth';
-import { ChatList } from '../modules/Main/ChatList/ChatList';
+import { Main } from 'pages/Main/Main';
+import { FriendList } from 'modules/Main/FriendList/FriendList';
+import { RequireAuth } from 'hocs/RequireAuth';
+import { NotFound } from 'pages/NotFound/NotFound';
+import { UserSearch } from 'modules/Main/UserSearch/UserSearch';
+import { CheckAuth } from 'hocs/CheckAuth';
+import { ChatList } from 'modules/Main/ChatList/ChatList';
 
 export const AppRouter = () => {
   return (

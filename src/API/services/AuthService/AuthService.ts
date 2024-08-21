@@ -1,5 +1,5 @@
 import { KyResponse } from 'ky';
-import api from '../../http';
+import api from 'API/http';
 import endpoints from './endpoints';
 import { AuthResponse } from './models';
 

@@ -1,7 +1,7 @@
 import './style.scss';
 import React, { useState, forwardRef } from 'react';
 import { type ITextFieldProps } from './types';
-import useInputIcon from '../../../hooks/useInputIcon/useInputIcon';
+import useInputIcon from 'hooks/useInputIcon/useInputIcon';
 
 export const TextField = forwardRef<HTMLInputElement, ITextFieldProps>(
   (

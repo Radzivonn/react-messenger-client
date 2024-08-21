@@ -1,4 +1,4 @@
-@use '../../../styles/mixins.scss' as *;
+@use 'styles/mixins.scss' as *;
 
 .button {
   @apply flex cursor-pointer items-center gap-3 rounded-lg bg-transparent px-6 py-4 text-[var(--accent-color-1-default)];

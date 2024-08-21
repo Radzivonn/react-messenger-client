@@ -1,5 +1,5 @@
 import { editingOptions } from './editingOptions';
-import userService from '../../../../../API/services/UserService/UserService';
+import userService from 'API/services/UserService/UserService';
 
 export const updateUserDataReducer = (
   editingOption: editingOptions,

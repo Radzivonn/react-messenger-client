@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useUserData } from '../../../../../hooks/useUserData/useUserData';
-import { TailSpinner } from '../../../../../components/UI/Loaders/TailSpinner';
-import { AvatarImage } from '../../../../../components/UI/AvatarUI/AvatarImage';
-import { ChangeAvatarButton } from '../../../../../components/UI/AvatarUI/ChangeAvatarButton';
+import { useUserData } from 'hooks/useUserData/useUserData';
+import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
+import { AvatarImage } from 'components/UI/AvatarUI/AvatarImage';
+import { ChangeAvatarButton } from 'components/UI/AvatarUI/ChangeAvatarButton';
 import { ChangeInfoPopup } from './ChangeInfoPopup';
 import { editingOptions } from './editingOptions';
 import PersonIcon from '../assets/person-circle-outline.svg?react';

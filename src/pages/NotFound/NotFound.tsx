@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.scss';
 import { Link } from 'react-router-dom';
-import { Button } from '../../components/UI/Button/Button';
-import { routes } from '../../router/routes';
+import { Button } from 'components/UI/Button/Button';
+import { routes } from 'router/routes';
 
 export const NotFound = () => {
   return (

@@ -1,15 +1,15 @@
 import React, { ComponentProps, FC } from 'react';
 import './style.scss';
 import { Outlet, useBeforeUnload, useParams, useSearchParams } from 'react-router-dom';
-import { WEBSOCKET_EVENTS } from '../../types/types';
-import { NavigationSidebar } from '../../modules/Main/NavigationSidebar/NavigationSidebar';
-import { Sidebar } from '../../modules/Main/Sidebar/Sidebar';
-import { Chat } from '../../modules/Chat/Chat';
-import { useAppSettingsStore } from '../../store/appSettings/appSettingsStore';
-import useWindowResizeHandler from '../../hooks/useWindowResizeHandler/useWindowResizeHandler';
-import useSocketSetup from '../../hooks/useSocket/useSocketSetup';
-import { useSocketStore } from '../../store/socket/socketStore';
-import { SettingsPopup } from '../../modules/Main/SettingsPopup/SettingsPopup';
+import { WEBSOCKET_EVENTS } from 'types/types';
+import { NavigationSidebar } from 'modules/Main/NavigationSidebar/NavigationSidebar';
+import { Sidebar } from 'modules/Main/Sidebar/Sidebar';
+import { Chat } from 'modules/Chat/Chat';
+import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
+import useWindowResizeHandler from 'hooks/useWindowResizeHandler/useWindowResizeHandler';
+import useSocketSetup from 'hooks/useSocket/useSocketSetup';
+import { useSocketStore } from 'store/socket/socketStore';
+import { SettingsPopup } from 'modules/Main/SettingsPopup/SettingsPopup';
 
 type userSearchParams = { id: string; name: string };
 

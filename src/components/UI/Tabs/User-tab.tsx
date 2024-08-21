@@ -1,8 +1,8 @@
 import React, { ComponentProps, FC } from 'react';
 import { Tab } from './BaseTab/Tab';
-import { RemoveFriendButton } from '../../FunctionalButtons/RemoveFriendButton';
-import { AddFriendButton } from '../../FunctionalButtons/AddFriendButton';
-import { WriteToFriendButton } from '../../FunctionalButtons/WriteToFriendButton';
+import { RemoveFriendButton } from 'components/FunctionalButtons/RemoveFriendButton';
+import { AddFriendButton } from 'components/FunctionalButtons/AddFriendButton';
+import { WriteToFriendButton } from 'components/FunctionalButtons/WriteToFriendButton';
 import { AvatarImage } from '../AvatarUI/AvatarImage';
 
 interface Props extends ComponentProps<'section'> {

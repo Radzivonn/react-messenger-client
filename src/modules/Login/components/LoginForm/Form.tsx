@@ -3,12 +3,12 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import authService from '../../../../API/services/AuthService/AuthService';
+import authService from 'API/services/AuthService/AuthService';
 import { formFields } from './formFields';
 import { loginSchema } from './schemes';
 import { toast } from 'react-toastify';
-import { Form } from '../../../../components/UI/Form/Form';
-import { TextField } from '../../../../components/UI/TextField/TextField';
+import { Form } from 'components/UI/Form/Form';
+import { TextField } from 'components/UI/TextField/TextField';
 
 export const LoginForm: FC = () => {
   const queryClient = useQueryClient();
