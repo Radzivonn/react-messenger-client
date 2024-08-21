@@ -98,12 +98,8 @@
   }
 
   &__text-helper {
-    @apply relative mx-2;
-    bottom: -4px;
+    @apply relative -bottom-1 mx-2 mb-0 mt-[1px] select-none text-left;
     font-size: 0.75em;
-    text-align: left;
-    margin-top: 1px;
-    margin-bottom: 0;
   }
 
   &:hover &__fieldset {

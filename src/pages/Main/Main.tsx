@@ -38,7 +38,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
     <>
       <main className="main-page">
         <div className="main-page__content">
-          <NavigationSidebar userId={id} />
+          <NavigationSidebar />
           {isSidebarOpened && (
             <Sidebar>
               <Outlet context={{ userId: id, userName: name }} />

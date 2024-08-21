@@ -27,7 +27,7 @@ export const WriteToFriendButton: FC<IFriendListActionButtonProps> = ({ userId, 
 
   return (
     <Button className="form__button button--icon-only" onClick={() => onClickToOpenChat()}>
-      <WriteToFriendIcon className="icon" />
+      <WriteToFriendIcon />
     </Button>
   );
 };

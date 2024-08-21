@@ -13,16 +13,12 @@ export default function useInputIcon(
 
   switch (type) {
     case 'password':
-      fieldIcon = isActiveOption ? (
-        <ClosedEyeIcon className="icon" />
-      ) : (
-        <OpenedEyeIcon className="icon" />
-      );
+      fieldIcon = isActiveOption ? <ClosedEyeIcon /> : <OpenedEyeIcon />;
       inputType = isActiveOption ? 'text' : 'password';
       isInteractive = true;
       break;
     case 'search':
-      fieldIcon = <SearchIcon className="icon" />;
+      fieldIcon = <SearchIcon />;
       break;
   }
 

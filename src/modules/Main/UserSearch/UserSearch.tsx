@@ -29,6 +29,7 @@ export const UserSearch = () => {
         label="Search"
         name="search"
         type="search"
+        autoComplete="off"
         className="m-auto mb-4 w-11/12"
         value={search}
         onChange={(evt) => setSearch(evt.target.value)}

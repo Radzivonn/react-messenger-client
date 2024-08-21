@@ -19,7 +19,7 @@ export const ControlLabel: FC<IControlLabelProps> = ({ className, label, onChang
         }}
       />
       <span className="checkbox-field__checker">
-        <CheckIcon className="icon" />
+        <CheckIcon />
       </span>
       <span className="checkbox-field__label">{label}</span>
     </label>

@@ -16,7 +16,7 @@ export const AddFriendButton: FC<IFriendListActionButtonProps> = ({
 
   return (
     <Button className="form__button button--icon-only" onClick={() => mutate()}>
-      <AddFriendIcon className="icon" />
+      <AddFriendIcon />
     </Button>
   );
 };
