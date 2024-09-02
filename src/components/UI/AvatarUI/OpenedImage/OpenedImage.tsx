@@ -9,7 +9,7 @@ interface Props extends ComponentProps<'div'> {
 export const OpenedImage: FC<Props> = ({ imagePath, onImageClose }) => {
   return (
     <div className="opened-image-wrapper">
-      <img className="opened-image" src={imagePath} alt="image" />
+      <img className="opened-image" src={imagePath} alt="opened-image" />
       <div id="cross" onClick={() => onImageClose()}></div>
     </div>
   );
