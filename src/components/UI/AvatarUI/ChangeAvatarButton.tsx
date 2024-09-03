@@ -31,7 +31,11 @@ export const ChangeAvatarButton: FC<Props> = ({ userId, ...props }) => {
       rounded
       onClick={() => runFilePicker()}
     >
+      <label htmlFor="file-uploader" className="hidden">
+        file-uploader
+      </label>
       <input
+        id="file-uploader"
         type="file"
         accept="image/*"
         ref={filePicker}
