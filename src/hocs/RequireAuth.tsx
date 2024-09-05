@@ -7,11 +7,6 @@ import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
 
 export const RequireAuth: FC<ChildrenProps> = ({ children }) => {
   const { id, name } = useParams();
-
-  if (!id || !name) {
-    return <Navigate to={`/${routes.login}`} replace />;
-  }
-
   const { isFetching, data, isError } = useUserData();
 
   if ((!isFetching && (!data || data.id !== id || data.name !== name)) || isError) {
