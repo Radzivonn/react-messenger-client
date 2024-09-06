@@ -36,7 +36,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
 
   return (
     <>
-      <main className="main-page">
+      <main className="main-page" data-testid="main-page">
         <div className="main-page__content">
           <NavigationSidebar />
           {isSidebarOpened && (
