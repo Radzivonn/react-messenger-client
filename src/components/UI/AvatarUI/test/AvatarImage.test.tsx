@@ -1,8 +1,9 @@
 import { describe, it } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AvatarImage } from 'components/UI/AvatarUI/AvatarImage';
+import { act } from 'react';
 
 const queryClient = new QueryClient();
 
@@ -44,10 +45,8 @@ describe('Avatar image component test', () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      const onlineMarker = screen.getByTestId('mock-online-marker');
-      expect(onlineMarker).toBeInTheDocument();
-    });
+    const onlineMarker = await screen.findByTestId('mock-online-marker');
+    expect(onlineMarker).toBeInTheDocument();
   });
 
   it('Check opening avatar by click on it', async () => {
@@ -57,14 +56,14 @@ describe('Avatar image component test', () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      const avatarImage = screen.getByRole('img', { name: /avatar/i });
-      expect(avatarImage).toBeInTheDocument();
+    const avatarImage = await screen.findByRole('img', { name: /avatar/i });
+    expect(avatarImage).toBeInTheDocument();
 
-      userEvent.click(avatarImage);
-
-      const openedImage = screen.getByRole('img', { name: /opened-image/i });
-      expect(openedImage).toBeInTheDocument();
+    await act(async () => {
+      await userEvent.click(avatarImage);
     });
+
+    const openedImage = await screen.findByRole('img', { name: /opened-image/i });
+    expect(openedImage).toBeInTheDocument();
   });
 });

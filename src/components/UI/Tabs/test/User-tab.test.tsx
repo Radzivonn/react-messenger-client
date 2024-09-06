@@ -2,7 +2,6 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { UserTab } from '../User-tab';
 
-// !!!
 vi.mock('components/FunctionalButtons/AddFriendButton', async (importOriginal) => {
   const mod = await importOriginal<typeof import('components/FunctionalButtons/AddFriendButton')>();
   return {
