@@ -1,7 +1,12 @@
 module.exports = {
   root: true,
   env: { browser: true, es2020: true, node: true },
-  extends: ['plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'plugin:react/jsx-runtime',
+  ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
