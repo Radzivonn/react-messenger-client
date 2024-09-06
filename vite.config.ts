@@ -19,6 +19,7 @@ export default defineConfig({
       styles: '/src/styles',
       types: '/src/types',
       validations: '/src/validations',
+      mocks: '/src/mocks',
     },
   },
 });
