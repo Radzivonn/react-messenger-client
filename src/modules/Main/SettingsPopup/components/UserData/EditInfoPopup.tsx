@@ -14,7 +14,7 @@ interface Props extends ComponentProps<'section'> {
   onCancelCallback: () => void;
 }
 
-export const ChangeInfoPopup: FC<Props> = ({
+export const EditInfoPopup: FC<Props> = ({
   className,
   userId,
   currentInfo,
@@ -36,7 +36,10 @@ export const ChangeInfoPopup: FC<Props> = ({
   useClickOutside(popupRef, onCancelCallback);
 
   return (
-    <section className={`popup-wrapper change-option-popup-wrapper ${className}`}>
+    <section
+      className={`popup-wrapper change-option-popup-wrapper ${className}`}
+      data-testid="editing-popup"
+    >
       <div className="popup-content" ref={popupRef}>
         <div className="popup-header">
           <h2 className="text-xl"> Edit your {editingOption} </h2>
