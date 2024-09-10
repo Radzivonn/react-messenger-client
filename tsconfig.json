@@ -36,7 +36,7 @@
       "tests": ["tests/*"]
     }
   },
-  "include": ["src", "./types/types.d.ts", "vite.config.ts"],
+  "include": ["src", "./types/types.d.ts", "vite.config.ts", "__mocks__"],
   "references": [
     {
       "path": "./tsconfig.node.json"
