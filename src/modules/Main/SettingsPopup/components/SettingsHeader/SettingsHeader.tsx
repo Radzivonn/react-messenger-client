@@ -18,13 +18,17 @@ export const SettingsHeader = () => {
     <div className="popup-header">
       <h2>Settings</h2>
       <div className="popup-header__buttons">
-        <div className="action-menu__icon" onClick={() => setIsActionMenuOpened(true)}>
+        <div
+          className="action-menu__icon"
+          data-testid="action-menu-button"
+          onClick={() => setIsActionMenuOpened(true)}
+        >
           <span></span>
           <span></span>
           <span></span>
         </div>
         {isActionMenuOpened && <ActionMenu ref={menuRef} />}
-        <div id="cross" onClick={() => setIsSettingsOpened(false)}></div>
+        <div id="cross" data-testid="close-button" onClick={() => setIsSettingsOpened(false)}></div>
       </div>
     </div>
   );
