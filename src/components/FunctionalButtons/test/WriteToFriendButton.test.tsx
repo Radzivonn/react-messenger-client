@@ -46,7 +46,7 @@ describe('Write to friend button component tests', () => {
     RenderWithRouter(
       queryClient,
       <WriteToFriendButton userId="mock-id" friendId="mock-friend-id" />,
-      `users/${mockUser.id}/${mockUser.name}/people`,
+      `/users/${mockUser.id}/${mockUser.name}/people`,
     );
 
     expect(screen.getByRole('button')).toBeInTheDocument();
@@ -58,7 +58,7 @@ describe('Write to friend button component tests', () => {
     RenderWithRouter(
       queryClient,
       <WriteToFriendButton userId={mockUserId} friendId={mockFriendId} />,
-      `users/${mockUser.id}/${mockUser.name}/people`,
+      `/users/${mockUser.id}/${mockUser.name}/people`,
     );
 
     const button = screen.getByRole('button');

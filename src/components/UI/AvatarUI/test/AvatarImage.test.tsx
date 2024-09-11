@@ -41,7 +41,7 @@ describe('Avatar image component test', () => {
 
     render(
       <QueryClientProvider client={queryClient}>
-        <AvatarImage userId="data-id" name="John" isOnline={true} isOpenable={false} />,
+        <AvatarImage userId="mock-id" name="John" isOnline={true} isOpenable={false} />,
       </QueryClientProvider>,
     );
 
@@ -52,7 +52,7 @@ describe('Avatar image component test', () => {
   it('Check opening avatar by click on it', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <AvatarImage userId="data-id" name="John" isOnline={false} isOpenable={true} />,
+        <AvatarImage userId="mock-id" name="John" isOnline={false} isOpenable={true} />,
       </QueryClientProvider>,
     );
 

@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import userService from 'API/services/UserService/UserService';
@@ -40,14 +41,19 @@ describe('User data block tests', async () => {
     const nameOption = await screen.findByTestId('name-option');
     expect(nameOption).toBeInTheDocument();
 
-    await userEvent.click(nameOption);
+    await act(async () => {
+      await userEvent.click(nameOption);
+    });
 
     expect(screen.getByTestId('editing-popup')).toBeInTheDocument();
 
     const cancelButton = screen.getByRole('button', { name: 'Cancel' });
     expect(cancelButton).toBeInTheDocument();
 
-    await userEvent.click(cancelButton);
+    await act(async () => {
+      await userEvent.click(cancelButton);
+    });
+
     expect(screen.queryByTestId('editing-popup')).toBe(null);
   });
 
@@ -71,14 +77,18 @@ describe('User data block tests', async () => {
     const nameOption = await screen.findByTestId('name-option');
     expect(nameOption).toBeInTheDocument();
 
-    await userEvent.click(nameOption);
+    await act(async () => {
+      await userEvent.click(nameOption);
+    });
 
     expect(screen.getByTestId('editing-popup')).toBeInTheDocument();
 
     const saveButton = screen.getByRole('button', { name: 'Save' });
     expect(saveButton).toBeInTheDocument();
 
-    await userEvent.click(saveButton);
+    await act(async () => {
+      await userEvent.click(saveButton);
+    });
 
     expect(spyUpdateUserName).toHaveBeenCalled();
     expect(spySaveAccessToken).toHaveBeenCalled();

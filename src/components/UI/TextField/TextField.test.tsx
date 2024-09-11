@@ -41,7 +41,7 @@ describe('Custom text field component test', () => {
   });
 
   it('check text field with search type', () => {
-    render(<TextField data-testid={'mock-text-field'} name="mock-text-field-name" type="search" />);
+    render(<TextField data-testid="mock-text-field" name="mock-text-field-name" type="search" />);
 
     const textField = screen.getByTestId('mock-text-field');
     expect(textField).toBeInTheDocument();
