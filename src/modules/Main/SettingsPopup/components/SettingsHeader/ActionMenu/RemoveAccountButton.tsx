@@ -23,19 +23,17 @@ export const RemoveAccountButton: FC<ComponentProps<'button'>> = ({ className, c
   const onRemove = async (userId: string) => {
     try {
       await userService.removeAccount(userId);
-    } catch (e) {
-      console.error(e);
-    } finally {
+
       setIsSettingsOpened(false);
-
       if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, userId);
-
       authService.removeAccessToken();
+
       navigate(`/${routes.registration}`, { replace: true });
 
       queryClient.clear();
-
       toast.info('You have removed your account!');
+    } catch (e) {
+      toast.error(`An error occurred: ${e}`);
     }
   };
 

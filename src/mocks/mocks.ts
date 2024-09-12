@@ -6,3 +6,10 @@ export const mockUser: User = {
   email: 'mock-email',
   role: 'mock-role',
 };
+
+export const mockErrorUser: User = {
+  id: 'mock-error-id',
+  name: 'mock-name',
+  email: 'mock-email',
+  role: 'mock-role',
+};

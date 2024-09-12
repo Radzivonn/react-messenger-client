@@ -7,6 +7,9 @@ import userService from 'API/services/UserService/UserService';
 import authService from 'API/services/AuthService/AuthService';
 import { RenderWithRouter } from 'tests/helpers/RenderWithRouter';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
+import { http, HttpResponse } from 'msw';
+import { server } from 'mocks/node';
+import { mockErrorUser } from 'mocks/mocks';
 
 const queryClient = new QueryClient();
 
@@ -31,7 +34,7 @@ describe('Settings header tests', () => {
     expect(useAppSettingsStore.getState().isSettingsOpened).toBe(false);
   });
 
-  it('Check close open-close action menu', async () => {
+  it('Check open-close action menu', async () => {
     RenderWithRouter(queryClient, <SettingsHeader />, '/users/mock-id/mock-name');
 
     const actionMenuButton = screen.getByTestId('action-menu-button');
@@ -87,6 +90,38 @@ describe('Settings header tests', () => {
     expect(await screen.findByTestId('login')).toBeInTheDocument();
   });
 
+  it('Check open action menu and click logout button with error response', async () => {
+    server.use(
+      http.get('http://localhost:5050/user/getData', () => {
+        return HttpResponse.json(mockErrorUser);
+      }),
+    );
+
+    const spyRemoveAccessToken = vi.spyOn(authService, 'removeAccessToken');
+
+    authService.saveAccessToken('mock-token');
+
+    RenderWithRouter(queryClient, <SettingsHeader />, '/users/mock-error-id/mock-name');
+
+    const actionMenuButton = screen.getByTestId('action-menu-button');
+    expect(actionMenuButton).toBeInTheDocument();
+
+    await act(async () => {
+      await userEvent.click(actionMenuButton);
+    });
+
+    const logoutButton = await screen.findByRole('button', { name: 'Log out' });
+    expect(logoutButton).toBeInTheDocument();
+
+    await act(async () => {
+      await userEvent.click(logoutButton);
+    });
+
+    expect(screen.queryByText('You are logged out!')).toBe(null);
+    expect(spyRemoveAccessToken).toHaveBeenCalledTimes(0);
+    expect(screen.getByTestId('main-page')).toBeInTheDocument();
+  });
+
   it('Check open action menu and click remove account button', async () => {
     authService.saveAccessToken('mock-token');
 
@@ -114,9 +149,41 @@ describe('Settings header tests', () => {
       await userEvent.click(removeAccountButton);
     });
 
+    expect(screen.getByText('You have removed your account!')).toBeInTheDocument();
     expect(spyRemoveAccount).toHaveBeenCalled();
     expect(spyRemoveAccessToken).toHaveBeenCalled();
     expect(useAppSettingsStore.getState().isSettingsOpened).toBe(false);
     expect(await screen.findByTestId('registration')).toBeInTheDocument();
+  });
+
+  it('Check open action menu and click remove account button with error response', async () => {
+    server.use(
+      http.get('http://localhost:5050/user/getData', () => {
+        return HttpResponse.json(mockErrorUser);
+      }),
+    );
+    const spyRemoveAccessToken = vi.spyOn(authService, 'removeAccessToken');
+
+    authService.saveAccessToken('mock-token');
+
+    RenderWithRouter(queryClient, <SettingsHeader />, '/users/mock-id/mock-name');
+
+    const actionMenuButton = screen.getByTestId('action-menu-button');
+    expect(actionMenuButton).toBeInTheDocument();
+
+    await act(async () => {
+      await userEvent.click(actionMenuButton);
+    });
+
+    const removeAccountButton = await screen.findByRole('button', { name: 'Remove account' });
+    expect(removeAccountButton).toBeInTheDocument();
+
+    await act(async () => {
+      await userEvent.click(removeAccountButton);
+    });
+
+    expect(screen.queryByText('You have removed your account!')).toBe(null);
+    expect(spyRemoveAccessToken).toHaveBeenCalledTimes(0);
+    expect(screen.getByTestId('main-page')).toBeInTheDocument();
   });
 });

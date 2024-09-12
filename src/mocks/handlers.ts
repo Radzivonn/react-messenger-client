@@ -2,12 +2,16 @@ import { http, HttpResponse } from 'msw';
 import { mockUser } from 'mocks/mocks';
 
 export const handlers = [
-  http.post('http://localhost:5050/auth/logout/mock-id', () => {
-    return HttpResponse.json({}, { status: 204 });
+  http.post('http://localhost:5050/auth/logout/:userId', (req) => {
+    const { userId } = req.params;
+    if (userId === 'mock-id') return HttpResponse.json(204);
+    return HttpResponse.json(null, { status: 500 });
   }),
 
-  http.delete('http://localhost:5050/user/mock-id/removeAccount', () => {
-    return HttpResponse.json({}, { status: 204 });
+  http.delete('http://localhost:5050/user/:userId/removeAccount', (req) => {
+    const { userId } = req.params;
+    if (userId === 'mock-id') return HttpResponse.json(204);
+    return HttpResponse.json(null, { status: 500 });
   }),
 
   http.get('http://localhost:5050/user/getData', () => {
