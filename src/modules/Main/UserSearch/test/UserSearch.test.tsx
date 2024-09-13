@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { server } from 'mocks/node';
 import { UserSearch } from '../UserSearch';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { mockSearchData, mockFriendListData } from './mocks/mocks';
+import { mockSearchData, mockFriendListData } from 'mocks/mocks';
 
 type ActualRouterType = typeof import('react-router-dom');
 vi.mock('react-router-dom', async () => {

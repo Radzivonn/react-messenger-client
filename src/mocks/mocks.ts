@@ -1,4 +1,4 @@
-import { User } from 'types/types';
+import { IChat, Message, User } from 'types/types';
 
 export const mockUser: User = {
   id: 'mock-id',
@@ -13,3 +13,61 @@ export const mockErrorUser: User = {
   email: 'mock-email',
   role: 'mock-role',
 };
+
+export const mockSearchData: User[] = [
+  {
+    id: '1',
+    name: 'John',
+    email: 'John@gmail.com',
+    role: 'user',
+  },
+];
+
+export const mockFriendListData: User[] = [
+  {
+    id: '1',
+    name: 'John',
+    email: 'John@gmail.com',
+    role: 'user',
+  },
+  {
+    id: '2',
+    name: 'Lisa',
+    email: 'Lisa@gmail.com',
+    role: 'user',
+  },
+];
+
+const messages: Message[] = [
+  {
+    chatId: 'chat1',
+    date: '12:00',
+    name: 'mock-name',
+    message: 'Hello!',
+  },
+  {
+    chatId: 'chat1',
+    date: '12:01',
+    name: 'mock-receiver-name',
+    message: 'Hi!',
+  },
+];
+
+export const mockChatListData: IChat[] = [
+  {
+    chatId: 'chat1',
+    participants: [
+      { userId: 'mock-id', userName: 'mock-name' },
+      { userId: 'mock-receiver-id', userName: 'mock-receiver-name' },
+    ],
+    messages: messages,
+  },
+];
+
+export const mockIncorrectChatListData: IChat[] = [
+  {
+    chatId: 'chat1',
+    participants: [{ userId: 'mock-id', userName: 'mock-name' }], // incorrect because one participant
+    messages: messages,
+  },
+];
