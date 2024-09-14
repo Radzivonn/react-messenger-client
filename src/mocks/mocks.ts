@@ -38,7 +38,7 @@ export const mockFriendListData: User[] = [
   },
 ];
 
-const messages: Message[] = [
+export const mockMessages: Message[] = [
   {
     chatId: 'chat1',
     date: '12:00',
@@ -60,7 +60,7 @@ export const mockChatListData: IChat[] = [
       { userId: 'mock-id', userName: 'mock-name' },
       { userId: 'mock-receiver-id', userName: 'mock-receiver-name' },
     ],
-    messages: messages,
+    messages: mockMessages,
   },
 ];
 
@@ -68,6 +68,6 @@ export const mockIncorrectChatListData: IChat[] = [
   {
     chatId: 'chat1',
     participants: [{ userId: 'mock-id', userName: 'mock-name' }], // incorrect because one participant
-    messages: messages,
+    messages: mockMessages,
   },
 ];

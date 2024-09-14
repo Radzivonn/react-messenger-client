@@ -11,9 +11,11 @@ export const MessagesList: FC<Props> = ({ userName, messages }) => {
 
   // scroll
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       lastMessage.current?.scrollIntoView({ behavior: 'instant' });
     }, 10);
+
+    return () => clearTimeout(timer);
   }, [messages]);
 
   if (!messages.length) {
