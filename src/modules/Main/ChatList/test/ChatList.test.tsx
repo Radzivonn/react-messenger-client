@@ -28,13 +28,13 @@ vi.mock('store/onlineStatuses/onlineStatuses', async (importOriginal) => {
   const mod = await importOriginal<typeof import('store/onlineStatuses/onlineStatuses')>();
   return {
     ...mod,
-    useFriendsOnlineStatusesStore: vi.fn().mockReturnValue(<div data-testid={'mock-loader'} />),
+    useFriendsOnlineStatusesStore: vi.fn().mockReturnValue({}),
   };
 });
 
 const queryClient = new QueryClient();
 
-describe('Friend list component tests', () => {
+describe('Chat list component tests', () => {
   beforeEach(() => {
     useAppSettingsStore.setState({ isChatOpened: false });
   });

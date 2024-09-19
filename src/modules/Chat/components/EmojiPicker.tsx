@@ -11,7 +11,7 @@ const MIN_PER_LINE = 6;
 
 export const EmojiPicker: FC<Props> = ({ setInputValue }) => {
   return (
-    <div className="absolute bottom-16 right-0 self-end">
+    <div className="absolute bottom-16 right-0 self-end" data-testid="emoji-picker">
       <Picker
         className="self-end"
         set="google"
