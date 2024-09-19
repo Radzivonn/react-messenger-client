@@ -21,6 +21,8 @@ export default defineConfig({
         'src/mocks',
         'src/validations/',
         'src/store/',
+        'src/index.tsx',
+        'src/App.tsx',
         'src/vite-env.d.ts',
         '**/types.ts',
         '**/browser.ts',
