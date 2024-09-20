@@ -11,10 +11,6 @@ class ChatService {
       .json();
     return chats;
   }
-
-  public getEmojiMartData() {
-    return api.get('https://cdn.jsdelivr.net/npm/@emoji-mart/data').json();
-  }
 }
 
 const chatService = new ChatService();
