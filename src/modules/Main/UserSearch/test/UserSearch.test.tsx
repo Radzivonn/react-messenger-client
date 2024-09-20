@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { server } from 'mocks/node';
 import { UserSearch } from '../UserSearch';
@@ -21,14 +21,6 @@ vi.mock('components/UI/Loaders/TailSpinner', async (importOriginal) => {
   return {
     ...mod,
     TailSpinner: vi.fn().mockReturnValue(<div data-testid={'mock-loader'} />),
-  };
-});
-
-vi.mock('hooks/useDebounce/useDebounce', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('hooks/useDebounce/useDebounce')>();
-  return {
-    ...mod,
-    useDebounce: vi.fn().mockReturnValue('qwerty'),
   };
 });
 
@@ -60,7 +52,6 @@ vi.mock('components/UI/AvatarUI/AvatarImage', async (importOriginal) => {
 
 const queryClient = new QueryClient();
 
-// TODO If possible, do not mock useDebounce, but test with timers
 describe('User search component tests', () => {
   afterEach(() => {
     queryClient.clear();
@@ -86,8 +77,12 @@ describe('User search component tests', () => {
     expect(searchInput).toBeInTheDocument();
     expect(screen.getByTestId('mock-loader')).toBeInTheDocument();
 
-    expect(await screen.findByText('No such users were found')).toBeInTheDocument();
-    expect(screen.queryByTestId('mock-loader')).toBe(null);
+    fireEvent.change(searchInput, { target: { value: 'search' } });
+
+    await waitFor(() => {
+      expect(screen.getByText('No such users were found')).toBeInTheDocument();
+      expect(screen.queryByTestId('mock-loader')).toBe(null);
+    });
   });
 
   it('Check users found case', async () => {
@@ -110,11 +105,15 @@ describe('User search component tests', () => {
     expect(searchInput).toBeInTheDocument();
     expect(screen.getByTestId('mock-loader')).toBeInTheDocument();
 
-    expect(await screen.findByText(mockSearchData[0].name)).toBeInTheDocument();
-    expect(screen.getByTestId('mock-avatar')).toBeInTheDocument();
-    expect(screen.getByTestId('mock-remove-friend-button')).toBeInTheDocument();
-    expect(screen.getByTestId('mock-write-friend-button')).toBeInTheDocument();
-    expect(screen.queryByTestId('No such users were found')).toBe(null);
-    expect(screen.queryByTestId('mock-loader')).toBe(null);
+    fireEvent.change(searchInput, { target: { value: 'search' } });
+
+    await waitFor(() => {
+      expect(screen.getByText(mockSearchData[0].name)).toBeInTheDocument();
+      expect(screen.getByTestId('mock-avatar')).toBeInTheDocument();
+      expect(screen.getByTestId('mock-remove-friend-button')).toBeInTheDocument();
+      expect(screen.getByTestId('mock-write-friend-button')).toBeInTheDocument();
+      expect(screen.queryByTestId('No such users were found')).toBe(null);
+      expect(screen.queryByTestId('mock-loader')).toBe(null);
+    });
   });
 });
