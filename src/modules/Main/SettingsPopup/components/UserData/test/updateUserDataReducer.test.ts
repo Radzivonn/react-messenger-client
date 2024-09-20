@@ -1,16 +1,16 @@
 import userService from 'API/services/UserService/UserService';
 import { updateUserDataReducer } from '../updateUserDataReducer';
-import { mockResponse } from './mocks/mockResponse';
+import { mockAuthResponse } from 'mocks/mocks';
 
 describe('updateUserDataReducer tests', () => {
   it('check reducer', async () => {
     const spy = vi
       .spyOn(userService, 'updateUserName')
-      .mockReturnValue(Promise.resolve(mockResponse));
+      .mockReturnValue(Promise.resolve(mockAuthResponse));
 
-    await updateUserDataReducer('Name', 'mock-id', 'mock-name');
+    const response = await updateUserDataReducer('Name', 'mock-id', 'mock-name');
 
     expect(spy).toHaveBeenCalledWith('mock-id', 'mock-name');
-    expect(spy).toHaveReturnedWith(mockResponse);
+    expect(response).toBe(mockAuthResponse);
   });
 });

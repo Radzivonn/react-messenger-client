@@ -10,7 +10,7 @@ import { MainPageComponentOutletContext } from 'types/types';
 
 export const UserSearch = () => {
   const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search); // ??? how to test
+  const debouncedSearch = useDebounce(search);
 
   const { userId } = useOutletContext<MainPageComponentOutletContext>();
   const { isFetching: isFetchingSearchData, data: searchData } = useUsersSearch(

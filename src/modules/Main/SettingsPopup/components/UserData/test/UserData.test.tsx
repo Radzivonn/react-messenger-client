@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import userService from 'API/services/UserService/UserService';
 import authService from 'API/services/AuthService/AuthService';
-import { mockResponse } from './mocks/mockResponse';
+import { mockAuthResponse } from 'mocks/mocks';
 import userEvent from '@testing-library/user-event';
 import { UserData } from '../UserData';
 
@@ -60,7 +60,7 @@ describe('User data block tests', async () => {
   it('Check click on open popup button with click on save', async () => {
     const spyUpdateUserName = vi
       .spyOn(userService, 'updateUserName')
-      .mockReturnValue(Promise.resolve(mockResponse));
+      .mockReturnValue(Promise.resolve(mockAuthResponse));
     const spySaveAccessToken = vi.spyOn(authService, 'saveAccessToken');
 
     authService.saveAccessToken('mock-token');
