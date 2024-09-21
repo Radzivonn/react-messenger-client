@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import './style.scss';
 import { useLocation } from 'react-router-dom';
 import { mainPageRoutes } from 'router/routes';

@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import './style.scss';
 import { Outlet, useBeforeUnload, useParams, useSearchParams } from 'react-router-dom';
 import { WEBSOCKET_EVENTS } from 'types/types';

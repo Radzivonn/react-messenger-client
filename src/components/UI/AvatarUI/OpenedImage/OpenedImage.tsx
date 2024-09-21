@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import './style.scss';
 
 interface Props extends ComponentProps<'div'> {

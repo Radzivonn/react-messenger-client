@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { ChildrenProps } from './types';
 
 export const DesktopHeader: FC<ChildrenProps> = ({ children }) => {

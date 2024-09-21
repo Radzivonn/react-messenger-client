@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, useEffect, useRef } from 'react';
+import { ComponentProps, FC, useEffect, useRef } from 'react';
 import { Message } from 'types/types';
 
 interface Props extends ComponentProps<'section'> {

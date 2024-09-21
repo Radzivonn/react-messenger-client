@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import { type FC } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { type ChildrenProps } from './types';
 import { routes } from 'router/routes';

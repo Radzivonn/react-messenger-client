@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Button } from '../UI/Button/Button';
 import RemoveFriendIcon from 'assets/icons/remove-friend-icon.svg?react';
 import { useRemoveFriend } from 'hooks/useFriendListMutations/useRemoveFriend';

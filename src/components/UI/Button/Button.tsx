@@ -1,5 +1,5 @@
 import './style.scss';
-import React, { type FC, type ComponentProps } from 'react';
+import { type FC, type ComponentProps } from 'react';
 
 export interface IButtonProps extends ComponentProps<'button'> {
   accent?: boolean;

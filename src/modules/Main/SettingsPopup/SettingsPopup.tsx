@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, useRef } from 'react';
+import { ComponentProps, FC, useRef } from 'react';
 import './style.scss';
 import { SettingsHeader } from './components/SettingsHeader/SettingsHeader';
 import { UserData } from './components/UserData/UserData';

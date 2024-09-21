@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, useRef, useState } from 'react';
+import { ComponentProps, FC, useRef, useState } from 'react';
 import { OnlineStatusMarker } from '../OnlineStatusMarker/OnlineStatusMarker';
 import { AvatarPlaceholder } from './AvatarPlaceholder';
 import { useAvatarImage } from 'hooks/useAvatarImage/useAvatarImage';

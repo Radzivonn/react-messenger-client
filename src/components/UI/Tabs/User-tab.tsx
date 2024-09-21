@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import { Tab } from './BaseTab/Tab';
 import { RemoveFriendButton } from '../../FunctionalButtons/RemoveFriendButton';
 import { AddFriendButton } from '../../FunctionalButtons/AddFriendButton';

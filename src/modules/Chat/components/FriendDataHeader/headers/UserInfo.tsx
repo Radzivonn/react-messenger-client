@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Props } from './types';
 import { useReceiverStore } from 'store/receiver/receiverStore';
 import { AvatarImage } from 'components/UI/AvatarUI/AvatarImage';

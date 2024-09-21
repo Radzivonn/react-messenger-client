@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Button } from 'components/UI/Button/Button';
 
 export const SignUpButton: FC = () => {

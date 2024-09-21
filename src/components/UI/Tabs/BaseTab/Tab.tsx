@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import './style.scss';
 
 export const Tab: FC<ComponentProps<'section'>> = ({ children, className, ...props }) => {

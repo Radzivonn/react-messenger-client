@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, forwardRef } from 'react';
+import { ComponentProps, FC, forwardRef } from 'react';
 import { LogoutButton } from './LogoutButton';
 import { RemoveAccountButton } from './RemoveAccountButton';
 

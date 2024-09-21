@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import { type FC } from 'react';
 import { Navigate } from 'react-router-dom';
 import { type ChildrenProps } from './types';
 import { useUserData } from 'hooks/useUserData/useUserData';

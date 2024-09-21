@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ComponentProps, FC, useRef } from 'react';
+import { ChangeEvent, ComponentProps, FC, useRef } from 'react';
 import { Button } from '../Button/Button';
 import CameraIcon from 'assets/icons/camera-icon.svg?react';
 import userService from 'API/services/UserService/UserService';

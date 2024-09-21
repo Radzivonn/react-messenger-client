@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { ChildrenProps } from './types';
 import { useSearchParams } from 'react-router-dom';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';

@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatuses';
 import { MobileHeader } from './headers/mobileHeader';

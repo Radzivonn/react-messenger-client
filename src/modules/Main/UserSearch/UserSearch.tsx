@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { TextField } from 'components/UI/TextField/TextField';
 import { useUsersSearch } from 'hooks/useUsersSearch/useUsersSearch';

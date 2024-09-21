@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC, useRef, useState } from 'react';
+import { ComponentProps, FC, useRef, useState } from 'react';
 import { TextField } from 'components/UI/TextField/TextField';
 import { Button } from 'components/UI/Button/Button';
 import { ClientToServerEvents, Message, ServerToClientEvents, WEBSOCKET_EVENTS } from 'types/types';

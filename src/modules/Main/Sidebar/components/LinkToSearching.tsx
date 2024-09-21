@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { mainPageRoutes } from 'router/routes';
 import AddFriendIcon from 'assets/icons/add-friend-icon.svg?react';

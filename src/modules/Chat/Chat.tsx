@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import './style.scss';
 import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
 import { FriendDataHeader } from './components/FriendDataHeader/FriendDataHeader';

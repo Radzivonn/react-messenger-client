@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute } from 'react';
+import { HTMLInputTypeAttribute } from 'react';
 import OpenedEyeIcon from './assets/opened-eye-icon.svg?react';
 import ClosedEyeIcon from './assets/closed-eye-icon.svg?react';
 import SearchIcon from './assets/search-icon.svg?react';

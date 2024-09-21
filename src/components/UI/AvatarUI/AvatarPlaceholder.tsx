@@ -1,4 +1,4 @@
-import React, { ComponentProps, FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import { OnlineStatusMarker } from '../OnlineStatusMarker/OnlineStatusMarker';
 
 interface Props extends ComponentProps<'div'> {

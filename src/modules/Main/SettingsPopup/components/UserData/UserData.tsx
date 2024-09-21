@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useUserData } from 'hooks/useUserData/useUserData';
 import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
 import { AvatarImage } from 'components/UI/AvatarUI/AvatarImage';

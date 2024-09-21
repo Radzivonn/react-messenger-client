@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { ThreeDots, ThreeDotsProps } from 'react-loader-spinner';
 
 export const ThreeDotsLoader: FC<ThreeDotsProps> = (props) => {
