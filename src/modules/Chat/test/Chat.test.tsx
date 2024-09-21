@@ -6,7 +6,7 @@ import { type AddressInfo } from 'node:net';
 import { io as ioc, type Socket as ClientSocket } from 'socket.io-client';
 import { Server, type Socket as ServerSocket } from 'socket.io';
 import { act } from 'react';
-import { useChatStore } from 'store/chatData/chatData';
+import { useChatStore } from 'store';
 import { useSocketStore } from 'store/socket/socketStore';
 
 type ActualRouterType = typeof import('react-router-dom');

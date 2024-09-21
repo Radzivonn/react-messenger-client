@@ -5,7 +5,7 @@ import { FriendDataHeader } from './components/FriendDataHeader/FriendDataHeader
 import { MessagesList } from './components/MessagesList';
 import { InputSection } from './components/InputSection';
 import useChat from 'hooks/useChat/useChat';
-import { useChatStore } from 'store/chatData/chatData';
+import { useChatStore } from 'store/chat/chatStore';
 import { useSocketStore } from 'store/socket/socketStore';
 
 interface Props extends ComponentProps<'section'> {

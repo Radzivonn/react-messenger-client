@@ -22,8 +22,8 @@
   }
 
   &__header {
-    @include font-display;
     margin-bottom: 24px;
+    @include font-display;
 
     @media (min-width: 768px) {
       margin-bottom: 0px;

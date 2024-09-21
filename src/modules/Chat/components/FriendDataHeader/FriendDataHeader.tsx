@@ -1,6 +1,6 @@
 import { ComponentProps, FC } from 'react';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
-import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatuses';
+import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatusesStore';
 import { MobileHeader } from './headers/mobileHeader';
 import { DesktopHeader } from './headers/desktopHeader';
 import { UserInfo } from './headers/UserInfo';

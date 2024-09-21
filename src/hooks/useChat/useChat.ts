@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { WEBSOCKET_EVENTS } from 'types/types';
 import { useSearchParams } from 'react-router-dom';
 import { useSocketStore } from 'store/socket/socketStore';
-import { useChatStore } from 'store/chatData/chatData';
+import { useChatStore } from 'store/chat/chatStore';
 import { useReceiverStore } from 'store/receiver/receiverStore';
 
 const useChat = (userId: string) => {

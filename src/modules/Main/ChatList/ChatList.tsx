@@ -5,7 +5,7 @@ import { ChatTab } from 'components/UI/Tabs/Chat-tab';
 import { MainPageComponentOutletContext } from 'types/types';
 import { useChatList } from 'hooks/useChat/useChatList';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
-import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatuses';
+import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatusesStore';
 
 export const ChatList = () => {
   const [_searchParams, setSearchParams] = useSearchParams();
