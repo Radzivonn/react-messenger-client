@@ -1,8 +1,8 @@
 import React, { ComponentProps, FC } from 'react';
 import { Tab } from './BaseTab/Tab';
-import { RemoveFriendButton } from 'components/FunctionalButtons/RemoveFriendButton';
-import { AddFriendButton } from 'components/FunctionalButtons/AddFriendButton';
-import { WriteToFriendButton } from 'components/FunctionalButtons/WriteToFriendButton';
+import { RemoveFriendButton } from '../../FunctionalButtons/RemoveFriendButton';
+import { AddFriendButton } from '../../FunctionalButtons/AddFriendButton';
+import { WriteToFriendButton } from '../../FunctionalButtons/WriteToFriendButton';
 import { AvatarImage } from '../AvatarUI/AvatarImage';
 
 interface Props extends ComponentProps<'section'> {
@@ -23,7 +23,7 @@ export const UserTab: FC<Props> = ({ name, friendId, userId, isFriend, isOnline,
       <div className="ml-1 flex gap-2">
         {isFriend ? (
           <>
-            <WriteToFriendButton userId={userId} friendId={friendId} friendName={name} />
+            <WriteToFriendButton userId={userId} friendId={friendId} />
             <RemoveFriendButton userId={userId} friendId={friendId} friendName={name} />
           </>
         ) : (

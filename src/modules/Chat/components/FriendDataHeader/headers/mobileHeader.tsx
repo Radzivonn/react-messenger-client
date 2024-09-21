@@ -3,7 +3,7 @@ import { ChildrenProps } from './types';
 import { useSearchParams } from 'react-router-dom';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import { Button } from 'components/UI/Button/Button';
-import ArrowIcon from 'assets/icons/arrow_left_icon.svg?react';
+import ArrowIcon from '../../../assets/arrow_left_icon.svg?react';
 
 export const MobileHeader: FC<ChildrenProps> = ({ children }) => {
   const [_searchParams, setSearchParams] = useSearchParams();

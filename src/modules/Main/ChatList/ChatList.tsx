@@ -46,6 +46,7 @@ export const ChatList = () => {
             receiverName={receiver.userName}
             lastMessage={chat.messages[chat.messages.length - 1]}
             isOnline={onlineStatuses[receiver.userId] ?? false}
+            data-testid="chat-tab"
           />
         );
       })}

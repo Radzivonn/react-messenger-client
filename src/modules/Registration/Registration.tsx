@@ -7,7 +7,7 @@ import { RegistrationNote } from './components/RegistrationNote';
 
 export const RegistrationModule = () => {
   return (
-    <section className="registration">
+    <section className="registration" data-testid="registration">
       <div className="registration__container page-wrapper">
         <Header />
         <RegistrationForm />

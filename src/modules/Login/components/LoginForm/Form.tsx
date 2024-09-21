@@ -42,6 +42,7 @@ export const LoginForm: FC = () => {
           <TextField
             {...data}
             key={name}
+            data-testid={name}
             id={`input-${index}`}
             isValid={!errors[name]}
             helpText={errors[name]?.message}

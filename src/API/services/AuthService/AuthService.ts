@@ -47,10 +47,14 @@ class AuthService {
   }
 
   public logout(userId: string) {
-    const response: Promise<KyResponse> = api.post(
-      `${this.BASE_URL}/${endpoints.logout}/${userId}`,
-    );
-    return response;
+    try {
+      const response: Promise<KyResponse> = api.post(
+        `${this.BASE_URL}/${endpoints.logout}/${userId}`,
+      );
+      return response;
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   public refreshTokens() {

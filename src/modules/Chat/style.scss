@@ -56,7 +56,7 @@
 }
 
 .friend-header {
-  @apply flex max-h-[87px] justify-between border-l-2 border-[--main-color-3] bg-[--main-color-5] p-3;
+  @apply flex max-h-[87px] items-center justify-between border-l-2 border-[--main-color-3] bg-[--main-color-5] p-3;
 
   &--desktop {
     .user-info {

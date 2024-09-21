@@ -7,7 +7,7 @@ import { LoginNote } from './components/LoginNote';
 
 export const LoginModule = () => {
   return (
-    <section className="login">
+    <section className="login" data-testid="login">
       <div className="login__container page-wrapper">
         <Header />
         <LoginForm />

@@ -50,6 +50,7 @@ export const RegistrationForm: FC = () => {
             <TextField
               {...data}
               key={name}
+              data-testid={name}
               isValid={!errors[name]}
               helpText={errors[name]?.message}
               {...register(name)}

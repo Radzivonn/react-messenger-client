@@ -3,7 +3,7 @@ import { useUserData } from 'hooks/useUserData/useUserData';
 import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
 import { AvatarImage } from 'components/UI/AvatarUI/AvatarImage';
 import { ChangeAvatarButton } from 'components/UI/AvatarUI/ChangeAvatarButton';
-import { ChangeInfoPopup } from './ChangeInfoPopup';
+import { EditInfoPopup } from './EditInfoPopup';
 import { editingOptions } from './editingOptions';
 import PersonIcon from '../assets/person-circle-outline.svg?react';
 
@@ -17,7 +17,7 @@ export const UserData = () => {
 
   return (
     <>
-      <div className="user-data">
+      <div className="user-data" data-testid="user-data-block">
         <AvatarImage
           className="h-36 w-36 text-5xl"
           userId={data.id}
@@ -28,6 +28,7 @@ export const UserData = () => {
           <ChangeAvatarButton userId={data.id} />
         </AvatarImage>
         <div
+          data-testid="name-option"
           className="user-data__option"
           onClick={() => {
             setEditingOption('Name');
@@ -42,7 +43,7 @@ export const UserData = () => {
         </div>
       </div>
       {isEditingPopupOpened && (
-        <ChangeInfoPopup
+        <EditInfoPopup
           userId={data.id}
           currentInfo={currentInfo}
           editingOption={editingOption}

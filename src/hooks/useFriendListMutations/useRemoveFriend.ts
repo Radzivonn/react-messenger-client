@@ -14,7 +14,7 @@ export const useRemoveFriend = (userId: string, friendId: string, friendName: st
     },
     onError: () => {
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
-      toast.error(`Removing error occurs!`);
+      toast.error(`Some error occurs!`);
     },
     retry: false,
   });

@@ -4,12 +4,10 @@ import { Button } from 'components/UI/Button/Button';
 import { ClientToServerEvents, Message, ServerToClientEvents, WEBSOCKET_EVENTS } from 'types/types';
 import { Socket } from 'socket.io-client';
 import { useChatStore } from 'store/chatData/chatData';
-import MessagePlaneIcon from './assets/message-plane.svg?react';
-import EmojiIcon from './assets/emoji-icon.svg?react';
+import MessagePlaneIcon from '../assets/message-plane.svg?react';
+import EmojiIcon from '../assets/emoji-icon.svg?react';
 import { EmojiPicker } from './EmojiPicker';
-
-const getTime = () =>
-  `${new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()}`;
+import { getTime } from '../helpers/getTime';
 
 interface Props extends ComponentProps<'section'> {
   socket: Socket<ServerToClientEvents, ClientToServerEvents>;
@@ -70,17 +68,19 @@ export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) =>
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           type="text"
-          className=" w-4/5 border-none"
+          className="w-4/5 border-none"
           onKeyDown={() => onKeyDownHandler()}
         />
         <div className="flex">
           <Button
+            data-testid="send-message-button"
             className={`button--icon-only button--no-hover ${inputValue ? '' : 'button--hidden'}`}
             onClick={sendMessage}
           >
             <MessagePlaneIcon />
           </Button>
           <Button
+            data-testid="emoji-picker-button"
             className={`button--icon-only button--no-hover`}
             onClick={() => setIsEmojiPickerVisible((prev) => !prev)}
           >

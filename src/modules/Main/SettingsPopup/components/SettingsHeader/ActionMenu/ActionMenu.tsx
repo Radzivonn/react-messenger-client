@@ -4,7 +4,7 @@ import { RemoveAccountButton } from './RemoveAccountButton';
 
 export const ActionMenu: FC<ComponentProps<'div'>> = forwardRef(({ ...props }, ref) => {
   return (
-    <div className="action-menu" {...props} ref={ref}>
+    <div className="action-menu" {...props} ref={ref} data-testid="action-menu">
       <LogoutButton className="action-menu__button">
         <p> Log out</p>
       </LogoutButton>

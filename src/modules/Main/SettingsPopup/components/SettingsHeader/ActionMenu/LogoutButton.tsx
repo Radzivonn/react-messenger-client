@@ -22,19 +22,17 @@ export const LogoutButton: FC<ComponentProps<'button'>> = ({ className, children
   const onLogout = async (userId: string) => {
     try {
       await authService.logout(userId);
-    } catch (e) {
-      console.error(e);
-    } finally {
+
       setIsSettingsOpened(false);
-
       if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, userId);
-
       authService.removeAccessToken();
+
       navigate(`/${routes.login}`, { replace: true });
 
       queryClient.clear();
-
       toast.info('You are logged out!');
+    } catch (e) {
+      toast.error(`An error occurred: ${e}`);
     }
   };
 

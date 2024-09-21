@@ -14,7 +14,7 @@ export const useAddFriend = (userId: string, friendId: string, friendName: strin
     },
     onError: () => {
       void queryClient.invalidateQueries({ queryKey: ['userData'] });
-      toast.error(`Adding error occurs!`);
+      toast.error(`Some error occurs!`);
     },
     retry: false,
   });
