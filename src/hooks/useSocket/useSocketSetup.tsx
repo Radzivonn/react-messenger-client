@@ -24,7 +24,7 @@ const useSocketSetup = (userId: string, userName: string) => {
     const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:5050/');
 
     socket.on(WEBSOCKET_EVENTS.CONNECTION, () => {
-      socket.emit(WEBSOCKET_EVENTS.CONNECT_PARTICIPANT, userId, userName);
+      socket.emit(WEBSOCKET_EVENTS.CONNECT_USER, userId, userName);
       setSocket(socket);
     });
 
@@ -35,13 +35,13 @@ const useSocketSetup = (userId: string, userName: string) => {
 
     socket.on(WEBSOCKET_EVENTS.CONNECTION_ERROR, () => console.log('connection_error'));
 
-    socket.on(WEBSOCKET_EVENTS.JOINED_ROOM_SUCCESSFULLY, ({ chat, isCreated }) => {
+    socket.on(WEBSOCKET_EVENTS.CREATED_CHAT_SUCCESSFULLY, ({ chat, isCreated }) => {
       if (isCreated) {
         addChat(chat);
       }
     });
 
-    socket.on(WEBSOCKET_EVENTS.PARTICIPANT_CONNECTED, (userId) => {
+    socket.on(WEBSOCKET_EVENTS.USER_CONNECTED, (userId) => {
       addOnlineStatus(userId, true);
     });
 
@@ -80,7 +80,7 @@ const useSocketSetup = (userId: string, userName: string) => {
         if (receiverId === userId) setIsReceiverTyping(false);
       });
 
-      socket.on(WEBSOCKET_EVENTS.PARTICIPANT_DISCONNECTED, (userId) => {
+      socket.on(WEBSOCKET_EVENTS.USER_DISCONNECTED, (userId) => {
         addOnlineStatus(userId, false);
         if (receiverId === userId) setIsReceiverTyping(false); // in case the receiver leaves the page
       });
@@ -88,7 +88,7 @@ const useSocketSetup = (userId: string, userName: string) => {
       return () => {
         socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_START_TYPING);
         socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_STOP_TYPING);
-        socket.removeListener(WEBSOCKET_EVENTS.PARTICIPANT_DISCONNECTED);
+        socket.removeListener(WEBSOCKET_EVENTS.USER_DISCONNECTED);
       };
     }
   }, [receiverId, socket]);

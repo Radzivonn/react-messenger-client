@@ -13,7 +13,7 @@ const useChat = (chatId: string, userId: string, currentChat: IChat) => {
 
   useEffect(() => {
     if (socket && receiverId && !currentChat) {
-      socket.emit(WEBSOCKET_EVENTS.JOIN_ROOM, {
+      socket.emit(WEBSOCKET_EVENTS.CREATE_CHAT, {
         chatId,
         userId,
         receiverId,

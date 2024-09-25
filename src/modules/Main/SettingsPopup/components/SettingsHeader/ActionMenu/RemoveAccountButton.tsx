@@ -25,7 +25,7 @@ export const RemoveAccountButton: FC<ComponentProps<'button'>> = ({ className, c
       await userService.removeAccount(userId);
 
       setIsSettingsOpened(false);
-      if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, userId);
+      if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_USER, userId);
       authService.removeAccessToken();
 
       navigate(`/${routes.registration}`, { replace: true });

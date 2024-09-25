@@ -24,7 +24,7 @@ export const LogoutButton: FC<ComponentProps<'button'>> = ({ className, children
       await authService.logout(userId);
 
       setIsSettingsOpened(false);
-      if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, userId);
+      if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_USER, userId);
       authService.removeAccessToken();
 
       navigate(`/${routes.login}`, { replace: true });

@@ -28,7 +28,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
   useBeforeUnload(() => {
     if (socket) {
       if (chatId) socket.emit(WEBSOCKET_EVENTS.STOP_TYPING, chatId, id);
-      socket.emit(WEBSOCKET_EVENTS.DISCONNECT_PARTICIPANT, id);
+      socket.emit(WEBSOCKET_EVENTS.DISCONNECT_USER, id);
     }
   });
   useWindowResizeHandler();
