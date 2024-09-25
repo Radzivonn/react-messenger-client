@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { FriendDataHeader } from './FriendDataHeader';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 
-vi.mock('store/onlineStatuses/onlineStatuses', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('store/onlineStatuses/onlineStatuses')>();
+vi.mock('store/onlineStatuses/onlineStatusesStore', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('store/onlineStatuses/onlineStatusesStore')>();
   return {
     ...mod,
     useFriendsOnlineStatusesStore: vi.fn().mockReturnValue({}),

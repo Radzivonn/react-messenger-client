@@ -6,7 +6,7 @@ import { type AddressInfo } from 'node:net';
 import { io as ioc, type Socket as ClientSocket } from 'socket.io-client';
 import { Server, type Socket as ServerSocket } from 'socket.io';
 import { act } from 'react';
-import { useChatStore } from 'store';
+import { useChatStore } from 'store/chat/chatStore';
 import { useSocketStore } from 'store/socket/socketStore';
 
 type ActualRouterType = typeof import('react-router-dom');
@@ -83,14 +83,14 @@ describe('Chat module tests', () => {
     return new Promise(async (resolve) => {
       useSocketStore.setState({ socket: clientSocket });
 
-      serverSocket.on(WEBSOCKET_EVENTS.JOIN_ROOM, ({ chatId, userId, receiverId }) => {
+      serverSocket.on(WEBSOCKET_EVENTS.CREATE_CHAT, ({ chatId, userId, receiverId }) => {
         expect(chatId).toBe('mock-chat-id');
         expect(userId).toBe('mock-user-id');
         expect(receiverId).toBe('mock-receiver-id');
 
         act(() => {
           useChatStore.setState({
-            currentChat: { chatId: 'mock-chat-id', participants: [], messages: [] },
+            chats: { 'mock-chat-id': { chatId: 'mock-chat-id', participants: [], messages: [] } },
           });
         });
 

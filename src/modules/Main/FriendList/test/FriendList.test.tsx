@@ -24,8 +24,8 @@ vi.mock('components/UI/Loaders/TailSpinner', async (importOriginal) => {
   };
 });
 
-vi.mock('store/onlineStatuses/onlineStatuses', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('store/onlineStatuses/onlineStatuses')>();
+vi.mock('store/onlineStatuses/onlineStatusesStore', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('store/onlineStatuses/onlineStatusesStore')>();
   return {
     ...mod,
     useFriendsOnlineStatusesStore: vi.fn().mockReturnValue({}),

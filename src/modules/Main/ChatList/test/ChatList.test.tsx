@@ -1,14 +1,13 @@
 import { act } from 'react';
-import { http, HttpResponse } from 'msw';
 import { screen } from '@testing-library/react';
 import { QueryClient } from '@tanstack/react-query';
-import { server } from 'mocks/node';
 import { ChatList } from '../ChatList';
 import { mockChatListData, mockIncorrectChatListData } from 'mocks/mocks';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import userEvent from '@testing-library/user-event';
 import { RenderWithRouter } from 'tests/helpers/RenderWithRouter';
 import authService from 'API/services/AuthService/AuthService';
+import { useChatStore } from 'store/chat/chatStore';
 
 const setSearchParamsMock = vi.fn();
 type ActualRouterType = typeof import('react-router-dom');
@@ -24,8 +23,8 @@ vi.mock('react-router-dom', async () => {
   };
 });
 
-vi.mock('store/onlineStatuses/onlineStatuses', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('store/onlineStatuses/onlineStatuses')>();
+vi.mock('store/onlineStatuses/onlineStatusesStore', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('store/onlineStatuses/onlineStatusesStore')>();
   return {
     ...mod,
     useFriendsOnlineStatusesStore: vi.fn().mockReturnValue({}),
@@ -46,11 +45,9 @@ describe('Chat list component tests', () => {
   it('Check no chats found case', async () => {
     authService.saveAccessToken('mock-token');
 
-    server.use(
-      http.get('http://localhost:5050/chat/chatList/:userId/:userName', () => {
-        return HttpResponse.json([]);
-      }),
-    );
+    useChatStore.setState({
+      chats: {},
+    });
 
     act(() => {
       RenderWithRouter(queryClient, <ChatList />, `/users/mock-id/mock-name/chats`);
@@ -63,11 +60,9 @@ describe('Chat list component tests', () => {
   it('Check friends found case, but receive incorrect chat data(with only one participant)', async () => {
     authService.saveAccessToken('mock-token');
 
-    server.use(
-      http.get('http://localhost:5050/chat/chatList/:userId/:userName', () => {
-        return HttpResponse.json(mockIncorrectChatListData);
-      }),
-    );
+    useChatStore.setState({
+      chats: mockIncorrectChatListData,
+    });
 
     act(() => {
       RenderWithRouter(queryClient, <ChatList />, `/users/mock-id/mock-name/chats`);
@@ -80,16 +75,16 @@ describe('Chat list component tests', () => {
   it('Check friends found case', async () => {
     authService.saveAccessToken('mock-token');
 
-    server.use(
-      http.get('http://localhost:5050/chat/chatList/:userId/:userName', () => {
-        return HttpResponse.json(mockChatListData);
-      }),
-    );
+    useChatStore.setState({
+      chats: mockChatListData,
+    });
 
     RenderWithRouter(queryClient, <ChatList />, `/users/mock-id/mock-name/chats`);
 
     const chatsTabs = await screen.findAllByTestId('chat-tab');
-    expect(chatsTabs.length).toBe(mockChatListData.length);
+    console.log(chatsTabs);
+
+    expect(chatsTabs).toHaveLength(Object.keys(mockChatListData).length);
     chatsTabs.forEach((tab) => {
       expect(tab).toBeInTheDocument();
     });

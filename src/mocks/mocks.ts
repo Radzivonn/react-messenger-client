@@ -60,8 +60,8 @@ export const mockMessages: Message[] = [
   },
 ];
 
-export const mockChatListData: IChat[] = [
-  {
+export const mockChatListData: Record<string, IChat> = {
+  'mock-chat-list': {
     chatId: 'chat1',
     participants: [
       { userId: 'mock-id', userName: 'mock-name' },
@@ -69,12 +69,12 @@ export const mockChatListData: IChat[] = [
     ],
     messages: mockMessages,
   },
-];
+};
 
-export const mockIncorrectChatListData: IChat[] = [
-  {
+export const mockIncorrectChatListData: Record<string, IChat> = {
+  'mock-incorrect-chat-list': {
     chatId: 'chat1',
     participants: [{ userId: 'mock-id', userName: 'mock-name' }], // incorrect because one participant
     messages: mockMessages,
   },
-];
+};
