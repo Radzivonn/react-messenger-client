@@ -16,9 +16,9 @@ export const MessagesList: FC<Props> = ({ userName, messages }) => {
     }, 10);
 
     return () => clearTimeout(timer);
-  }, [messages]);
+  }, [messages.length]);
 
-  if (!messages.length) {
+  if (messages.length === 0) {
     return <h2 className="text-hint">No messages here yet</h2>;
   }
 

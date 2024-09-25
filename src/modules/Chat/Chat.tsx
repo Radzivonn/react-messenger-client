@@ -15,10 +15,10 @@ interface Props extends ComponentProps<'section'> {
 }
 
 export const Chat: FC<Props> = ({ chatId, userId, userName }) => {
-  const currentChat = useChatStore((state) => state.currentChat);
+  const currentChat = useChatStore((state) => state.chats[chatId]);
   const socket = useSocketStore((state) => state.socket);
 
-  useChat(userId);
+  useChat(chatId, userId, currentChat);
 
   if (!currentChat || !socket) {
     return (

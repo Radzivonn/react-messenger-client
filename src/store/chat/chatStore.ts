@@ -3,28 +3,51 @@ import { devtools } from 'zustand/middleware';
 import { IChat, Message } from 'types/types';
 
 interface ChatStore {
-  currentChat: IChat | null;
-  setCurrentChat: (chat: IChat) => void;
-  clearChatData: () => void;
+  chats: Record<string, IChat>;
+  setChats: (chats: IChat[]) => void;
+  addChat: (chat: IChat) => void;
+  clearChatsData: () => void;
   addMessage: (message: Message) => void;
 }
 
 export const useChatStore = create<ChatStore>()(
   devtools((set) => ({
-    currentChat: null,
-    setCurrentChat: (chat) => set(() => ({ currentChat: chat })),
-    clearChatData: () => set(() => ({ currentChat: null })),
+    chats: {},
+    setChats: (chats: IChat[]) =>
+      set(() => {
+        const chatsRecord: Record<string, IChat> = {};
+
+        chats.forEach((chat) => {
+          chatsRecord[chat.chatId] = chat;
+        });
+
+        return {
+          chats: chatsRecord,
+        };
+      }),
+    addChat: (chat) =>
+      set((state) => ({
+        chats: {
+          ...state.chats,
+          [chat.chatId]: chat,
+        },
+      })),
+    clearChatsData: () => set(() => ({ chats: {} })),
     addMessage: (message) =>
       set((state) => {
-        if (state.currentChat) {
+        const chat = state.chats[message.chatId];
+
+        if (chat) {
+          chat.messages.push(message);
           return {
-            currentChat: {
-              ...state.currentChat,
-              messages: [...state.currentChat.messages, message],
+            chats: {
+              ...state.chats,
+              [chat.chatId]: chat,
             },
           };
         }
-        return { currentChat: null };
+
+        return { chats: state.chats };
       }),
   })),
 );

@@ -19,7 +19,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
   const [searchParams] = useSearchParams();
   const chatId = searchParams.get('chatId');
 
-  const { isMobile, isChatOpened, isSettingsOpened } = useAppSettingsStore();
+  const { isMobile, isChatOpened } = useAppSettingsStore();
   const socket = useSocketStore((state) => state.socket);
 
   const isSidebarOpened = isMobile && isChatOpened ? false : true;
@@ -32,7 +32,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
     }
   });
   useWindowResizeHandler();
-  useSocketSetup(id, name, chatId);
+  useSocketSetup(id, name);
 
   return (
     <>
@@ -48,7 +48,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
           {isTextHintShow && <h2 className="text-hint">Select a chat to start messaging</h2>}
         </div>
       </main>
-      <SettingsPopup className={`${isSettingsOpened ? '' : 'popup-wrapper--closed'}`} />
+      <SettingsPopup />
     </>
   );
 };

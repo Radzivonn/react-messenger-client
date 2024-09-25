@@ -1,34 +1,29 @@
 import { useEffect } from 'react';
-import { WEBSOCKET_EVENTS } from 'types/types';
+import { IChat, WEBSOCKET_EVENTS } from 'types/types';
 import { useSearchParams } from 'react-router-dom';
 import { useSocketStore } from 'store/socket/socketStore';
-import { useChatStore } from 'store/chat/chatStore';
 import { useReceiverStore } from 'store/receiver/receiverStore';
 
-const useChat = (userId: string) => {
+const useChat = (chatId: string, userId: string, currentChat: IChat) => {
   const [searchParams] = useSearchParams();
-  const chatId = searchParams.get('chatId');
   const receiverId = searchParams.get('receiverId');
 
   const socket = useSocketStore((state) => state.socket);
-  const clearChatData = useChatStore((state) => state.clearChatData);
   const setIsReceiverTyping = useReceiverStore((state) => state.setIsReceiverTyping);
 
   useEffect(() => {
-    if (socket && chatId && receiverId) {
+    if (socket && receiverId && !currentChat) {
       socket.emit(WEBSOCKET_EVENTS.JOIN_ROOM, {
         chatId,
         userId,
         receiverId,
       });
-
-      /* when leave chat */
-      return () => {
-        setIsReceiverTyping(false);
-        clearChatData();
-      };
     }
-  }, [chatId]);
+    /* when leave chat */
+    return () => {
+      setIsReceiverTyping(false);
+    };
+  }, [chatId, currentChat]);
 };
 
 export default useChat;

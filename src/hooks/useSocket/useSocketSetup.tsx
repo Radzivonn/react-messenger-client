@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Socket, io } from 'socket.io-client';
 import { WEBSOCKET_EVENTS } from 'types/types';
 import { ServerToClientEvents, ClientToServerEvents } from 'types/types';
-import { useQueryClient } from '@tanstack/react-query';
 import { useSocketStore } from 'store/socket/socketStore';
 import { useChatStore } from 'store/chat/chatStore';
 import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatusesStore';
@@ -10,15 +9,13 @@ import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import { useReceiverStore } from 'store/receiver/receiverStore';
 import { useSearchParams } from 'react-router-dom';
 
-const useSocketSetup = (userId: string, userName: string, chatId: string | null) => {
-  const queryClient = useQueryClient();
-
+const useSocketSetup = (userId: string, userName: string) => {
   const [searchParams] = useSearchParams();
   const receiverId = searchParams.get('receiverId');
 
   const { socket, setSocket } = useSocketStore();
   const resetSocket = useSocketStore((state) => state.resetSocket);
-  const { setCurrentChat, addMessage, clearChatData } = useChatStore();
+  const { setChats, addChat, clearChatsData, addMessage } = useChatStore();
   const { addOnlineStatus, setOnlineStatuses } = useFriendsOnlineStatusesStore();
   const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);
   const setIsReceiverTyping = useReceiverStore((state) => state.setIsReceiverTyping);
@@ -31,17 +28,17 @@ const useSocketSetup = (userId: string, userName: string, chatId: string | null)
       setSocket(socket);
     });
 
-    socket.on(WEBSOCKET_EVENTS.SOCKET_SUCCESSFULLY_CONNECTED, (friendsOnlineStatuses) =>
-      setOnlineStatuses(friendsOnlineStatuses),
-    );
+    socket.on(WEBSOCKET_EVENTS.SOCKET_SUCCESSFULLY_CONNECTED, (friendsOnlineStatuses, chats) => {
+      setOnlineStatuses(friendsOnlineStatuses);
+      setChats(chats);
+    });
 
     socket.on(WEBSOCKET_EVENTS.CONNECTION_ERROR, () => console.log('connection_error'));
 
     socket.on(WEBSOCKET_EVENTS.JOINED_ROOM_SUCCESSFULLY, ({ chat, isCreated }) => {
       if (isCreated) {
-        void queryClient.invalidateQueries({ queryKey: ['chatList', userId] }); //!!! optimize because fetch all chats bad idea
+        addChat(chat);
       }
-      setCurrentChat(chat);
     });
 
     socket.on(WEBSOCKET_EVENTS.PARTICIPANT_CONNECTED, (userId) => {
@@ -54,7 +51,7 @@ const useSocketSetup = (userId: string, userName: string, chatId: string | null)
 
     return () => {
       setIsChatOpened(false);
-      clearChatData();
+      clearChatsData();
       resetSocket();
       socket.removeAllListeners();
       socket.close();
@@ -64,17 +61,14 @@ const useSocketSetup = (userId: string, userName: string, chatId: string | null)
   useEffect(() => {
     if (socket) {
       socket.on(WEBSOCKET_EVENTS.RECEIVE_MESSAGE, (message) => {
-        void queryClient.invalidateQueries({ queryKey: ['chatList', userId] }); // !!! optimize because fetch all chats bad idea
-        if (message.chatId === chatId) {
-          addMessage(message);
-        }
+        addMessage(message);
       });
 
       return () => {
         socket.removeListener(WEBSOCKET_EVENTS.RECEIVE_MESSAGE);
       };
     }
-  }, [chatId, socket]);
+  }, [socket]);
 
   useEffect(() => {
     if (socket) {

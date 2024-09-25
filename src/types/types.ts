@@ -66,7 +66,10 @@ interface JoinedRoomSuccessfullyPayload {
 }
 
 export interface ServerToClientEvents {
-  socket_successfully_connected: (friendsOnlineStatuses: Record<string, boolean>) => void;
+  socket_successfully_connected: (
+    friendsOnlineStatuses: Record<string, boolean>,
+    chats: IChat[],
+  ) => void;
   socket_successfully_disconnected: () => void;
   receiver_start_typing: (userId: string) => void;
   receiver_stop_typing: (userId: string) => void;
