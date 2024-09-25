@@ -1,9 +1,8 @@
-import { ComponentProps, FC, useRef, useState } from 'react';
+import { ComponentProps, FC, useState } from 'react';
 import { OnlineStatusMarker } from '../OnlineStatusMarker/OnlineStatusMarker';
 import { AvatarPlaceholder } from './AvatarPlaceholder';
 import { useAvatarImage } from 'hooks/useAvatarImage/useAvatarImage';
 import { OpenedImage } from './OpenedImage/OpenedImage';
-import { useClickOnSpecific } from 'hooks/useClickOnSpecific/useClickOnSpecific';
 
 interface Props extends ComponentProps<'div'> {
   userId: string;
@@ -20,12 +19,9 @@ export const AvatarImage: FC<Props> = ({
   isOpenable,
   children,
 }) => {
-  const avatarRef = useRef(null);
   const [isImageOpened, setIsImageOpened] = useState(false);
   const { data } = useAvatarImage(userId);
   const isImageShow = isImageOpened && isOpenable;
-
-  useClickOnSpecific(avatarRef, () => setIsImageOpened(true));
 
   if (!data) {
     return (
@@ -39,10 +35,10 @@ export const AvatarImage: FC<Props> = ({
     <>
       <div className={`avatar ${className ?? ''}`}>
         <img
-          ref={avatarRef}
           className="avatar-image"
           src={'http://localhost:5050/' + data.avatarPath}
           alt="avatar"
+          onClick={() => setIsImageOpened(true)}
         />
         {isOnline && <OnlineStatusMarker />}
         {children}
