@@ -9,8 +9,9 @@ export const Layout = () => {
       <ToastContainer
         position="top-center"
         autoClose={2000}
-        limit={2}
+        limit={3}
         pauseOnHover={false}
+        closeButton={false}
         theme={'dark'}
         closeOnClick
         hideProgressBar

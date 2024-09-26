@@ -32,7 +32,7 @@ export const Main: FC<ComponentProps<'main'>> = () => {
     }
   });
   useWindowResizeHandler();
-  useSocketSetup(id, name);
+  useSocketSetup(id, name, chatId);
 
   return (
     <>

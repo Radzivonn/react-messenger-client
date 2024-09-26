@@ -17,6 +17,7 @@ interface Props extends ComponentProps<'section'> {
 }
 
 const TYPING_DELAY = 2000; // 2 sec
+const MAX_TEXT_LENGTH = 255; // max symbol count of input text
 
 export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) => {
   const [inputValue, setInputValue] = useState('');
@@ -68,6 +69,7 @@ export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) =>
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           type="text"
+          maxLength={MAX_TEXT_LENGTH}
           className="w-4/5 border-none"
           onKeyDown={() => onKeyDownHandler()}
         />

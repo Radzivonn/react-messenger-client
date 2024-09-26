@@ -8,8 +8,9 @@ import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatus
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import { useReceiverStore } from 'store/receiver/receiverStore';
 import { useSearchParams } from 'react-router-dom';
+import { toastMessage } from './ToastMessageNotification';
 
-const useSocketSetup = (userId: string, userName: string) => {
+const useSocketSetup = (userId: string, userName: string, currentChatId: string | null) => {
   const [searchParams] = useSearchParams();
   const receiverId = searchParams.get('receiverId');
 
@@ -62,16 +63,17 @@ const useSocketSetup = (userId: string, userName: string) => {
     if (socket) {
       socket.on(WEBSOCKET_EVENTS.RECEIVE_MESSAGE, (message) => {
         addMessage(message);
+        if (message.chatId !== currentChatId) toastMessage(message, userId);
       });
 
       return () => {
         socket.removeListener(WEBSOCKET_EVENTS.RECEIVE_MESSAGE);
       };
     }
-  }, [socket]);
+  }, [socket, currentChatId]);
 
   useEffect(() => {
-    if (socket) {
+    if (socket && receiverId) {
       socket.on(WEBSOCKET_EVENTS.RECEIVER_START_TYPING, (userId) => {
         if (receiverId === userId) setIsReceiverTyping(true);
       });
@@ -91,7 +93,7 @@ const useSocketSetup = (userId: string, userName: string) => {
         socket.removeListener(WEBSOCKET_EVENTS.USER_DISCONNECTED);
       };
     }
-  }, [receiverId, socket]);
+  }, [socket, receiverId]);
 };
 
 export default useSocketSetup;
