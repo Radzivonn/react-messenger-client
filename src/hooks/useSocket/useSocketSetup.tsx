@@ -82,14 +82,21 @@ const useSocketSetup = (userId: string, userName: string, currentChatId: string 
         if (receiverId === userId) setIsReceiverTyping(false);
       });
 
+      return () => {
+        socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_START_TYPING);
+        socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_STOP_TYPING);
+      };
+    }
+  }, [socket, receiverId]);
+
+  useEffect(() => {
+    if (socket) {
       socket.on(WEBSOCKET_EVENTS.USER_DISCONNECTED, (userId) => {
         addOnlineStatus(userId, false);
         if (receiverId === userId) setIsReceiverTyping(false); // in case the receiver leaves the page
       });
 
       return () => {
-        socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_START_TYPING);
-        socket.removeListener(WEBSOCKET_EVENTS.RECEIVER_STOP_TYPING);
         socket.removeListener(WEBSOCKET_EVENTS.USER_DISCONNECTED);
       };
     }
