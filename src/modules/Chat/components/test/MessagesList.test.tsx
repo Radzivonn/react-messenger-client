@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MessagesList } from '../MessagesList';
 import { mockMessages } from 'mocks/mocks';
+import { getTime } from 'helpers/getTime';
 
 describe('Messages list component tests', () => {
   it('Check with no messages', () => {
@@ -21,7 +22,7 @@ describe('Messages list component tests', () => {
 
     mockMessages.forEach((message) => {
       expect(screen.getByText(message.message));
-      expect(screen.getByText(message.date));
+      expect(screen.getByText(getTime(message.date)));
     });
 
     expect(screen.queryByText('No messages here yet')).toBe(null);

@@ -2,8 +2,10 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ChatTab } from '../Chat-tab';
 import { Message } from 'types/types';
+import { mockMessages } from 'mocks/mocks';
+import { getTime } from 'helpers/getTime';
 
-const mockMessage: Message = { chatId: 'ID', date: '12:00', name: 'John', message: 'Hello world!' };
+const mockMessage: Message = mockMessages[0];
 
 vi.mock('components/UI/AvatarUI/AvatarImage', async (importOriginal) => {
   const mod = await importOriginal<typeof import('components/UI/AvatarUI/AvatarImage')>();
@@ -36,8 +38,8 @@ describe('User tab component test', () => {
     const avatarImage = screen.getByTestId('mock-avatar-image');
     expect(avatarImage).not.toBe(null);
 
-    expect(screen.getByText(mockMessage.name)).toBeInTheDocument();
+    expect(screen.getByText('John')).toBeInTheDocument();
     expect(screen.getByText(mockMessage.message)).toBeInTheDocument();
-    expect(screen.getByText(mockMessage.date)).toBeInTheDocument();
+    expect(screen.getByText(getTime(mockMessage.date))).toBeInTheDocument();
   });
 });

@@ -57,7 +57,7 @@ describe('Chat list component tests', () => {
     expect(chatsTabs.length).toBe(0);
   });
 
-  it('Check friends found case, but receive incorrect chat data(with only one participant)', async () => {
+  it('Check chats found case, but receive incorrect chat data(with only one participant)', async () => {
     authService.saveAccessToken('mock-token');
 
     useChatStore.setState({
@@ -82,7 +82,6 @@ describe('Chat list component tests', () => {
     RenderWithRouter(queryClient, <ChatList />, `/users/mock-id/mock-name/chats`);
 
     const chatsTabs = await screen.findAllByTestId('chat-tab');
-    console.log(chatsTabs);
 
     expect(chatsTabs).toHaveLength(Object.keys(mockChatListData).length);
     chatsTabs.forEach((tab) => {

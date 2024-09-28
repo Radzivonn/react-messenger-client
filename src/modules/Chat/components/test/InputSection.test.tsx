@@ -7,7 +7,7 @@ import { type AddressInfo } from 'node:net';
 import { io as ioc, type Socket as ClientSocket } from 'socket.io-client';
 import { Server, type Socket as ServerSocket } from 'socket.io';
 import { act } from 'react';
-import { getTime } from '../../helpers/getTime';
+import { getTime } from 'helpers/getTime';
 
 describe('Message sending input component tests', () => {
   let io: Server,
@@ -35,8 +35,9 @@ describe('Message sending input component tests', () => {
   });
 
   it('Should return time in h:m format', () => {
-    expect(getTime()).toBe(
-      `${new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()}`,
+    const date = new Date('September 28, 2024 12:00:00');
+    expect(getTime(date.toString())).toBe(
+      `${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`,
     );
   });
 
