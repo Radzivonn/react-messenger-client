@@ -17,6 +17,7 @@ export default defineConfig({
       pages: '/src/pages',
       router: '/src/router',
       store: '/src/store',
+      helpers: '/src/helpers',
       styles: '/src/styles',
       types: '/src/types',
       validations: '/src/validations',
