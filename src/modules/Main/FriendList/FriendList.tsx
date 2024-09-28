@@ -1,4 +1,3 @@
-import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { useFriendList } from 'hooks/useFriendList/useFriendList';
 import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
@@ -15,6 +14,8 @@ export const FriendList = () => {
   if (isFetching || !data) return <TailSpinner />;
 
   if (!data.length) return <h2 className="text-hint">Your friends list is empty</h2>;
+
+  data.sort((a, b) => (a.name < b.name ? -1 : 1)); // sorting friends alphabetically
 
   return (
     <>

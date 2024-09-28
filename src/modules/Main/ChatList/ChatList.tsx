@@ -1,11 +1,10 @@
-import React from 'react';
 import { useOutletContext, useSearchParams } from 'react-router-dom';
-import { TailSpinner } from 'components/UI/Loaders/TailSpinner';
 import { ChatTab } from 'components/UI/Tabs/Chat-tab';
 import { MainPageComponentOutletContext } from 'types/types';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import { useFriendsOnlineStatusesStore } from 'store/onlineStatuses/onlineStatusesStore';
 import { useChatStore } from 'store/chat/chatStore';
+import { getSortedChatList } from './helpers';
 
 export const ChatList = () => {
   const [_searchParams, setSearchParams] = useSearchParams();
@@ -16,10 +15,7 @@ export const ChatList = () => {
 
   const chats = useChatStore((state) => state.chats);
 
-  const chatList = [];
-  for (const chatId in chats) {
-    if (chats[chatId].messages.length !== 0) chatList.push(chats[chatId]);
-  }
+  const chatList = getSortedChatList(chats);
 
   if (chatList.length === 0) {
     return <h2 className="text-hint">Your have no chats yet</h2>;

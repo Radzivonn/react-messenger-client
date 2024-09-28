@@ -48,13 +48,13 @@ export const mockFriendListData: User[] = [
 export const mockMessages: Message[] = [
   {
     chatId: 'chat1',
-    date: '12:00',
+    date: new Date('September 28, 2024 23:59:00').toString(),
     name: 'mock-name',
     message: 'Hello!',
   },
   {
     chatId: 'chat1',
-    date: '12:01',
+    date: new Date('September 28, 2024 12:00:00').toString(),
     name: 'mock-receiver-name',
     message: 'Hi!',
   },

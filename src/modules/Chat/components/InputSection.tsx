@@ -7,7 +7,6 @@ import { useChatStore } from 'store/chat/chatStore';
 import MessagePlaneIcon from '../assets/message-plane.svg?react';
 import EmojiIcon from '../assets/emoji-icon.svg?react';
 import { EmojiPicker } from './EmojiPicker';
-import { getTime } from '../helpers/getTime';
 
 interface Props extends ComponentProps<'section'> {
   socket: Socket<ServerToClientEvents, ClientToServerEvents>;
@@ -29,7 +28,7 @@ export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) =>
   const sendMessage = () => {
     const message: Message = {
       chatId,
-      date: getTime(),
+      date: new Date().toString(),
       name: userName,
       message: inputValue,
     };

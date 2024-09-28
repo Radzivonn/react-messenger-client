@@ -1,4 +1,5 @@
 import { ComponentProps, FC, useEffect, useRef } from 'react';
+import { getTime } from 'helpers/getTime';
 import { Message } from 'types/types';
 
 interface Props extends ComponentProps<'section'> {
@@ -31,7 +32,7 @@ export const MessagesList: FC<Props> = ({ userName, messages }) => {
           ref={i === arr.length - 1 ? lastMessage : undefined}
         >
           <p className="message__text">{message.message}</p>
-          <p className="message__time">{message.date}</p>
+          <p className="message__time">{getTime(message.date)}</p>
         </div>
       ))}
     </div>
