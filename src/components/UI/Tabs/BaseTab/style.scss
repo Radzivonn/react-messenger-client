@@ -1,6 +1,11 @@
 .tab {
-  @apply flex h-16 w-full cursor-pointer flex-row gap-2 px-3;
+  @apply flex h-16 w-full cursor-default flex-row gap-2 px-3;
   transition: var(--base-transition);
+
+  &--clickable {
+    @extend .tab;
+    cursor: pointer;
+  }
 
   &--with-highlight {
     @media (hover: hover) {

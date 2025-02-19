@@ -14,8 +14,7 @@ const useSocketSetup = (userId: string, userName: string, currentChatId: string 
   const [searchParams] = useSearchParams();
   const receiverId = searchParams.get('receiverId');
 
-  const { socket, setSocket } = useSocketStore();
-  const resetSocket = useSocketStore((state) => state.resetSocket);
+  const { socket, setSocket, resetSocket } = useSocketStore();
   const { setChats, addChat, clearChatsData, addMessage } = useChatStore();
   const { addOnlineStatus, setOnlineStatuses } = useFriendsOnlineStatusesStore();
   const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);

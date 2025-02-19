@@ -76,7 +76,7 @@ export const InputSection: FC<Props> = ({ socket, chatId, userId, userName }) =>
           <Button
             data-testid="send-message-button"
             className={`button--icon-only button--no-hover ${inputValue ? '' : 'button--hidden'}`}
-            onClick={sendMessage}
+            onClick={() => sendMessage()}
           >
             <MessagePlaneIcon />
           </Button>

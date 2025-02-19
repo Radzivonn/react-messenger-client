@@ -4,7 +4,7 @@ import { UserData } from './UserData/UserData';
 import { useClickOutside } from 'hooks/useClickOutside/useClickOutside';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 
-export const PopupContent: FC<ComponentProps<'section'>> = () => {
+export const PopupContent: FC<ComponentProps<'div'>> = () => {
   const settingsRef = useRef(null);
   const setIsSettingsOpened = useAppSettingsStore((state) => state.setIsSettingsOpened);
 

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 
 interface Props {
@@ -14,7 +15,7 @@ export const EmojiPicker: FC<Props> = ({ setInputValue }) => {
     <div className="absolute bottom-16 right-0 self-end" data-testid="emoji-picker">
       <Picker
         className="self-end"
-        set="google"
+        data={data}
         previewPosition="none"
         navPosition="bottom"
         perLine={window.innerWidth > MOBILE_BREAKPOINT ? MAX_PER_LINE : MIN_PER_LINE}

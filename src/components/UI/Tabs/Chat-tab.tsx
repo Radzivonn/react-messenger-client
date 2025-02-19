@@ -19,7 +19,7 @@ export const ChatTab: FC<Props> = ({
   ...props
 }) => {
   return (
-    <Tab {...props} className="tab--with-highlight">
+    <Tab {...props} className="tab--with-highlight tab--clickable">
       <AvatarImage userId={receiverId} name={receiverName} isOnline={isOnline} isOpenable={false} />
       <div className="ml-3 flex w-fit max-w-[45%] flex-col justify-start gap-1">
         <h3 className="tab__info_name">{receiverName}</h3>

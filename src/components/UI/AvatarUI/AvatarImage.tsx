@@ -33,7 +33,7 @@ export const AvatarImage: FC<Props> = ({
 
   return (
     <>
-      <div className={`avatar ${className ?? ''}`}>
+      <div className={`avatar${isOpenable ? '--clickable' : ''} ${className ?? ''}`}>
         <img
           className="avatar-image"
           src={'http://localhost:5050/' + data.avatarPath}
