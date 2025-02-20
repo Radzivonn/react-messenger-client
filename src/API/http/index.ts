@@ -2,8 +2,10 @@ import ky from 'ky';
 import { afterResponseHook, beforeRequestHook } from './hooks';
 import { STATUS_CODES } from 'types/types';
 
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+
 const api = ky.create({
-  prefixUrl: 'http://localhost:5050', // ? temporary url
+  prefixUrl: `${VITE_SERVER_API_URL}`, // ? temporary url
   credentials: 'include',
   hooks: {
     beforeRequest: [beforeRequestHook],

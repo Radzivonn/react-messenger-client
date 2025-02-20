@@ -32,7 +32,7 @@ export const LogoutButton: FC<ComponentProps<'button'>> = ({ className, children
       queryClient.clear();
       toast.info('You are logged out!');
     } catch (e) {
-      toast.error(`An error occurred: ${e}`);
+      toast.error('An error occurred during logout!');
     }
   };
 

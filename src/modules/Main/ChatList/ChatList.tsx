@@ -12,7 +12,6 @@ export const ChatList = () => {
 
   const setIsChatOpened = useAppSettingsStore((state) => state.setIsChatOpened);
   const onlineStatuses = useFriendsOnlineStatusesStore((state) => state.onlineStatuses);
-
   const chats = useChatStore((state) => state.chats);
 
   const chatList = getSortedChatList(chats);

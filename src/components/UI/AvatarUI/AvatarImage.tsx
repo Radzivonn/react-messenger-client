@@ -4,6 +4,8 @@ import { AvatarPlaceholder } from './AvatarPlaceholder';
 import { useAvatarImage } from 'hooks/useAvatarImage/useAvatarImage';
 import { OpenedImage } from './OpenedImage/OpenedImage';
 
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+
 interface Props extends ComponentProps<'div'> {
   userId: string;
   name: string;
@@ -36,7 +38,7 @@ export const AvatarImage: FC<Props> = ({
       <div className={`avatar${isOpenable ? '--clickable' : ''} ${className ?? ''}`}>
         <img
           className="avatar-image"
-          src={'http://localhost:5050/' + data.avatarPath}
+          src={`${VITE_SERVER_API_URL}${data.avatarPath}`}
           alt="avatar"
           onClick={() => setIsImageOpened(true)}
         />
@@ -45,7 +47,7 @@ export const AvatarImage: FC<Props> = ({
       </div>
       {isImageShow && (
         <OpenedImage
-          imagePath={'http://localhost:5050/' + data.avatarPath}
+          imagePath={`${VITE_SERVER_API_URL}${data.avatarPath}`}
           onImageClose={() => setIsImageOpened(false)}
         />
       )}

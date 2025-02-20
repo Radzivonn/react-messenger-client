@@ -10,6 +10,8 @@ import { useReceiverStore } from 'store/receiver/receiverStore';
 import { useSearchParams } from 'react-router-dom';
 import { toastMessage } from './ToastMessageNotification';
 
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+
 const useSocketSetup = (userId: string, userName: string, currentChatId: string | null) => {
   const [searchParams] = useSearchParams();
   const receiverId = searchParams.get('receiverId');
@@ -21,7 +23,7 @@ const useSocketSetup = (userId: string, userName: string, currentChatId: string 
   const setIsReceiverTyping = useReceiverStore((state) => state.setIsReceiverTyping);
 
   useEffect(() => {
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:5050/');
+    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(`${VITE_SERVER_API_URL}`);
 
     socket.on(WEBSOCKET_EVENTS.CONNECTION, () => {
       socket.emit(WEBSOCKET_EVENTS.CONNECT_USER, userId, userName);
