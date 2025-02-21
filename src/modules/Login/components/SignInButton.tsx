@@ -1,7 +1,11 @@
 import { FC } from 'react';
 import { Button } from 'components/UI/Button/Button';
 
-export const SignInButton: FC = () => {
+interface Props {
+  isDisabled: boolean;
+}
+
+export const SignInButton: FC<Props> = ({ isDisabled }) => {
   return (
     <Button
       accent
@@ -9,6 +13,7 @@ export const SignInButton: FC = () => {
       type="submit"
       form="LoginForm"
       data-testid="login-submit-button"
+      disabled={isDisabled}
     >
       Sign in
     </Button>

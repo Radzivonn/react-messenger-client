@@ -23,38 +23,26 @@ class AuthService {
   }
 
   public register(name: string, email: string, password: string) {
-    try {
-      const reqBody = { name, email, password };
-      const user: Promise<AuthResponse> = api
-        .post(`${this.BASE_URL}/${endpoints.registration}`, { json: reqBody })
-        .json();
-      return user;
-    } catch (e) {
-      console.error(e);
-    }
+    const reqBody = { name, email, password };
+    const user: Promise<AuthResponse> = api
+      .post(`${this.BASE_URL}/${endpoints.registration}`, { json: reqBody })
+      .json();
+    return user;
   }
 
   public login(email: string, password: string) {
-    try {
-      const reqBody = { email, password };
-      const user: Promise<AuthResponse> = api
-        .post(`${this.BASE_URL}/${endpoints.login}`, { json: reqBody })
-        .json();
-      return user;
-    } catch (e) {
-      console.error(e);
-    }
+    const reqBody = { email, password };
+    const user: Promise<AuthResponse> = api
+      .post(`${this.BASE_URL}/${endpoints.login}`, { json: reqBody })
+      .json();
+    return user;
   }
 
   public logout(userId: string) {
-    try {
-      const response: Promise<KyResponse> = api.post(
-        `${this.BASE_URL}/${endpoints.logout}/${userId}`,
-      );
-      return response;
-    } catch (e) {
-      console.error(e);
-    }
+    const response: Promise<KyResponse> = api.post(
+      `${this.BASE_URL}/${endpoints.logout}/${userId}`,
+    );
+    return response;
   }
 
   public refreshTokens() {

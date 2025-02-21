@@ -1,42 +1,31 @@
 import { FC } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { profileFormSchema } from './schemes';
 import { profileFormFields } from './formFields';
 import { TextField } from 'components/UI/TextField/TextField';
 import { Form } from 'components/UI/Form/Form';
-import authService from 'API/services/AuthService/AuthService';
-import { toast } from 'react-toastify';
+import { RegistrationMutationFunction } from '../../types';
 
-export const RegistrationForm: FC = () => {
-  const queryClient = useQueryClient();
+interface Props {
+  registration: RegistrationMutationFunction;
+}
 
+export const RegistrationForm: FC<Props> = ({ registration }) => {
   const profileForm = useForm({
     resolver: yupResolver(profileFormSchema),
     mode: 'all',
   });
 
-  const navigate = useNavigate();
-
   const { register, handleSubmit, formState } = profileForm;
   const { errors } = formState;
 
-  const onSubmit = handleSubmit(async (profileInfo) => {
-    const userData = await authService.register(
-      profileInfo.userName,
-      profileInfo.email,
-      profileInfo.password,
-    );
-    if (userData) {
-      authService.saveAccessToken(userData.accessToken);
-
-      void queryClient.invalidateQueries({ queryKey: ['userData'] });
-      navigate(`/users/${userData.user.id}/${userData.user.name}`, { replace: true });
-
-      toast.success('You are successfully registered!');
-    } else toast.error('This user was not found');
+  const onSubmit = handleSubmit((profileInfo) => {
+    registration({
+      userName: profileInfo.userName,
+      email: profileInfo.email,
+      password: profileInfo.password,
+    });
   });
 
   return (

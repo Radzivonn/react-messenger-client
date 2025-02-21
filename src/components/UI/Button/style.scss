@@ -92,7 +92,7 @@
   }
 
   &:disabled {
-    @apply cursor-default border-[--main-color-2-shadow-1] bg-transparent text-[var(--main-color-2-shadow-1)];
+    @apply cursor-default bg-[--accent-color-1-shadow-1];
   }
 
   &--no-hover:hover {
