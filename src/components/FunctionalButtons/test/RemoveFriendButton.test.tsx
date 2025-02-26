@@ -2,7 +2,7 @@ import { vi, describe, it, Mock } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RemoveFriendButton } from 'components/FunctionalButtons/RemoveFriendButton';
-import { useRemoveFriend } from 'hooks';
+import { useRemoveFriend } from 'hooks/useFriendListMutations/useRemoveFriend';
 
 vi.mock('hooks/useFriendListMutations/useRemoveFriend');
 

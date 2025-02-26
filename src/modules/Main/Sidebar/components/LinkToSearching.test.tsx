@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { LinkToSearching } from './LinkToSearching';
 import userEvent from '@testing-library/user-event';
 import { mainPageRoutes } from 'router/routes';
+import { act } from 'react';
 
 const Main = () => {
   return <div data-testid="Main" />;
@@ -29,7 +30,9 @@ describe('Link to searching tab tests', () => {
     expect(screen.getByTestId('Main')).toBeInTheDocument();
     expect(screen.queryByTestId('Search')).toBe(null);
 
-    await userEvent.click(link);
+    await act(async () => {
+      await userEvent.click(link);
+    });
 
     expect(screen.getByTestId('Search')).toBeInTheDocument();
     expect(screen.queryByTestId('Main')).toBe(null);

@@ -110,6 +110,40 @@ describe('Message sending input component tests', () => {
   });
 
   it('Check emoji picker work', async () => {
+    /* mock window.matchMedia */
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: vi.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(), // deprecated method
+        removeListener: vi.fn(), // deprecated method
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+    /* mock window.matchMedia */
+
+    /* mock IntersectionObserver */
+    class MockIntersectionObserver {
+      observe = vi.fn();
+      unobserve = vi.fn();
+      disconnect = vi.fn();
+    }
+
+    Object.defineProperty(window, 'IntersectionObserver', {
+      writable: true,
+      value: MockIntersectionObserver,
+    });
+
+    Object.defineProperty(global, 'IntersectionObserver', {
+      writable: true,
+      value: MockIntersectionObserver,
+    });
+    /* mock IntersectionObserver */
+
     render(
       <InputSection
         socket={clientSocket}

@@ -55,7 +55,7 @@ describe('Registration form tests', () => {
   it('Submit test with undefined login response', async () => {
     server.use(
       http.post('http://localhost:5050/auth/registration', () => {
-        return HttpResponse.json(undefined, { status: 200 });
+        return HttpResponse.json({}, { status: 404 });
       }),
     );
 
