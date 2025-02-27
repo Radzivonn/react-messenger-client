@@ -22,10 +22,10 @@ export const AvatarImage: FC<Props> = ({
   children,
 }) => {
   const [isImageOpened, setIsImageOpened] = useState(false);
-  const { data } = useAvatarImage(userId);
+  const { data, isError } = useAvatarImage(userId);
   const isImageShow = isImageOpened && isOpenable;
 
-  if (!data) {
+  if (!data || isError) {
     return (
       <AvatarPlaceholder className={className} name={name} isOnline={isOnline}>
         {children}
@@ -38,7 +38,7 @@ export const AvatarImage: FC<Props> = ({
       <div className={`avatar${isOpenable ? '--clickable' : ''} ${className ?? ''}`}>
         <img
           className="avatar-image"
-          src={`${VITE_SERVER_API_URL}${data.avatarPath}`}
+          src={`${VITE_SERVER_API_URL}/${data.avatarPath}`}
           alt="avatar"
           onClick={() => setIsImageOpened(true)}
         />
@@ -47,7 +47,7 @@ export const AvatarImage: FC<Props> = ({
       </div>
       {isImageShow && (
         <OpenedImage
-          imagePath={`${VITE_SERVER_API_URL}${data.avatarPath}`}
+          imagePath={`${VITE_SERVER_API_URL}/${data.avatarPath}`}
           onImageClose={() => setIsImageOpened(false)}
         />
       )}

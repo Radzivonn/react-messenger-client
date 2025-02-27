@@ -10,25 +10,16 @@ class UserService {
 
   /** Get user data by access jwt from local storage */
   public getUserData() {
-    try {
-      if (!authService.hasAccessToken()) return null;
-      const user: Promise<User> = api.get(`${this.BASE_URL}/${endpoints.getUserData}`).json();
-      return user;
-    } catch (e) {
-      console.error(e);
-    }
+    if (!authService.hasAccessToken()) return null;
+    const user: Promise<User> = api.get(`${this.BASE_URL}/${endpoints.getUserData}`).json();
+    return user;
   }
 
   public getAvatarImage(userId: string) {
-    try {
-      const avatar: Promise<{ avatarPath: string }> = api
-        .get(`${this.BASE_URL}/${userId}/${endpoints.getAvatarImage}`)
-        .json();
-
-      return avatar;
-    } catch (e) {
-      console.error(e);
-    }
+    const avatar: Promise<{ avatarPath: string }> = api
+      .get(`${this.BASE_URL}/${userId}/${endpoints.getAvatarImage}`)
+      .json();
+    return avatar;
   }
 
   public updateAvatarImage(userId: string, image: File) {
@@ -60,11 +51,7 @@ class UserService {
   }
 
   removeAccount(userId: string) {
-    try {
-      return api.delete(`${this.BASE_URL}/${userId}/${endpoints.removeAccount}`);
-    } catch (e) {
-      console.error(e);
-    }
+    return api.delete(`${this.BASE_URL}/${userId}/${endpoints.removeAccount}`);
   }
 }
 

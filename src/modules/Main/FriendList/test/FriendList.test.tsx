@@ -5,6 +5,8 @@ import { server } from 'mocks/node';
 import { FriendList } from '../FriendList';
 import { mockFriendListData } from 'mocks/mocks';
 
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+
 type ActualRouterType = typeof import('react-router-dom');
 vi.mock('react-router-dom', async () => {
   const actual: ActualRouterType = await vi.importActual('react-router-dom');
@@ -49,7 +51,7 @@ describe('Friend list component tests', () => {
 
   it('Check no friends found case', async () => {
     server.use(
-      http.get('http://localhost:5050/friends/friendList/:userId', () => {
+      http.get(`${VITE_SERVER_API_URL}/friends/friendList/:userId`, () => {
         return HttpResponse.json([]);
       }),
     );
@@ -68,7 +70,7 @@ describe('Friend list component tests', () => {
 
   it('Check friends found case', async () => {
     server.use(
-      http.get('http://localhost:5050/friends/friendList/:userId', () => {
+      http.get(`${VITE_SERVER_API_URL}/friends/friendList/:userId`, () => {
         return HttpResponse.json(mockFriendListData);
       }),
     );

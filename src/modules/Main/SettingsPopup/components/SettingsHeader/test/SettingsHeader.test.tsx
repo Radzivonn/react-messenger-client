@@ -11,6 +11,8 @@ import { http, HttpResponse } from 'msw';
 import { server } from 'mocks/node';
 import { mockErrorUser } from 'mocks/mocks';
 
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+
 const queryClient = new QueryClient();
 
 describe('Settings header tests', () => {
@@ -92,7 +94,7 @@ describe('Settings header tests', () => {
 
   it('Check open action menu and click logout button with error response', async () => {
     server.use(
-      http.get('http://localhost:5050/user/getData', () => {
+      http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
         return HttpResponse.json(mockErrorUser);
       }),
     );
@@ -158,7 +160,7 @@ describe('Settings header tests', () => {
 
   it('Check open action menu and click remove account button with error response', async () => {
     server.use(
-      http.get('http://localhost:5050/user/getData', () => {
+      http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
         return HttpResponse.json(mockErrorUser);
       }),
     );

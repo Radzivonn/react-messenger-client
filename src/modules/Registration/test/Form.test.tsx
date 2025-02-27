@@ -9,6 +9,8 @@ import { server } from 'mocks/node';
 import { http, HttpResponse } from 'msw';
 import { mockAuthResponse } from 'mocks/mocks';
 
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+
 const queryClient = new QueryClient();
 
 describe('Registration form tests', () => {
@@ -19,7 +21,7 @@ describe('Registration form tests', () => {
 
   it('Submit test', async () => {
     server.use(
-      http.post('http://localhost:5050/auth/registration', () => {
+      http.post(`${VITE_SERVER_API_URL}/auth/registration`, () => {
         return HttpResponse.json(mockAuthResponse, { status: 200 });
       }),
     );
@@ -54,7 +56,7 @@ describe('Registration form tests', () => {
 
   it('Submit test with undefined login response', async () => {
     server.use(
-      http.post('http://localhost:5050/auth/registration', () => {
+      http.post(`${VITE_SERVER_API_URL}/auth/registration`, () => {
         return HttpResponse.json({}, { status: 404 });
       }),
     );

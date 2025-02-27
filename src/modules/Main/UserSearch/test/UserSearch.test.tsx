@@ -5,6 +5,8 @@ import { UserSearch } from '../UserSearch';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { mockSearchData, mockFriendListData } from 'mocks/mocks';
 
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
+
 type ActualRouterType = typeof import('react-router-dom');
 vi.mock('react-router-dom', async () => {
   const actual: ActualRouterType = await vi.importActual('react-router-dom');
@@ -59,10 +61,10 @@ describe('User search component tests', () => {
 
   it('Check no users found case', async () => {
     server.use(
-      http.get('http://localhost:5050/friends/:userId/searching/:search', () => {
+      http.get(`${VITE_SERVER_API_URL}/friends/:userId/searching/:search`, () => {
         return HttpResponse.json([]);
       }),
-      http.get('http://localhost:5050/friends/friendList/:userId', () => {
+      http.get(`${VITE_SERVER_API_URL}/friends/friendList/:userId`, () => {
         return HttpResponse.json([]);
       }),
     );
@@ -87,10 +89,10 @@ describe('User search component tests', () => {
 
   it('Check users found case', async () => {
     server.use(
-      http.get('http://localhost:5050/friends/:userId/searching/:search', () => {
+      http.get(`${VITE_SERVER_API_URL}/friends/:userId/searching/:search`, () => {
         return HttpResponse.json(mockSearchData);
       }),
-      http.get('http://localhost:5050/friends/friendList/:userId', () => {
+      http.get(`${VITE_SERVER_API_URL}/friends/friendList/:userId`, () => {
         return HttpResponse.json(mockFriendListData);
       }),
     );
