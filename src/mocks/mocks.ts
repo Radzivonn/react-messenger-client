@@ -1,4 +1,3 @@
-import { AuthResponse } from 'API/services/AuthService/models';
 import { IChat, Message, User } from 'types/types';
 
 export const mockUser: User = {
@@ -13,12 +12,6 @@ export const mockErrorUser: User = {
   name: 'mock-name',
   email: 'mock-email',
   role: 'mock-role',
-};
-
-export const mockAuthResponse: AuthResponse = {
-  user: mockUser,
-  accessToken: 'mock-access-token',
-  refreshToken: 'mock-refresh-token',
 };
 
 export const mockSearchData: User[] = [

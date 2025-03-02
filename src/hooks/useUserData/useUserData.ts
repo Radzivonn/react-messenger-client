@@ -5,7 +5,7 @@ export const useUserData = () => {
   return useQuery({
     queryKey: ['userData'],
     queryFn: () => userService.getUserData(),
-    staleTime: 60000, // 60 seconds
+    staleTime: 60 * 60 * 1000, // 1 hour
     retry: false,
   });
 };

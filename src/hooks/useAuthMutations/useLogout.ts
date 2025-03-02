@@ -20,7 +20,6 @@ export const useLogout = () => {
     onSuccess: (data, { userId }) => {
       setIsSettingsOpened(false);
       if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_USER, userId);
-      authService.removeAccessToken();
       navigate(`/${routes.login}`, { replace: true });
       queryClient.clear();
       toast.info('You are logged out!');

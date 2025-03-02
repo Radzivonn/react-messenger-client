@@ -1,7 +1,11 @@
 import { screen } from '@testing-library/react';
 import { QueryClient } from '@tanstack/react-query';
 import { RenderWithRouter } from 'tests/helpers/RenderWithRouter';
-import authService from 'API/services/AuthService/AuthService';
+import { server } from 'mocks/node';
+import { http, HttpResponse } from 'msw';
+import { mockUser } from 'mocks/mocks';
+
+const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
 vi.mock('modules/Chat/Chat', async (importOriginal) => {
   const mod = await importOriginal<typeof import('modules/Chat/Chat')>();
@@ -15,6 +19,11 @@ const queryClient = new QueryClient();
 
 describe('Check auth hoc tests', () => {
   beforeEach(() => {
+    server.use(
+      http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
+        return HttpResponse.json(undefined);
+      }),
+    );
     void queryClient.invalidateQueries({ queryKey: ['userData'] });
   });
 
@@ -30,8 +39,12 @@ describe('Check auth hoc tests', () => {
     expect(await screen.findByTestId('registration')).toBeInTheDocument();
   });
 
-  it('Check user authorized route', async () => {
-    authService.saveAccessToken('mock-token');
+  it('Check authorized', async () => {
+    server.use(
+      http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
+        return HttpResponse.json(mockUser);
+      }),
+    );
 
     RenderWithRouter(queryClient, null, `/`);
 

@@ -7,7 +7,7 @@ import { RenderWithRouter } from 'tests/helpers/RenderWithRouter';
 import { profileFormFields } from '../components/RegistrationForm/formFields';
 import { server } from 'mocks/node';
 import { http, HttpResponse } from 'msw';
-import { mockAuthResponse } from 'mocks/mocks';
+import { mockUser } from 'mocks/mocks';
 
 const VITE_SERVER_API_URL = import.meta.env.VITE_SERVER_API_URL;
 
@@ -15,19 +15,20 @@ const queryClient = new QueryClient();
 
 describe('Registration form tests', () => {
   beforeEach(() => {
-    authService.removeAccessToken();
     queryClient.clear();
   });
 
   it('Submit test', async () => {
     server.use(
       http.post(`${VITE_SERVER_API_URL}/auth/registration`, () => {
-        return HttpResponse.json(mockAuthResponse, { status: 200 });
+        return HttpResponse.json(mockUser, { status: 200 });
+      }),
+      http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
+        return HttpResponse.json(undefined);
       }),
     );
 
     const spyRegister = vi.spyOn(authService, 'register');
-    const spySaveAccessToken = vi.spyOn(authService, 'saveAccessToken');
 
     RenderWithRouter(queryClient, null, '/registration');
 
@@ -46,23 +47,29 @@ describe('Registration form tests', () => {
       await userEvent.type(emailInput, 'mockemail@gmail.com');
       await userEvent.type(passwordInput, 'qwe123RTY!');
       await userEvent.click(submitButton);
+      server.use(
+        http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
+          return HttpResponse.json(mockUser);
+        }),
+      );
     });
 
     expect(await screen.findByText('You are successfully registered!')).toBeInTheDocument();
     expect(await screen.findByTestId('main-page')).toBeInTheDocument();
     expect(spyRegister).toHaveBeenCalled();
-    expect(spySaveAccessToken).toHaveBeenCalled();
   });
 
-  it('Submit test with undefined login response', async () => {
+  it('Submit test with undefined response', async () => {
     server.use(
       http.post(`${VITE_SERVER_API_URL}/auth/registration`, () => {
-        return HttpResponse.json({}, { status: 404 });
+        return HttpResponse.json(undefined, { status: 404 });
+      }),
+      http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
+        return HttpResponse.json(undefined);
       }),
     );
 
     const spyRegister = vi.spyOn(authService, 'register');
-    const spySaveAccessToken = vi.spyOn(authService, 'saveAccessToken');
 
     RenderWithRouter(queryClient, null, '/registration');
 
@@ -85,7 +92,7 @@ describe('Registration form tests', () => {
 
     expect(await screen.findByText('This user was not found')).toBeInTheDocument();
     expect(screen.queryByTestId('main-page')).toBe(null);
+    expect(screen.queryByTestId('registration')).toBeInTheDocument();
     expect(spyRegister).toHaveBeenCalled();
-    expect(spySaveAccessToken).not.toHaveBeenCalled();
   });
 });

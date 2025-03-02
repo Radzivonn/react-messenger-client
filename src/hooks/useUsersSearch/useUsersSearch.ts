@@ -5,7 +5,7 @@ export const useUsersSearch = (userId: string, search: string) => {
   return useQuery({
     queryKey: ['usersSearchData', userId, search],
     queryFn: () => friendListService.searchUsers(userId, search),
-    staleTime: 30000, // 30 seconds
+    staleTime: 60 * 1000, // 1 minute
     retry: 1,
     enabled: search !== '',
   });

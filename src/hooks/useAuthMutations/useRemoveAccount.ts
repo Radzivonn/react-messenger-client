@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { KyResponse } from 'ky';
-import authService from 'API/services/AuthService/AuthService';
 import userService from 'API/services/UserService/UserService';
 import { useSocketStore } from 'store/socket/socketStore';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
@@ -21,7 +20,6 @@ export const useRemoveAccount = () => {
     onSuccess: (data, { userId }) => {
       setIsSettingsOpened(false);
       if (socket) socket.emit(WEBSOCKET_EVENTS.DISCONNECT_USER, userId);
-      authService.removeAccessToken();
       navigate(`/${routes.registration}`, { replace: true });
       queryClient.clear();
       toast.info('You have removed your account!');

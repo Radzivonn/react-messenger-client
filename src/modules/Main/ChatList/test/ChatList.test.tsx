@@ -6,7 +6,6 @@ import { mockChatListData, mockIncorrectChatListData } from 'mocks/mocks';
 import { useAppSettingsStore } from 'store/appSettings/appSettingsStore';
 import userEvent from '@testing-library/user-event';
 import { RenderWithRouter } from 'tests/helpers/RenderWithRouter';
-import authService from 'API/services/AuthService/AuthService';
 import { useChatStore } from 'store/chat/chatStore';
 
 const setSearchParamsMock = vi.fn();
@@ -43,8 +42,6 @@ describe('Chat list component tests', () => {
   });
 
   it('Check no chats found case', async () => {
-    authService.saveAccessToken('mock-token');
-
     useChatStore.setState({
       chats: {},
     });
@@ -58,8 +55,6 @@ describe('Chat list component tests', () => {
   });
 
   it('Check chats found case, but receive incorrect chat data(with only one participant)', async () => {
-    authService.saveAccessToken('mock-token');
-
     useChatStore.setState({
       chats: mockIncorrectChatListData,
     });
@@ -73,8 +68,6 @@ describe('Chat list component tests', () => {
   });
 
   it('Check friends found case', async () => {
-    authService.saveAccessToken('mock-token');
-
     useChatStore.setState({
       chats: mockChatListData,
     });

@@ -3,6 +3,7 @@ import { useState, forwardRef } from 'react';
 import { type ITextFieldProps } from './types';
 import useInputIcon from 'hooks/useInputIcon/useInputIcon';
 
+// TODO remove forwardRef in react 19.0
 export const TextField = forwardRef<HTMLInputElement, ITextFieldProps>(
   (
     {

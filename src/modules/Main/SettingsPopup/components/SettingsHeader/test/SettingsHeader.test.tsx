@@ -61,10 +61,7 @@ describe('Settings header tests', () => {
   });
 
   it('Check open action menu and click logout button', async () => {
-    authService.saveAccessToken('mock-token');
-
     const spyLogout = vi.spyOn(authService, 'logout');
-    const spyRemoveAccessToken = vi.spyOn(authService, 'removeAccessToken');
 
     RenderWithRouter(queryClient, <SettingsHeader />, '/users/mock-id/mock-name');
     const actionMenuButton = screen.getByTestId('action-menu-button');
@@ -84,11 +81,16 @@ describe('Settings header tests', () => {
 
     await act(async () => {
       await userEvent.click(logoutButton);
+      server.use(
+        http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
+          return HttpResponse.json(undefined);
+        }),
+      );
     });
 
     expect(spyLogout).toHaveBeenCalled();
-    expect(spyRemoveAccessToken).toHaveBeenCalled();
     expect(useAppSettingsStore.getState().isSettingsOpened).toBe(false);
+    expect(screen.queryByText('You are logged out!')).toBeInTheDocument();
     expect(await screen.findByTestId('login')).toBeInTheDocument();
   });
 
@@ -98,10 +100,6 @@ describe('Settings header tests', () => {
         return HttpResponse.json(mockErrorUser);
       }),
     );
-
-    const spyRemoveAccessToken = vi.spyOn(authService, 'removeAccessToken');
-
-    authService.saveAccessToken('mock-token');
 
     RenderWithRouter(queryClient, <SettingsHeader />, '/users/mock-error-id/mock-name');
 
@@ -120,15 +118,11 @@ describe('Settings header tests', () => {
     });
 
     expect(screen.queryByText('You are logged out!')).toBe(null);
-    expect(spyRemoveAccessToken).toHaveBeenCalledTimes(0);
     expect(screen.getByTestId('main-page')).toBeInTheDocument();
   });
 
   it('Check open action menu and click remove account button', async () => {
-    authService.saveAccessToken('mock-token');
-
     const spyRemoveAccount = vi.spyOn(userService, 'removeAccount');
-    const spyRemoveAccessToken = vi.spyOn(authService, 'removeAccessToken');
 
     RenderWithRouter(queryClient, <SettingsHeader />, '/users/mock-id/mock-name');
 
@@ -149,12 +143,16 @@ describe('Settings header tests', () => {
 
     await act(async () => {
       await userEvent.click(removeAccountButton);
+      server.use(
+        http.get(`${VITE_SERVER_API_URL}/user/getData`, () => {
+          return HttpResponse.json(undefined);
+        }),
+      );
     });
 
-    expect(screen.getByText('You have removed your account!')).toBeInTheDocument();
     expect(spyRemoveAccount).toHaveBeenCalled();
-    expect(spyRemoveAccessToken).toHaveBeenCalled();
     expect(useAppSettingsStore.getState().isSettingsOpened).toBe(false);
+    expect(screen.getByText('You have removed your account!')).toBeInTheDocument();
     expect(await screen.findByTestId('registration')).toBeInTheDocument();
   });
 
@@ -164,9 +162,6 @@ describe('Settings header tests', () => {
         return HttpResponse.json(mockErrorUser);
       }),
     );
-    const spyRemoveAccessToken = vi.spyOn(authService, 'removeAccessToken');
-
-    authService.saveAccessToken('mock-token');
 
     RenderWithRouter(queryClient, <SettingsHeader />, '/users/mock-id/mock-name');
 
@@ -185,7 +180,6 @@ describe('Settings header tests', () => {
     });
 
     expect(screen.queryByText('You have removed your account!')).toBe(null);
-    expect(spyRemoveAccessToken).toHaveBeenCalledTimes(0);
     expect(screen.getByTestId('main-page')).toBeInTheDocument();
   });
 });

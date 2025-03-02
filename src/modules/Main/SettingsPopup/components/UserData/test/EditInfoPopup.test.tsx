@@ -2,9 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { EditInfoPopup } from '../EditInfoPopup';
 import userService from 'API/services/UserService/UserService';
-import authService from 'API/services/AuthService/AuthService';
-import { mockAuthResponse } from 'mocks/mocks';
 import userEvent from '@testing-library/user-event';
+import { mockUser } from 'mocks/mocks';
 
 const queryClient = new QueryClient();
 
@@ -13,8 +12,7 @@ describe('Edit info popup tests', () => {
     const mockOnCancelCallback = vi.fn();
     const spyUpdateUserName = vi
       .spyOn(userService, 'updateUserName')
-      .mockReturnValue(Promise.resolve(mockAuthResponse));
-    const spySaveAccessToken = vi.spyOn(authService, 'saveAccessToken');
+      .mockReturnValue(Promise.resolve(mockUser));
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -42,6 +40,5 @@ describe('Edit info popup tests', () => {
     await userEvent.click(saveButton);
 
     expect(spyUpdateUserName).toHaveBeenCalled();
-    expect(spySaveAccessToken).toHaveBeenCalled();
   });
 });

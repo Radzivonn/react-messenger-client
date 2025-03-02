@@ -4,7 +4,6 @@ import { WriteToFriendButton } from 'components/FunctionalButtons/WriteToFriendB
 import { RenderWithRouter } from 'tests/helpers/RenderWithRouter';
 import { mockUser } from 'mocks/mocks';
 import { QueryClient } from '@tanstack/react-query';
-import authService from 'API/services/AuthService/AuthService';
 
 vi.mock('modules/Chat/Chat', async (importOriginal) => {
   const mod = await importOriginal<typeof import('modules/Chat/Chat')>();
@@ -53,8 +52,6 @@ describe('Write to friend button component tests', () => {
   });
 
   it('Check setting search params by click on the button', async () => {
-    authService.saveAccessToken('mock-token');
-
     RenderWithRouter(
       queryClient,
       <WriteToFriendButton userId={mockUserId} friendId={mockFriendId} />,
