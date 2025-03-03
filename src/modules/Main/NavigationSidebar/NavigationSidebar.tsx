@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from 'components/UI/Button/Button';
 import SettingsIcon from './assets/settings-icon.svg?react';
 import ChatIcon from './assets/chat-icon.svg?react';

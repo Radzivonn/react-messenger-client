@@ -30,12 +30,8 @@ class AuthService {
   }
 
   public refreshTokens() {
-    try {
-      const user: Promise<User> = api.get(`${this.BASE_URL}/${endpoints.refresh}`).json();
-      return user;
-    } catch (e) {
-      console.error(e);
-    }
+    const user: Promise<User> = api.get(`${this.BASE_URL}/${endpoints.refresh}`).json();
+    return user;
   }
 }
 
