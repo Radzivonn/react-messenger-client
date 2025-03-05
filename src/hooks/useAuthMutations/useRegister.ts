@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import authService from 'API/services/AuthService/AuthService';
 import { User } from 'types/types';
+import { HTTPError } from 'ky';
 
 export const useRegister = () => {
   const queryClient = useQueryClient();
@@ -16,8 +17,13 @@ export const useRegister = () => {
       toast.success('You are successfully registered!');
       navigate(`/users/${userData.id}/${userData.name}`, { replace: true });
     },
-    onError: () => {
-      toast.error('This user was not found');
+    onError: async (error) => {
+      if (error instanceof HTTPError && error.response) {
+        const errorData = await error.response.json();
+        toast.error(errorData.message);
+      } else {
+        toast.error('Something went wrong!');
+      }
     },
     retry: false,
   });
